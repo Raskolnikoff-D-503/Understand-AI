@@ -55,6 +55,12 @@ module.exports = {
         },
       },
       {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+      {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
