@@ -1,0 +1,15 @@
+.section {
+  padding: 32px;
+  height: 100%;
+  border: 3px solid black;
+  display: grid;
+  grid-template-rows: min-content;
+  gap: 16px;
+  align-items: start;
+}
+
+.element {
+  border: 1px dashed black;
+  width: fit-content;
+  background-color: white;
+}
