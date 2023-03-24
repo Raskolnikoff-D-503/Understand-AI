@@ -4,7 +4,7 @@ import {getEmptyImage} from 'react-dnd-html5-backend';
 
 type Props = {
   id: number;
-  moveCard: (id: number, to: number) => void;
+  moveCard: (id: string, to: number) => void;
   findCard: (id: number) => {index: number};
   children: ReactNode;
 };
@@ -18,10 +18,10 @@ export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0 : 1,
       }),
-      end: (_, monitor) => {
+      end: (data, monitor) => {
         const didDrop = monitor.didDrop();
         if (!didDrop) {
-          moveCard(id, originalIndex);
+          moveCard(data?.props?.id, originalIndex);
         }
       },
     }),
@@ -31,10 +31,10 @@ export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
   const [, dropRef] = useDrop(
     () => ({
       accept: 'card',
-      hover() {
-        if (id !== id) {
+      hover(data) {
+        if (data?.props?.id !== id) {
           const {index: overIndex} = findCard(id);
-          moveCard(id, overIndex);
+          moveCard(data.props.id, overIndex);
         }
       },
     }),
