@@ -2,10 +2,13 @@
   padding: 32px;
   height: 100%;
   border: 3px solid black;
+  align-items: start;
+}
+
+.container {
   display: grid;
   grid-template-rows: min-content;
-  gap: 16px;
-  align-items: start;
+  gap: 4px;
 }
 
 .element {
