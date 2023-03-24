@@ -72,13 +72,15 @@ export const Section = () => {
 
   return (
     <section ref={dropRef} className="section">
-      {cards.map((item) => (
-        <DraggableElement key={item.id} id={item.id} moveCard={moveCard} findCard={findCard}>
-          <div id={item.id.toString()} className="element">
-            {item.text}
-          </div>
-        </DraggableElement>
-      ))}
+      <div className="container">
+        {cards.map((item) => (
+          <DraggableElement key={item.id} id={item.id} moveCard={moveCard} findCard={findCard}>
+            <div id={item.id.toString()} className="element">
+              {item.text}
+            </div>
+          </DraggableElement>
+        ))}
+      </div>
       <CustomDragLayer />
     </section>
   );
