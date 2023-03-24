@@ -56,11 +56,16 @@ export const Section = () => {
   );
 
   const moveCard = useCallback(
-    (id: number, atIndex: number) => {
-      const {card, index} = findCard(id);
-      console.log(card, atIndex, index);
+    (id: string, atIndex: number) => {
+      console.log(id, atIndex);
 
-      setCards(cards);
+      const updateCards = [...cards];
+      const {card, index} = findCard(Number(id));
+
+      updateCards.splice(index, 1);
+      updateCards.splice(atIndex, 0, card);
+
+      setCards(updateCards);
     },
     [findCard, cards, setCards],
   );
@@ -69,7 +74,9 @@ export const Section = () => {
     <section ref={dropRef} className="section">
       {cards.map((item) => (
         <DraggableElement key={item.id} id={item.id} moveCard={moveCard} findCard={findCard}>
-          <div className="element">{item.text}</div>
+          <div id={item.id.toString()} className="element">
+            {item.text}
+          </div>
         </DraggableElement>
       ))}
       <CustomDragLayer />
