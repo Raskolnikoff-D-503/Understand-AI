@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {useDrop} from 'react-dnd';
-import {CustomDragLayer} from '../CustomDragLayer/CustomDragLayer';
+import {DragAndDropContainer} from '../DragAndDropContainer/DragAndDropContainer';
 import {DraggableElement} from '../DraggableElement/DraggableElement';
 
 import './Section.scss';
@@ -57,8 +57,6 @@ export const Section = () => {
 
   const moveCard = useCallback(
     (id: string, atIndex: number) => {
-      console.log(id, atIndex);
-
       const updateCards = [...cards];
       const {card, index} = findCard(Number(id));
 
@@ -72,7 +70,7 @@ export const Section = () => {
 
   return (
     <section ref={dropRef} className="section">
-      <div className="container">
+      <DragAndDropContainer className="container">
         {cards.map((item) => (
           <DraggableElement key={item.id} id={item.id} moveCard={moveCard} findCard={findCard}>
             <div id={item.id.toString()} className="element">
@@ -80,8 +78,7 @@ export const Section = () => {
             </div>
           </DraggableElement>
         ))}
-      </div>
-      <CustomDragLayer />
+      </DragAndDropContainer>
     </section>
   );
 };
