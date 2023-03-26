@@ -36,8 +36,6 @@ export const CustomDragLayer = () => {
     currentOffset: monitor.getSourceClientOffset(),
   }));
 
-  console.log('test', item);
-
   if (!isDragging) {
     return null;
   }
