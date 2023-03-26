@@ -1,37 +1,41 @@
 import React, {useCallback, useState} from 'react';
-import {useDrop} from 'react-dnd';
 import {DragAndDropContainer} from '../DragAndDropContainer/DragAndDropContainer';
-import {DraggableElement} from '../DraggableElement/DraggableElement';
+import {Card} from './Card';
 
 import './Section.scss';
 
-const ITEMS = [
+type ItemType = {
+  id: string;
+  text: string;
+};
+
+const ITEMS: ItemType[] = [
   {
-    id: 1,
+    id: '1',
     text: 'Write a cool JS library',
   },
   {
-    id: 2,
+    id: '2',
     text: 'Make it generic enough',
   },
   {
-    id: 3,
+    id: '3',
     text: 'Write README',
   },
   {
-    id: 4,
+    id: '4',
     text: 'Create some examples',
   },
   {
-    id: 5,
+    id: '5',
     text: 'Spam in Twitter and IRC to promote it',
   },
   {
-    id: 6,
+    id: '6',
     text: '???',
   },
   {
-    id: 7,
+    id: '7',
     text: 'PROFIT',
   },
 ];
@@ -39,44 +43,19 @@ const ITEMS = [
 export const Section = () => {
   const [cards, setCards] = useState(ITEMS);
 
-  const [, dropRef] = useDrop(() => ({accept: 'card'}));
-
-  const findCard = useCallback(
-    (id: number) => {
-      const card = cards.filter((c) => c.id === id)[0] as {
-        id: number;
-        text: string;
-      };
-      return {
-        card,
-        index: cards.indexOf(card),
-      };
-    },
-    [cards],
-  );
-
-  const moveCard = useCallback(
-    (id: string, atIndex: number) => {
-      const updateCards = [...cards];
-      const {card, index} = findCard(Number(id));
-
-      updateCards.splice(index, 1);
-      updateCards.splice(atIndex, 0, card);
-
-      setCards(updateCards);
-    },
-    [findCard, cards, setCards],
-  );
+  const updateDataHandler = useCallback((data: ItemType[]) => {
+    setCards(data);
+  }, []);
 
   return (
-    <section ref={dropRef} className="section">
-      <DragAndDropContainer className="container">
+    <section className="section">
+      <DragAndDropContainer
+        data={cards}
+        updateDataHandler={updateDataHandler}
+        className="container"
+      >
         {cards.map((item) => (
-          <DraggableElement key={item.id} id={item.id} moveCard={moveCard} findCard={findCard}>
-            <div id={item.id.toString()} className="element">
-              {item.text}
-            </div>
-          </DraggableElement>
+          <Card key={item.id} className="element" id={item.id} text={item.text} />
         ))}
       </DragAndDropContainer>
     </section>
