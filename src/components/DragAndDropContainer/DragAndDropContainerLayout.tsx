@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {Children, useCallback} from 'react';
 import {useDrop} from 'react-dnd';
 import {CustomDragLayer} from './CustomDragLayer/CustomDragLayer';
 import {DraggableElement} from './DraggableElement/DraggableElement';
@@ -45,16 +45,16 @@ export const DragAndDropContainerLayout = <T extends {id: string}>({
 
   return (
     <div className={className} ref={dropRef}>
-      {children.map((item) => {
+      {Children.map(children, (child) => (
         <DraggableElement
-          key={item.props.id}
-          id={item.props.id}
+          key={child.props.id}
+          id={child.props.id}
           moveCard={moveElement}
           findCard={findElement}
         >
-          {item}
-        </DraggableElement>;
-      })}
+          {child}
+        </DraggableElement>
+      ))}
       <CustomDragLayer />
     </div>
   );
