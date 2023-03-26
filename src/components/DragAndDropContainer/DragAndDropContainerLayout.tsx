@@ -32,13 +32,13 @@ export const DragAndDropContainerLayout = <T extends {id: string}>({
 
   const moveElement = useCallback(
     (id: string, atIndex: number) => {
-      const updateCards = [...data];
+      const updatedElementsOrder = [...data];
       const {card, index} = findElement(id);
 
-      updateCards.splice(index, 1);
-      updateCards.splice(atIndex, 0, card);
+      updatedElementsOrder.splice(index, 1);
+      updatedElementsOrder.splice(atIndex, 0, card);
 
-      updateDataHandler(updateCards);
+      updateDataHandler(updatedElementsOrder);
     },
     [data, findElement, updateDataHandler],
   );
@@ -49,8 +49,8 @@ export const DragAndDropContainerLayout = <T extends {id: string}>({
         <DraggableElement
           key={child.props.id}
           id={child.props.id}
-          moveCard={moveElement}
-          findCard={findElement}
+          moveElement={moveElement}
+          findElement={findElement}
         >
           {child}
         </DraggableElement>

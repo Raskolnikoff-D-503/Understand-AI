@@ -4,13 +4,13 @@ import {getEmptyImage} from 'react-dnd-html5-backend';
 
 type Props = {
   id: string;
-  moveCard: (id: string, to: number) => void;
-  findCard: (id: string) => {index: number};
+  moveElement: (id: string, to: number) => void;
+  findElement: (id: string) => {index: number};
   children: JSX.Element;
 };
 
-export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
-  const originalIndex = findCard(id).index;
+export const DraggableElement = ({id, moveElement, findElement, children}: Props) => {
+  const originalIndex = findElement(id).index;
   const [{opacity}, dragRef, preview] = useDrag(
     () => ({
       type: 'card',
@@ -21,11 +21,11 @@ export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
       end: (data: JSX.Element, monitor) => {
         const didDrop = monitor.didDrop();
         if (!didDrop) {
-          moveCard(data?.props?.id, originalIndex);
+          moveElement(data?.props?.id, originalIndex);
         }
       },
     }),
-    [id, originalIndex, moveCard],
+    [id, originalIndex, moveElement],
   );
 
   const [, dropRef] = useDrop(
@@ -33,12 +33,12 @@ export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
       accept: 'card',
       hover(data: JSX.Element) {
         if (data?.props?.id !== id) {
-          const {index: overIndex} = findCard(id);
-          moveCard(data.props.id, overIndex);
+          const {index: overIndex} = findElement(id);
+          moveElement(data.props.id, overIndex);
         }
       },
     }),
-    [findCard, moveCard],
+    [findElement, moveElement],
   );
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const DraggableElement = ({id, moveCard, findCard, children}: Props) => {
   return (
     <div
       ref={(node) => dragRef(dropRef(node))}
-      className="draggable-element"
+      className={`draggable-element ${children.props.className}`}
       style={{opacity, cursor: 'grab'}}
     >
       {children}
