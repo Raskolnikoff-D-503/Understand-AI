@@ -3,9 +3,9 @@ import {useDrag, useDrop} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 
 type Props = {
-  id: number;
+  id: string;
   moveCard: (id: string, to: number) => void;
-  findCard: (id: number) => {index: number};
+  findCard: (id: string) => {index: number};
   children: JSX.Element;
 };
 
