@@ -5,7 +5,7 @@ type Props = {
 };
 
 const styles: CSSProperties = {
-  display: 'inline-block',
+  display: '',
 };
 
 export const BoxDragPreview = ({children}: Props) => {
