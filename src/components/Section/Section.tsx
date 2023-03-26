@@ -7,6 +7,7 @@ import './Section.scss';
 type ItemType = {
   id: string;
   text: string;
+  isFullWidth?: boolean;
 };
 
 const ITEMS: ItemType[] = [
@@ -25,6 +26,7 @@ const ITEMS: ItemType[] = [
   {
     id: '4',
     text: 'Create some examples',
+    isFullWidth: true,
   },
   {
     id: '5',
@@ -55,7 +57,12 @@ export const Section = () => {
         className="container"
       >
         {cards.map((item) => (
-          <Card key={item.id} className="element" id={item.id} text={item.text} />
+          <Card
+            key={item.id}
+            className={`card ${item.isFullWidth ? 'card--full-width' : ''}`}
+            id={item.id}
+            text={item.text}
+          />
         ))}
       </DragAndDropContainer>
     </section>
