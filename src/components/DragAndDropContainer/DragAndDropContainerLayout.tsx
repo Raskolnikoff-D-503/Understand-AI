@@ -1,21 +1,30 @@
-import React, {Children, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {useDrop} from 'react-dnd';
 import {CustomDragLayer} from './CustomDragLayer/CustomDragLayer';
 import {DraggableElement} from './DraggableElement/DraggableElement';
 
-type Props<T extends {id: string}> = {
+type Props = {
+  id: string;
+  className: string;
+};
+
+type DragAndDropContainerLayoutProps<T> = {
   data: T[];
-  children: JSX.Element[];
   updateDataHandler: (data: T[]) => void;
   className: string;
 };
 
-export const DragAndDropContainerLayout = <T extends {id: string}>({
+export const DragAndDropContainerLayout = <
+  T extends {
+    id: string;
+    className: string;
+    Component: ({id, className}: Props) => JSX.Element;
+  },
+>({
   data,
-  children,
   updateDataHandler,
   className,
-}: Props<T>) => {
+}: DragAndDropContainerLayoutProps<T>) => {
   const [, dropRef] = useDrop(() => ({accept: 'card'}));
 
   const findElement = useCallback(
@@ -45,16 +54,21 @@ export const DragAndDropContainerLayout = <T extends {id: string}>({
 
   return (
     <div className={className} ref={dropRef}>
-      {Children.map(children, (child) => (
-        <DraggableElement
-          key={child.props.id}
-          id={child.props.id}
-          moveElement={moveElement}
-          findElement={findElement}
-        >
-          {child}
-        </DraggableElement>
-      ))}
+      {data.map((item) => {
+        const {id, className, Component} = item;
+
+        return (
+          <DraggableElement
+            key={id}
+            id={id}
+            className={className}
+            moveElement={moveElement}
+            findElement={findElement}
+          >
+            <Component id={id} className={className} />
+          </DraggableElement>
+        );
+      })}
       <CustomDragLayer />
     </div>
   );

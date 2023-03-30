@@ -8,7 +8,6 @@ const layerStyles: CSSProperties = {
   zIndex: 100,
   left: 0,
   top: 0,
-  width: '100%',
   height: '100%',
 };
 
@@ -40,8 +39,10 @@ export const CustomDragLayer = () => {
     return null;
   }
 
+  const styles = getComputedStyle(document.getElementById(item.props.id)!);
+
   return (
-    <div style={layerStyles}>
+    <div style={{...layerStyles, width: styles.width}}>
       <div style={getItemStyles(initialOffset, currentOffset)}>
         <BoxDragPreview>{item}</BoxDragPreview>
       </div>
