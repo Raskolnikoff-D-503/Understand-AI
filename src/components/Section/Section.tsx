@@ -59,7 +59,7 @@ export const Section = () => {
         {cards.map((item) => (
           <Card
             key={item.id}
-            className={`card ${item.isFullWidth ? 'card--full-width' : ''}`}
+            className={`card${item.isFullWidth ? ' card--full-width' : ''}`}
             id={item.id}
             text={item.text}
           />
