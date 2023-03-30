@@ -3,28 +3,36 @@ import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {DragAndDropContainerLayout} from './DragAndDropContainerLayout';
 
-type Props<T extends {id: string}> = {
+type Props = {
+  id: string;
+  className: string;
+};
+
+type DragAndDropContainerProps<T> = {
   data: T[];
-  children: JSX.Element[];
   updateDataHandler: (data: T[]) => void;
   className: string;
 };
 
-export const DragAndDropContainer = <T extends {id: string}>({
+export const DragAndDropContainer = <
+  T extends {
+    id: string;
+    className: string;
+    Component: ({id, className}: Props) => JSX.Element;
+  },
+>({
   data,
-  children,
+  // children,
   updateDataHandler,
   className,
-}: Props<T>) => {
+}: DragAndDropContainerProps<T>) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <DragAndDropContainerLayout
         data={data}
         updateDataHandler={updateDataHandler}
         className={className}
-      >
-        {children}
-      </DragAndDropContainerLayout>
+      />
     </DndProvider>
   );
 };

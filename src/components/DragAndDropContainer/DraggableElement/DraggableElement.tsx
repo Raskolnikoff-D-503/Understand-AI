@@ -4,12 +4,13 @@ import {getEmptyImage} from 'react-dnd-html5-backend';
 
 type Props = {
   id: string;
+  className: string;
   moveElement: (id: string, to: number) => void;
   findElement: (id: string) => {index: number};
   children: JSX.Element;
 };
 
-export const DraggableElement = ({id, moveElement, findElement, children}: Props) => {
+export const DraggableElement = ({id, className, moveElement, findElement, children}: Props) => {
   const originalIndex = findElement(id).index;
   const [{opacity}, dragRef, preview] = useDrag(
     () => ({
@@ -48,7 +49,7 @@ export const DraggableElement = ({id, moveElement, findElement, children}: Props
   return (
     <div
       ref={(node) => dragRef(dropRef(node))}
-      className={`draggable-element ${children.props.className}`}
+      className={className}
       style={{opacity, cursor: 'grab'}}
     >
       {children}

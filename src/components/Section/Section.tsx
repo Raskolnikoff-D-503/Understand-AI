@@ -4,41 +4,52 @@ import {Card} from './Card';
 
 import './Section.scss';
 
+type Props = {
+  id: string;
+  className: string;
+};
+
 type ItemType = {
   id: string;
-  text: string;
-  isFullWidth?: boolean;
+  className: string;
+  Component: ({id, className}: Props) => JSX.Element;
 };
 
 const ITEMS: ItemType[] = [
   {
     id: '1',
-    text: 'Write a cool JS library',
+    className: 'card',
+    Component: Card,
   },
   {
     id: '2',
-    text: 'Make it generic enough',
+    className: 'card',
+    Component: Card,
   },
   {
     id: '3',
-    text: 'Write README',
+    className: 'card card--full-width',
+    Component: Card,
   },
   {
     id: '4',
-    text: 'Create some examples',
-    isFullWidth: true,
+    className: 'card',
+    Component: Card,
   },
   {
     id: '5',
-    text: 'Spam in Twitter and IRC to promote it',
+    className: 'card',
+    Component: Card,
   },
   {
     id: '6',
-    text: '???',
+    className: 'card',
+    Component: Card,
   },
   {
     id: '7',
-    text: 'PROFIT',
+    className: 'card',
+    Component: Card,
   },
 ];
 
@@ -55,16 +66,7 @@ export const Section = () => {
         data={cards}
         updateDataHandler={updateDataHandler}
         className="container"
-      >
-        {cards.map((item) => (
-          <Card
-            key={item.id}
-            className={`card${item.isFullWidth ? ' card--full-width' : ''}`}
-            id={item.id}
-            text={item.text}
-          />
-        ))}
-      </DragAndDropContainer>
+      />
     </section>
   );
 };
