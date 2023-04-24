@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
-import {DragAndDropContainer} from '../DragAndDropContainer/DragAndDropContainer';
-import {Card} from './Card';
+import {DragAndDropContainer} from '@/components/DragAndDropContainer/DragAndDropContainer';
+import {CardExample} from '@/widgets/CardExample/CardExample';
 
 import './Section.scss';
 
@@ -18,38 +18,53 @@ type ItemType = {
 const ITEMS: ItemType[] = [
   {
     id: '1',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
   },
   {
     id: '2',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
   },
   {
     id: '3',
-    className: 'card card--full-width',
-    Component: Card,
+    className: 'section__card section__card--full-width',
+    Component: CardExample,
   },
   {
     id: '4',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
   },
   {
     id: '5',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
   },
   {
     id: '6',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
   },
   {
     id: '7',
-    className: 'card',
-    Component: Card,
+    className: 'section__card',
+    Component: CardExample,
+  },
+  {
+    id: '8',
+    className: 'section__card',
+    Component: CardExample,
+  },
+  {
+    id: '9',
+    className: 'section__card',
+    Component: CardExample,
+  },
+  {
+    id: '10',
+    className: 'section__card',
+    Component: CardExample,
   },
 ];
 
@@ -65,7 +80,7 @@ export const Section = () => {
       <DragAndDropContainer
         data={cards}
         updateDataHandler={updateDataHandler}
-        className="container"
+        className="section__container"
       />
     </section>
   );
