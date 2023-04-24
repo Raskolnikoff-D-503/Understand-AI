@@ -22,7 +22,6 @@ export const DragAndDropContainer = <
   },
 >({
   data,
-  // children,
   updateDataHandler,
   className,
 }: DragAndDropContainerProps<T>) => {
