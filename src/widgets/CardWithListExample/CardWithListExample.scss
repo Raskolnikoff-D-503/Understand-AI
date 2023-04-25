@@ -1,0 +1,10 @@
+.card-with-list {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__list-item {
+    padding: 8px 16px;
+  }
+}
