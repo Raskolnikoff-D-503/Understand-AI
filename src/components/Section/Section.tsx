@@ -24,7 +24,7 @@ const ITEMS: ItemType[] = [
   {
     id: '2',
     className: 'section__card',
-    Component: CardWithListExample,
+    Component: CardWithChartExample,
   },
   {
     id: '3',
@@ -34,7 +34,7 @@ const ITEMS: ItemType[] = [
   {
     id: '4',
     className: 'section__card',
-    Component: CardWithListExample,
+    Component: CardWithChartExample,
   },
   {
     id: '5',

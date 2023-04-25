@@ -1,6 +1,5 @@
 import React from 'react';
-import {Card, CustomLink, Title} from '@/shared/UI';
-import {SIZE} from '@/shared/constants';
+import {Card, CustomLink} from '@/shared/UI';
 
 import './CardWithListExample.scss';
 
@@ -25,27 +24,26 @@ const cardItems = [
     title: 'Check the link',
     to: '/',
   },
-  // {
-  //   id: '456',
-  //   title: 'Check the link',
-  //   to: '/',
-  // },
-  // {
-  //   id: '567',
-  //   title: 'Check the link',
-  //   to: '/',
-  // },
-  // {
-  //   id: '678',
-  //   title: 'Check the link',
-  //   to: '/',
-  // }
+  {
+    id: '456',
+    title: 'Check the link',
+    to: '/',
+  },
+  {
+    id: '567',
+    title: 'Check the link',
+    to: '/',
+  },
+  {
+    id: '678',
+    title: 'Check the link',
+    to: '/',
+  },
 ];
 
 export const CardWithListExample = ({id, className}: Props) => {
   return (
-    <Card id={id} className={`card-with-list ${className}`}>
-      <Title size={SIZE.SMALL}>Interesting Facts</Title>
+    <Card id={id} className={`card-with-list ${className}`} title="Interesting Facts" isDraggable>
       <ul className="card-with-list__list">
         {cardItems.map((item) => (
           <li className="card-with-list__list-item" key={item.id}>
