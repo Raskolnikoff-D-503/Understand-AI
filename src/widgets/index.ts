@@ -1,1 +1,2 @@
-export {CardExample} from './CardExample/CardExample';
+export {CardWithListExample} from './CardWithListExample/CardWithListExample';
+export {CardWithChartExample} from './CardWithChartExample/CardWithChartExample';
