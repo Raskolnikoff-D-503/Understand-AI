@@ -1,12 +1,13 @@
 .card-with-chart {
   height: 400px;
-  display: flex;
-  flex-direction: column;
   border-radius: 16px;
+  display: grid;
+  grid-template-rows: min-content minmax(0, 1fr);
+  height: 400px;
+  width: calc(100% - 2em);
 
   &__container {
     width: 100%;
-    height: calc(100% - 60px);
     padding: 24px;
     display: flex;
     justify-content: center;
