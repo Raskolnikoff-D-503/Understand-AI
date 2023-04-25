@@ -1,0 +1,13 @@
+.card-with-chart {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+
+  &__container {
+    height: calc(100% - 60px);
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+  }
+}

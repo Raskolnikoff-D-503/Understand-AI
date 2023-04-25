@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {DragAndDropContainer} from '@/components/DragAndDropContainer/DragAndDropContainer';
-import {CardExample} from '@/widgets/CardExample/CardExample';
+import {CardWithChartExample, CardWithListExample} from '@/widgets';
 
 import './Section.scss';
 
@@ -19,52 +19,52 @@ const ITEMS: ItemType[] = [
   {
     id: '1',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithChartExample,
   },
   {
     id: '2',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '3',
     className: 'section__card section__card--full-width',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '4',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '5',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '6',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '7',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '8',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '9',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
   {
     id: '10',
     className: 'section__card',
-    Component: CardExample,
+    Component: CardWithListExample,
   },
 ];
 
