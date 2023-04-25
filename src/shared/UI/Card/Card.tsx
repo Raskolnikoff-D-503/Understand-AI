@@ -18,7 +18,7 @@ export const Card = ({id, className, title, isDraggable = false, children}: Prop
     <div id={id} className={`card ${className}`}>
       {(title || isDraggable) && (
         <div className="card__title-container">
-          {title && <Title size={SIZE.SMALL}>{title}</Title>}
+          {title && <Title size={SIZE.MEDIUM}>{title}</Title>}
           {isDraggable && (
             <div className="card__icon-wrapper">
               <DraggableIcon />

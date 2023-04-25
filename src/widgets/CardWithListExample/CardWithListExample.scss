@@ -2,9 +2,30 @@
   height: 400px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
-  &__list-item {
-    padding: 8px 16px;
+  &__list {
+    display: grid;
+    gap: 32px;
+    padding: 24px;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #d6dee1;
+      border-radius: 20px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #a8bbbf;
+    }
   }
 }
