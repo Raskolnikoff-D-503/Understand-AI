@@ -1,7 +1,6 @@
 .section {
   padding: 32px;
   height: 100%;
-  min-height: fit-content;
   min-width: fit-content;
   border: 3px solid black;
   align-items: start;
@@ -9,11 +8,15 @@
 
 .section__container {
   position: relative;
-  height: fit-content;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content;
   gap: 16px;
+
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .section__card {
