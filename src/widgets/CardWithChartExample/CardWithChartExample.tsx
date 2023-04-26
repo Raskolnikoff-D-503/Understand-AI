@@ -25,7 +25,7 @@ const data: ChartData<'doughnut'> = {
 
 const options: ChartOptions = {
   responsive: true,
-  maintainAspectRatio: true,
+  maintainAspectRatio: false,
   plugins: {legend: {position: 'right'}},
   aspectRatio: 1,
 };
@@ -39,7 +39,9 @@ export const CardWithChartExample = ({id, className}: Props) => {
       isDraggable
     >
       <div className="card-with-chart__container">
-        <Doughnut data={data} options={options} />
+        <div className="card-with-chart__chart-wrapper">
+          <Doughnut data={data} options={options} />
+        </div>
       </div>
     </Card>
   );
