@@ -3,6 +3,10 @@
   width: 100%;
   height: fit-content;
 
+  &--no-padding {
+    padding: 0;
+  }
+
   &--large {
     font-size: 48px;
   }
