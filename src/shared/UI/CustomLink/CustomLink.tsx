@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {Link} from 'react-router-dom';
 
 import './CustomLink.scss';
 
 type Props = {
-  title: string;
+  children: ReactNode;
   to: string;
 };
 
-export const CustomLink = ({title, to}: Props) => {
+export const CustomLink = ({children, to}: Props) => {
   return (
     <Link className="custom-link" to={to}>
-      {title}
+      {children}
     </Link>
   );
 };

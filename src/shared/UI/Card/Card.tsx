@@ -26,7 +26,7 @@ export const Card = ({id, className, title, isDraggable = false, children}: Prop
           )}
         </div>
       )}
-      {children}
+      <div className="card__content">{children}</div>
     </div>
   );
 };
