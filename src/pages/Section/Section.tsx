@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {DragAndDropContainer} from '@/components/DragAndDropContainer/DragAndDropContainer';
+import {DragAndDropContainer} from '@/features';
 import {CardWithChartExample, CardWithListExample} from '@/widgets';
 
 import './Section.scss';
