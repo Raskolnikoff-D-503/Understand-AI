@@ -1,6 +1,8 @@
 .card {
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  display: flex;
+  flex-direction: column;
 
   &__title-container {
     display: flex;
@@ -9,5 +11,11 @@
 
   &__icon-wrapper {
     padding: 24px;
+  }
+
+  &__content {
+    padding: 24px;
+    flex: 1;
+    min-height: 0;
   }
 }

@@ -1,12 +1,10 @@
 .card-with-list {
-  height: 400px;
-  display: flex;
-  flex-direction: column;
+  height: 600px;
 
   &__list {
     display: grid;
     gap: 32px;
-    padding: 24px;
+    height: 100%;
     overflow-x: hidden;
 
     &::-webkit-scrollbar {
@@ -27,5 +25,13 @@
     &::-webkit-scrollbar-thumb:hover {
       background-color: #a8bbbf;
     }
+  }
+
+  &__description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    white-space: pre-wrap;
   }
 }
