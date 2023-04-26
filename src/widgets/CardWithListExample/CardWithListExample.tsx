@@ -60,8 +60,10 @@ export const CardWithListExample = ({id, className}: Props) => {
       <ul className="card-with-list__list">
         {cardItems.map((item) => (
           <li className="card-with-list__list-item" key={item.id}>
+            <Title size={SIZE.SMALL} noPadding>
+              {item.title}
+            </Title>
             <CustomLink to={item.to}>
-              <Title size={SIZE.SMALL}>{item.title}</Title>
               <div className="card-with-list__description">{item.description}</div>
             </CustomLink>
           </li>

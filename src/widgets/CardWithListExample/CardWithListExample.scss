@@ -27,6 +27,11 @@
     }
   }
 
+  &__list-item {
+    display: grid;
+    gap: 16px;
+  }
+
   &__description {
     overflow: hidden;
     display: -webkit-box;
