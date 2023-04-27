@@ -1,4 +1,4 @@
-.card-with-list {
+.learning-recourses-card-widget {
   height: 600px;
 
   &__list {
@@ -27,7 +27,7 @@
     }
   }
 
-  &__list-item {
+  &__anchor {
     display: grid;
     gap: 16px;
   }

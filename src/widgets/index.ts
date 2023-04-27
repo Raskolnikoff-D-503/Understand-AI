@@ -1,3 +1,3 @@
 export {Header} from './Header/Header';
-export {CardWithListExample} from './CardWithListExample/CardWithListExample';
+export {LearningResourcersCardWidget} from './LearningResourcersCardWidget/LearningResourcersCardWidget';
 export {CardWithChartExample} from './CardWithChartExample/CardWithChartExample';

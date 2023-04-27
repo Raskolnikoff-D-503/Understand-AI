@@ -1,9 +1,9 @@
 import React from 'react';
-import {useGetGoogleNewsQuery} from '@/app/services/googleNews/hooks';
+import {useGetAINewsQuery} from '@/app/services/AINews/hooks';
 import {Card, CustomAnchor, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
-import './CardWithListExample.scss';
+import './LearningResourcersCardWidget.scss';
 
 type Props = {
   id: string;
@@ -55,23 +55,30 @@ type Props = {
 //   },
 // ];
 
-export const CardWithListExample = ({id, className}: Props) => {
-  const {data, error, isLoading} = useGetGoogleNewsQuery();
+const PAGE_NUMBER = 1;
+
+export const LearningResourcersCardWidget = ({id, className}: Props) => {
+  const {data, error, isLoading} = useGetAINewsQuery(PAGE_NUMBER);
 
   console.log(data, error, isLoading);
 
   return (
-    <Card id={id} className={`card-with-list ${className}`} title="Interesting Facts" isDraggable>
-      <ul className="card-with-list__list">
-        {data?.news.news.map(
+    <Card
+      id={id}
+      className={`learning-recourses-card-widget ${className}`}
+      title={data?.title}
+      isDraggable
+    >
+      <ul className="learning-recourses-card-widget__list">
+        {data?.value.map(
           (item) =>
-            item.props.title && (
-              <li className="card-with-list__list-item" key={item.props.title}>
-                <Title size={SIZE.SMALL} noPadding>
-                  {item.props.title}
-                </Title>
-                <CustomAnchor href={item.props.url}>
-                  <div className="card-with-list__description">{item.props.description}</div>
+            item.title && (
+              <li key={item.excerpt}>
+                <CustomAnchor className="learning-recourses-card-widget__anchor" href={item.webUrl}>
+                  <Title size={SIZE.SMALL} noPadding>
+                    {item.title}
+                  </Title>
+                  <div className="learning-recourses-card-widget__description">{item.excerpt}</div>
                 </CustomAnchor>
               </li>
             ),
