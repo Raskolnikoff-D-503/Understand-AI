@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
+import {LearningResourcersCardWidget} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
-import {CardWithChartExample, CardWithListExample} from '@/widgets';
 
 import './Section.scss';
 
@@ -19,53 +19,48 @@ const ITEMS: ItemType[] = [
   {
     id: '1',
     className: 'section__card',
-    Component: CardWithChartExample,
+    Component: LearningResourcersCardWidget,
   },
   {
     id: '2',
     className: 'section__card',
-    Component: CardWithChartExample,
+    Component: LearningResourcersCardWidget,
   },
   {
     id: '3',
-    className: 'section__card section__card--full-width',
-    Component: CardWithListExample,
+    className: 'section__card',
+    Component: LearningResourcersCardWidget,
   },
   {
     id: '4',
     className: 'section__card',
-    Component: CardWithChartExample,
+    Component: LearningResourcersCardWidget,
   },
   {
     id: '5',
     className: 'section__card',
-    Component: CardWithListExample,
+    Component: LearningResourcersCardWidget,
   },
-  {
-    id: '6',
-    className: 'section__card',
-    Component: CardWithListExample,
-  },
-  {
-    id: '7',
-    className: 'section__card',
-    Component: CardWithListExample,
-  },
-  {
-    id: '8',
-    className: 'section__card',
-    Component: CardWithListExample,
-  },
-  {
-    id: '9',
-    className: 'section__card',
-    Component: CardWithListExample,
-  },
-  {
-    id: '10',
-    className: 'section__card',
-    Component: CardWithListExample,
-  },
+  // {
+  //   id: '10',
+  //   className: 'section__card',
+  //   Component: CardWithListExample,
+  // },
+  // {
+  //   id: '1',
+  //   className: 'section__card',
+  //   Component: CardWithChartExample,
+  // },
+  // {
+  //   id: '2',
+  //   className: 'section__card',
+  //   Component: CardWithChartExample,
+  // },
+  // {
+  //   id: '3',
+  //   className: 'section__card section__card--full-width',
+  //   Component: CardWithListExample,
+  // },
 ];
 
 export const Section = () => {
