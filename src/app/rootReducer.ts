@@ -1,5 +1,5 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {googleNewsApi} from './api';
+import {googleNewsApi} from './services/googleNews/api';
 
 export const rootReducer = combineReducers({
   [googleNewsApi.reducerPath]: googleNewsApi.reducer,
