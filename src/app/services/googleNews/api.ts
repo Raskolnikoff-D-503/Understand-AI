@@ -1,15 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-// import axios from 'axios';
-
-// export const apiGoogle = () => {
-//   const {GOOGLE_NEW_API_URL} = process.env;
-
-//   const axiosInstance = axios.create({baseURL: GOOGLE_NEW_API_URL});
-
-//   return axiosInstance;
-// };
-
-// const {GOOGLE_NEW_API_URL} = process.env;
 
 /**
  * body: null
@@ -61,10 +50,12 @@ type GoogleNewsDataDto = {
   news: GoogleNewsListType;
 };
 
+const {GOOGLE_NEW_API_URL} = process.env;
+
 export const googleNewsApi = createApi({
   reducerPath: 'googleNewsApi',
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'https://google-news-api1.p.rapidapi.com/search',
+    baseUrl: `${GOOGLE_NEW_API_URL}`,
     headers: {
       'content-type': 'application/octet-stream',
       'X-RapidAPI-Key': 'c7b8d0a2ffmsh13190575c527053p1b3a04jsn198f455f27ce',

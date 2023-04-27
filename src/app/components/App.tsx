@@ -4,7 +4,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
 import {rootReducer} from '@/app/rootReducer';
-import {googleNewsApi} from '@/app/api';
+import {googleNewsApi} from '@/app/services/googleNews/api';
 import {Section} from '@/pages';
 import {Header} from '@/widgets';
 

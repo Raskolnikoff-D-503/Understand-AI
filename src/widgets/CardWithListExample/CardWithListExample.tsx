@@ -1,5 +1,5 @@
 import React from 'react';
-import {useGetGoogleNewsQuery} from '@/app/hooks';
+import {useGetGoogleNewsQuery} from '@/app/services/googleNews/hooks';
 import {Card, CustomAnchor, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
@@ -63,16 +63,19 @@ export const CardWithListExample = ({id, className}: Props) => {
   return (
     <Card id={id} className={`card-with-list ${className}`} title="Interesting Facts" isDraggable>
       <ul className="card-with-list__list">
-        {data?.news.news.map((item) => (
-          <li className="card-with-list__list-item" key={item.props.title}>
-            <Title size={SIZE.SMALL} noPadding>
-              {item.props.title}
-            </Title>
-            <CustomAnchor href={item.props.url}>
-              <div className="card-with-list__description">{item.props.description}</div>
-            </CustomAnchor>
-          </li>
-        ))}
+        {data?.news.news.map(
+          (item) =>
+            item.props.title && (
+              <li className="card-with-list__list-item" key={item.props.title}>
+                <Title size={SIZE.SMALL} noPadding>
+                  {item.props.title}
+                </Title>
+                <CustomAnchor href={item.props.url}>
+                  <div className="card-with-list__description">{item.props.description}</div>
+                </CustomAnchor>
+              </li>
+            ),
+        )}
       </ul>
     </Card>
   );
