@@ -67,22 +67,25 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
       id={id}
       className={`learning-recourses-card-widget ${className}`}
       title={data?.title}
+      isLoading={isLoading}
       isDraggable
     >
       <ul className="learning-recourses-card-widget__list">
-        {data?.value.map(
-          (item) =>
-            item.title && (
-              <li key={item.excerpt}>
-                <CustomAnchor className="learning-recourses-card-widget__anchor" href={item.webUrl}>
-                  <Title size={SIZE.SMALL} noPadding>
-                    {item.title}
-                  </Title>
-                  <div className="learning-recourses-card-widget__description">{item.excerpt}</div>
-                </CustomAnchor>
-              </li>
-            ),
-        )}
+        {data?.value.map((item) => (
+          <li key={item.excerpt}>
+            <CustomAnchor className="learning-recourses-card-widget__anchor" href={item.webUrl}>
+              <Title size={SIZE.SMALL} noPadding>
+                {item.title}
+              </Title>
+              <div className="learning-recourses-card-widget__description">
+                {item.excerpt.replace(
+                  /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+                  '',
+                )}
+              </div>
+            </CustomAnchor>
+          </li>
+        ))}
       </ul>
     </Card>
   );
