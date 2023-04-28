@@ -4,6 +4,11 @@ export const SIZE = {
   SMALL: 'SMALL',
 } as const;
 
+export const STYLE_TYPE = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+} as const;
+
 export const TOPIC_IDS = {
   MACHINE_LEARNING: 'MACHINE_LEARNING',
   COMPUTER_VISION: 'COMPUTER_VISION',

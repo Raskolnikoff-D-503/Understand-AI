@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {LearningResourcersCardWidget} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
-import './Section.scss';
+import './MainPage.scss';
 
 type Props = {
   id: string;
@@ -18,52 +18,52 @@ type ItemType = {
 const ITEMS: ItemType[] = [
   {
     id: '1',
-    className: 'section__card',
+    className: 'main-page__card main-page__card--full-width',
     Component: LearningResourcersCardWidget,
   },
   {
     id: '2',
-    className: 'section__card',
+    className: 'main-page__card',
     Component: LearningResourcersCardWidget,
   },
   {
     id: '3',
-    className: 'section__card',
+    className: 'main-page__card',
     Component: LearningResourcersCardWidget,
   },
   {
     id: '4',
-    className: 'section__card',
+    className: 'main-page__card',
     Component: LearningResourcersCardWidget,
   },
   {
     id: '5',
-    className: 'section__card',
+    className: 'main-page__card',
     Component: LearningResourcersCardWidget,
   },
   // {
   //   id: '10',
-  //   className: 'section__card',
+  //   className: 'main-page__card',
   //   Component: CardWithListExample,
   // },
   // {
   //   id: '1',
-  //   className: 'section__card',
+  //   className: 'main-page__card',
   //   Component: CardWithChartExample,
   // },
   // {
   //   id: '2',
-  //   className: 'section__card',
+  //   className: 'main-page__card',
   //   Component: CardWithChartExample,
   // },
   // {
   //   id: '3',
-  //   className: 'section__card section__card--full-width',
+  //   className: 'main-page__card main-page__card--full-width',
   //   Component: CardWithListExample,
   // },
 ];
 
-export const Section = () => {
+export const MainPage = () => {
   const [cards, setCards] = useState(ITEMS);
 
   const updateDataHandler = useCallback((data: ItemType[]) => {
@@ -71,12 +71,12 @@ export const Section = () => {
   }, []);
 
   return (
-    <section className="section">
+    <div className="main-page">
       <DragAndDropContainer
         data={cards}
         updateDataHandler={updateDataHandler}
-        className="section__container"
+        className="main-page__container"
       />
-    </section>
+    </div>
   );
 };
