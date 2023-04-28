@@ -1,6 +1,7 @@
 import React from 'react';
 import {useGetAINewsQuery} from '@/app/services/AINews/hooks';
-import {Card, CustomAnchor, Title} from '@/shared/UI';
+import {Card, CustomAnchor, List, Title} from '@/shared/UI';
+import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
 import './LearningResourcersCardWidget.scss';
@@ -70,23 +71,18 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
       isLoading={isLoading}
       isDraggable
     >
-      <ul className="learning-recourses-card-widget__list">
+      <List>
         {data?.value.map((item) => (
-          <li key={item.excerpt}>
-            <CustomAnchor className="learning-recourses-card-widget__anchor" href={item.webUrl}>
+          <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
+            <li className="learning-recourses-card-widget__list-item">
               <Title size={SIZE.SMALL} noPadding>
                 {item.title}
               </Title>
-              <div className="learning-recourses-card-widget__description">
-                {item.excerpt.replace(
-                  /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
-                  '',
-                )}
-              </div>
-            </CustomAnchor>
-          </li>
+              <p>{removeEmojis(item.excerpt)}</p>
+            </li>
+          </CustomAnchor>
         ))}
-      </ul>
+      </List>
     </Card>
   );
 };
