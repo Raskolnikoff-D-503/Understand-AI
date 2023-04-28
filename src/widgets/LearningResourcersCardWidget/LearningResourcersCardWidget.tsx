@@ -68,6 +68,7 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
       id={id}
       className={`learning-recourses-card-widget ${className}`}
       title={data?.title}
+      error={error}
       isLoading={isLoading}
       isDraggable
     >
