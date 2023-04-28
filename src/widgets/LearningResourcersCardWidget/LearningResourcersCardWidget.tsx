@@ -1,6 +1,6 @@
 import React from 'react';
 import {useGetAINewsQuery} from '@/app/services/AINews/hooks';
-import {Card, CustomAnchor, List, Title} from '@/shared/UI';
+import {Card, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
@@ -72,16 +72,20 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
       isDraggable
     >
       <List>
-        {data?.value.map((item) => (
-          <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
-            <li className="learning-recourses-card-widget__list-item">
-              <Title size={SIZE.SMALL} noPadding>
-                {item.title}
-              </Title>
-              <p>{removeEmojis(item.excerpt)}</p>
-            </li>
-          </CustomAnchor>
-        ))}
+        {Boolean(data?.value.length) ? (
+          data?.value.map((item) => (
+            <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
+              <li className="learning-recourses-card-widget__list-item">
+                <Title size={SIZE.SMALL} noPadding>
+                  {item.title}
+                </Title>
+                <p>{removeEmojis(item.excerpt)}</p>
+              </li>
+            </CustomAnchor>
+          ))
+        ) : (
+          <EmptyState />
+        )}
       </List>
     </Card>
   );
