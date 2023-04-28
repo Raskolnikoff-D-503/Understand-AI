@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {store} from '@/app/store';
-import {Section} from '@/pages';
+import {MainPage} from '@/pages';
 import {Header} from '@/widgets';
 
 import './App.scss';
@@ -13,7 +13,7 @@ export const App = () => {
       <BrowserRouter>
         <div className="app">
           <Header />
-          <Section />
+          <MainPage />
         </div>
       </BrowserRouter>
     </Provider>
