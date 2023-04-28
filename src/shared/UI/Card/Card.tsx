@@ -1,6 +1,5 @@
 import React, {ReactNode} from 'react';
-import {ShimmerTitle, ShimmerSectionHeader} from 'react-shimmer-effects';
-import {Title} from '@/shared/UI';
+import {CardContentLoader, Title, TitleLoader} from '@/shared/UI';
 import {DraggableIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
@@ -27,11 +26,7 @@ export const Card = ({
     <div id={id} className={`card ${className}`}>
       {(title || isDraggable || isLoading) && (
         <div className="card__title-container">
-          {isLoading && (
-            <div className="card__shimmer-title-wrapper">
-              <ShimmerTitle line={2} gap={10} variant="primary" />
-            </div>
-          )}
+          {isLoading && <TitleLoader />}
           {!isLoading && title && <Title size={SIZE.MEDIUM}>{title}</Title>}
           {!isLoading && isDraggable && (
             <div className="card__icon-wrapper">
@@ -40,17 +35,7 @@ export const Card = ({
           )}
         </div>
       )}
-      <div className="card__content">
-        {isLoading ? (
-          <>
-            <ShimmerSectionHeader />
-            <ShimmerSectionHeader />
-            <ShimmerSectionHeader />
-          </>
-        ) : (
-          children
-        )}
-      </div>
+      <div className="card__content">{isLoading ? <CardContentLoader /> : children}</div>
     </div>
   );
 };
