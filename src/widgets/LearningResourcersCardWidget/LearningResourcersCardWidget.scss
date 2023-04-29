@@ -10,13 +10,6 @@
     height: 100%;
     display: grid;
     grid-template-rows: 1fr min-content;
+    gap: 24px;
   }
-
-  // &__description {
-  //   overflow: hidden;
-  //   display: -webkit-box;
-  //   -webkit-box-orient: vertical;
-  //   -webkit-line-clamp: 3;
-  //   white-space: pre-wrap;
-  // }
 }
