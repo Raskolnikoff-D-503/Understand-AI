@@ -17,11 +17,6 @@ type ItemType = {
 
 const ITEMS: ItemType[] = [
   {
-    id: '1',
-    className: 'main-page__card main-page__card--full-width',
-    Component: LearningResourcersCardWidget,
-  },
-  {
     id: '2',
     className: 'main-page__card',
     Component: LearningResourcersCardWidget,
@@ -39,6 +34,11 @@ const ITEMS: ItemType[] = [
   {
     id: '5',
     className: 'main-page__card',
+    Component: LearningResourcersCardWidget,
+  },
+  {
+    id: '1',
+    className: 'main-page__card main-page__card--full-width',
     Component: LearningResourcersCardWidget,
   },
   // {
