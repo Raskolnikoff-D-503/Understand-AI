@@ -1,3 +1,4 @@
 export {Header} from './Header/Header';
-export {LearningResourcersCardWidget} from './LearningResourcersCardWidget/LearningResourcersCardWidget';
+export {LearningResourcesWidget} from './LearningResourcesWidget/LearningResourcesWidget';
+export {ChatGPTWidget} from './ChatGPTWidget/ChatGPTWidget';
 export {CardWithChartExample} from './CardWithChartExample/CardWithChartExample';
