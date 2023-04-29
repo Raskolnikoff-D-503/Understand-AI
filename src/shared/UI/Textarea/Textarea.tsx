@@ -5,13 +5,14 @@ import './Textarea.scss';
 type Props = {
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 };
 
-export const Textarea = ({value, onChange}: Props) => {
+export const Textarea = ({value, onChange, placeholder = ''}: Props) => {
   return (
     <textarea
       className="textarea"
-      placeholder="Start typing..."
+      placeholder={placeholder}
       value={value}
       rows={4}
       maxLength={1024}
