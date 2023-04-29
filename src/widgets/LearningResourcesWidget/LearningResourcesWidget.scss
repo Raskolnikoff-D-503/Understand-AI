@@ -1,13 +1,13 @@
 .learning-recources-widget {
-  &__list-item {
-    display: grid;
-    gap: 16px;
-  }
-
   &__container {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr min-content;
     gap: 24px;
+  }
+
+  &__list-item {
+    display: grid;
+    gap: 16px;
   }
 }
