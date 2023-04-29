@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <div className="header">
       <div className="header__title-wrapper">
-        <Title size={SIZE.LARGE}>HEADER</Title>
+        <Title size={SIZE.LARGE}>Understand AI</Title>
       </div>
       <div className="header__nav">Toggle</div>
     </div>
