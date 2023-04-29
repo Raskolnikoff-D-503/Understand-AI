@@ -1,2 +1,20 @@
 .chat-gpt-widget {
+  &__container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    gap: 24px;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__list-wrapper {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
 }
