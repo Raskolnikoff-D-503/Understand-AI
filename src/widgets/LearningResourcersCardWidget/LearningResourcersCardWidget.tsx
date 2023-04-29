@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {useGetAINewsQuery} from '@/app/services/AINews/hooks';
 import {Card, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
 import './LearningResourcersCardWidget.scss';
+import {Pagination} from '@/shared/UI/Pagination/Pagination';
 
 type Props = {
   id: string;
@@ -56,10 +57,16 @@ type Props = {
 //   },
 // ];
 
-const PAGE_NUMBER = 1;
+const DEFAULT_PAGE_NUMBER = 1;
 
 export const LearningResourcersCardWidget = ({id, className}: Props) => {
-  const {data, error, isLoading} = useGetAINewsQuery(PAGE_NUMBER);
+  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
+
+  const {data, error, isLoading} = useGetAINewsQuery(currentPage);
+
+  const onPageChange = useCallback((page: number) => {
+    setCurrentPage(page);
+  }, []);
 
   console.log(data, error, isLoading);
 
@@ -72,22 +79,32 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
       isLoading={isLoading}
       isDraggable
     >
-      <List>
-        {Boolean(data?.value.length) ? (
-          data?.value.map((item) => (
-            <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
-              <li className="learning-recourses-card-widget__list-item">
-                <Title size={SIZE.SMALL} noPadding>
-                  {item.title}
-                </Title>
-                <p>{removeEmojis(item.excerpt)}</p>
-              </li>
-            </CustomAnchor>
-          ))
-        ) : (
-          <EmptyState />
-        )}
-      </List>
+      <div className="learning-recourses-card-widget__container">
+        <List>
+          {Boolean(data?.value.length) ? (
+            data?.value.map((item) => (
+              <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
+                <li className="learning-recourses-card-widget__list-item">
+                  <Title size={SIZE.SMALL} noPadding>
+                    {item.title}
+                  </Title>
+                  <p>{removeEmojis(item.excerpt)}</p>
+                </li>
+              </CustomAnchor>
+            ))
+          ) : (
+            <EmptyState />
+          )}
+        </List>
+
+        <div>
+          <Pagination
+            currentPage={data?.page ?? 0}
+            nextPage={data?.nextPage}
+            onPageChange={onPageChange}
+          />
+        </div>
+      </div>
     </Card>
   );
 };

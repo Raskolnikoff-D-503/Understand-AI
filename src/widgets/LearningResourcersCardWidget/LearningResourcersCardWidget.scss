@@ -6,6 +6,12 @@
     gap: 16px;
   }
 
+  &__container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+  }
+
   // &__description {
   //   overflow: hidden;
   //   display: -webkit-box;
