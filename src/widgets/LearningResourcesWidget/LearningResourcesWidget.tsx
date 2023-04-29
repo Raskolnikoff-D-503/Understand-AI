@@ -1,11 +1,11 @@
 import React, {useCallback, useState} from 'react';
-import {useGetAINewsQuery} from '@/app/services/AINews/hooks';
+import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
 import {Card, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
+import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
-import './LearningResourcersCardWidget.scss';
-import {Pagination} from '@/shared/UI/Pagination/Pagination';
+import './LearningResourcesWidget.scss';
 
 type Props = {
   id: string;
@@ -59,32 +59,32 @@ type Props = {
 
 const DEFAULT_PAGE_NUMBER = 1;
 
-export const LearningResourcersCardWidget = ({id, className}: Props) => {
+export const LearningResourcesWidget = ({id, className}: Props) => {
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
 
-  const {data, error, isLoading} = useGetAINewsQuery(currentPage);
+  const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
   const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
 
-  console.log(data, error, isLoading);
+  // console.log(data, error, isLoading);
 
   return (
     <Card
       id={id}
-      className={`learning-recourses-card-widget ${className}`}
+      className={`learning-recources-widget ${className}`}
       title={data?.title}
       error={error}
       isLoading={isLoading}
       isDraggable
     >
-      <div className="learning-recourses-card-widget__container">
+      <div className="learning-recources-widget__container">
         <List>
           {Boolean(data?.value.length) ? (
             data?.value.map((item) => (
               <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
-                <li className="learning-recourses-card-widget__list-item">
+                <li className="learning-recources-widget__list-item">
                   <Title size={SIZE.SMALL} noPadding>
                     {item.title}
                   </Title>

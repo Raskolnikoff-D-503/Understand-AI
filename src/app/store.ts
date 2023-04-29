@@ -1,13 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
 import {rootReducer} from './rootReducer';
-import {yahooFinanceApi} from './services/yahooFinance/api';
-import {AINewsApi} from './services/AINews/api';
+import {learningResourcesApi} from './services/learningResources/api';
+import {chatGPTApi} from './services/chatGPT/api';
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([yahooFinanceApi.middleware, AINewsApi.middleware]),
+    getDefaultMiddleware().concat([learningResourcesApi.middleware, chatGPTApi.middleware]),
 });
 
 setupListeners(store.dispatch);

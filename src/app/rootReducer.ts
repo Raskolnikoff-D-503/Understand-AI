@@ -1,8 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {yahooFinanceApi} from './services/yahooFinance/api';
-import {AINewsApi} from './services/AINews/api';
+import {learningResourcesApi} from './services/learningResources/api';
+import {chatGPTApi} from './services/chatGPT/api';
 
 export const rootReducer = combineReducers({
-  [yahooFinanceApi.reducerPath]: yahooFinanceApi.reducer,
-  [AINewsApi.reducerPath]: AINewsApi.reducer,
+  [chatGPTApi.reducerPath]: chatGPTApi.reducer,
+  [learningResourcesApi.reducerPath]: learningResourcesApi.reducer,
 });
