@@ -19,6 +19,7 @@
   &__card {
     background-color: white;
     width: 100%;
+    max-width: 100%;
 
     &--full-width {
       grid-column: 1 / -1;
