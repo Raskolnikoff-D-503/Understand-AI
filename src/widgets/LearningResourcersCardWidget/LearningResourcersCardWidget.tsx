@@ -97,13 +97,11 @@ export const LearningResourcersCardWidget = ({id, className}: Props) => {
           )}
         </List>
 
-        <div>
-          <Pagination
-            currentPage={data?.page ?? 0}
-            nextPage={data?.nextPage}
-            onPageChange={onPageChange}
-          />
-        </div>
+        <Pagination
+          currentPage={data?.page ?? 0}
+          nextPage={data?.nextPage}
+          onPageChange={onPageChange}
+        />
       </div>
     </Card>
   );
