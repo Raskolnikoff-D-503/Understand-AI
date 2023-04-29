@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {LearningResourcersCardWidget} from '@/widgets';
+import {ChatGPTWidget, LearningResourcesWidget} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
 import './MainPage.scss';
@@ -19,27 +19,27 @@ const ITEMS: ItemType[] = [
   {
     id: '2',
     className: 'main-page__card',
-    Component: LearningResourcersCardWidget,
+    Component: ChatGPTWidget,
   },
   {
     id: '3',
     className: 'main-page__card',
-    Component: LearningResourcersCardWidget,
+    Component: LearningResourcesWidget,
   },
   {
     id: '4',
     className: 'main-page__card',
-    Component: LearningResourcersCardWidget,
+    Component: LearningResourcesWidget,
   },
   {
     id: '5',
     className: 'main-page__card',
-    Component: LearningResourcersCardWidget,
+    Component: LearningResourcesWidget,
   },
   {
     id: '1',
     className: 'main-page__card main-page__card--full-width',
-    Component: LearningResourcersCardWidget,
+    Component: LearningResourcesWidget,
   },
   // {
   //   id: '10',

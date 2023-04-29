@@ -31,9 +31,9 @@ type CardContentLoaderProps = {
 export const CardContentLoader = ({repeat = 3, line = 3}: CardContentLoaderProps) => {
   return (
     <div className="card-content-loader">
-      {new Array(repeat).fill(null).map((_) => {
+      {new Array(repeat).fill(null).map((_, index) => {
         return (
-          <div>
+          <div key={index}>
             <TitleLoader type={STYLE_TYPE.SECONDARY} line={1} noPadding />
             <ShimmerText line={line} />
           </div>

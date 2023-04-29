@@ -33,8 +33,6 @@ const getErrorMessage = (error: FetchBaseQueryError | SerializedError): string =
 };
 
 export const Error = ({error}: Props) => {
-  console.log('error', error);
-
   return (
     <div className="error">
       <ErrorIcon />

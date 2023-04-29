@@ -17,8 +17,8 @@ type AINewsDto = {
   nextPage: number;
 };
 
-export const AINewsApi = createApi({
-  reducerPath: 'AINewsApi',
+export const learningResourcesApi = createApi({
+  reducerPath: 'learningResourcesApi',
   baseQuery: fetchBaseQuery({
     // baseUrl: 'https://ai10.p.rapidapi.com/learning/page',
     headers: {
@@ -28,7 +28,7 @@ export const AINewsApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAINews: builder.query<AINewsDto, number>({
+    getLearningResources: builder.query<AINewsDto, number>({
       query: (page) => `/${page}/`,
     }),
   }),
