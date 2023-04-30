@@ -14,7 +14,7 @@ export const Textarea = ({value, onChange, placeholder = ''}: Props) => {
       className="textarea"
       placeholder={placeholder}
       value={value}
-      rows={4}
+      rows={2}
       maxLength={1024}
       onChange={(e) => onChange(e.currentTarget.value)}
     />
