@@ -4,6 +4,7 @@ export {Error} from './Error/Error';
 export {Title} from './Title/Title';
 export {Textarea} from './Textarea/Textarea';
 export {Button} from './Button/Button';
+export {ToggleSwitch} from './ToggleSwitch/ToggleSwitch';
 export {CustomLink} from './CustomLink/CustomLink';
 export {CustomAnchor} from './CustomAnchor/CustomAnchor';
 export {Card} from './Card/Card';

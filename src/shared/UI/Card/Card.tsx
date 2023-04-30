@@ -28,11 +28,11 @@ export const Card = ({
 }: Props) => {
   return (
     <div id={id} className={`card ${className}`}>
-      {!error && (title || isDraggable || isLoading) && (
+      {(title || isDraggable || isLoading) && (
         <div className="card__title-container">
           {isLoading && <TitleLoader />}
           {!isLoading && title && <Title size={SIZE.MEDIUM}>{title}</Title>}
-          {!isLoading && isDraggable && (
+          {isDraggable && (
             <div className="card__icon-wrapper">
               <DraggableIcon />
             </div>
