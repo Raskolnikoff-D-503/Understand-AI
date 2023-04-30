@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {ChatGPTWidget, LearningResourcesWidget} from '@/widgets';
+import {ChatGPTWidget, LearningResourcesWidget, SavedChatGPTRepliesWidget} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
 import './MainPage.scss';
@@ -26,7 +26,7 @@ const ITEMS: ItemType[] = [
   {
     id: '3',
     className: 'main-page__card',
-    Component: LearningResourcesWidget,
+    Component: SavedChatGPTRepliesWidget,
   },
   {
     id: '4',
