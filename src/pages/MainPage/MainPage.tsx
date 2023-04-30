@@ -1,4 +1,6 @@
 import React, {useCallback, useState} from 'react';
+import {useAppSelector} from '@/app/store';
+import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {ChatGPTWidget, LearningResourcesWidget} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
@@ -66,17 +68,29 @@ const ITEMS: ItemType[] = [
 export const MainPage = () => {
   const [cards, setCards] = useState(ITEMS);
 
+  const isOnEdit = useAppSelector(selectIsOnEdit);
+
   const updateDataHandler = useCallback((data: ItemType[]) => {
     setCards(data);
   }, []);
 
   return (
     <div className="main-page">
-      <DragAndDropContainer
-        data={cards}
-        updateDataHandler={updateDataHandler}
-        className="main-page__container"
-      />
+      {isOnEdit ? (
+        <DragAndDropContainer
+          data={cards}
+          updateDataHandler={updateDataHandler}
+          className="main-page__container"
+        />
+      ) : (
+        <div className="main-page__container">
+          {cards.map((item) => {
+            const {id, className, Component} = item;
+
+            return <Component id={id} key={id} className={className} />;
+          })}
+        </div>
+      )}
     </div>
   );
 };

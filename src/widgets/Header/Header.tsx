@@ -1,16 +1,21 @@
 import React from 'react';
-import {Title} from '@/shared/UI';
+import {useGetIsOnEdit} from '@/app/services/mainPageController/hooks';
+import {Title, ToggleSwitch} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
 import './Header.scss';
 
 export const Header = () => {
+  const {isOnEdit, setIsOnEdit} = useGetIsOnEdit();
+
   return (
     <div className="header">
       <div className="header__title-wrapper">
         <Title size={SIZE.LARGE}>Understand AI</Title>
       </div>
-      <div className="header__nav">Toggle</div>
+      <div className="header__nav">
+        <ToggleSwitch name="drag-and-drop" checked={isOnEdit} onChange={setIsOnEdit} />
+      </div>
     </div>
   );
 };

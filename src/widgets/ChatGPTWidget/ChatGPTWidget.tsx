@@ -3,6 +3,8 @@ import {useGetChatGPTMessageMutation} from '@/app/services/chatGPT/hooks';
 import {Button, Card, List, Textarea} from '@/shared/UI';
 
 import './ChatGPTWidget.scss';
+import {useAppSelector} from '@/app/store';
+import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 
 type Props = {
   id: string;
@@ -12,12 +14,17 @@ type Props = {
 export const ChatGPTWidget = ({id, className}: Props) => {
   const [txt, setTxt] = useState<string>('');
 
+  const isDraggable = useAppSelector(selectIsOnEdit);
+
   const [getChatGPTMessage, response] = useGetChatGPTMessageMutation();
 
-  console.log(getChatGPTMessage, response);
-
   return (
-    <Card id={id} className={`chat-gpt-widget ${className}`} title="Chat GPT" isDraggable>
+    <Card
+      id={id}
+      className={`chat-gpt-widget ${className}`}
+      title="Chat GPT"
+      isDraggable={isDraggable}
+    >
       <div className="chat-gpt-widget__container">
         <div className="chat-gpt-widget__controls">
           <Textarea value={txt} onChange={setTxt} placeholder="Send a message..." />
