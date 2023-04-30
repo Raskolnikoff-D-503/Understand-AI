@@ -19,12 +19,7 @@ export const ChatGPTWidget = ({id, className}: Props) => {
   const [getChatGPTMessage, response] = useGetChatGPTMessageMutation();
 
   return (
-    <Card
-      id={id}
-      className={`chat-gpt-widget ${className}`}
-      title="Chat GPT"
-      isDraggable={isDraggable}
-    >
+    <Card id={id} className={className} title="Chat GPT" isDraggable={isDraggable}>
       <div className="chat-gpt-widget__container">
         <div className="chat-gpt-widget__controls">
           <Textarea value={txt} onChange={setTxt} placeholder="Send a message..." />
