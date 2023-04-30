@@ -1,4 +1,6 @@
 import React, {useCallback, useState} from 'react';
+import {useAppSelector} from '@/app/store';
+import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
 import {Card, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
@@ -62,13 +64,13 @@ const DEFAULT_PAGE_NUMBER = 1;
 export const LearningResourcesWidget = ({id, className}: Props) => {
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
 
+  const isDraggable = useAppSelector(selectIsOnEdit);
+
   const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
   const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
-
-  // console.log(data, error, isLoading);
 
   return (
     <Card
@@ -77,7 +79,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
       title={data?.title}
       error={error}
       isLoading={isLoading}
-      isDraggable
+      isDraggable={isDraggable}
     >
       <div className="learning-recources-widget__container">
         <List>
