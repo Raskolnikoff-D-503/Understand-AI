@@ -1,5 +1,6 @@
 import React from 'react';
 import {useAppSelector} from '@/app/store';
+import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {Accordion, Card, List} from '@/shared/UI';
 
@@ -13,9 +14,16 @@ type Props = {
 export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
+  const items = useReadLocalStorage<{id: string; title: string; content: string}[]>('responses');
+
   return (
     <Card id={id} className={className} isDraggable={isDraggable} title="Saved Chat GPT Replies">
       <List className="saved-chat-gpt-replies-widget__container">
+        {items?.map((item) => (
+          <Accordion key={item.id ?? item.title} title={item.title}>
+            <p>{item.content}</p>
+          </Accordion>
+        ))}
         <Accordion title={'title'}>
           <p>
             {
