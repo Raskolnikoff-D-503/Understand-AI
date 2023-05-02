@@ -1,5 +1,5 @@
 import React, {ReactNode, useCallback, useState} from 'react';
-import {Title} from '@/shared/UI';
+import {Divider, Title} from '@/shared/UI';
 import {ArrowIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
@@ -28,7 +28,7 @@ export const Accordion = ({title, children, open = false}: Props) => {
           <ArrowIcon />
         </div>
       </div>
-      <hr className={`accordion__divider accordion__divider${!isOpen && '--hidden'}`} />
+      <Divider className={`accordion__divider accordion__divider${!isOpen && '--hidden'}`} />
       <div className={`accordion__content accordion__content${!isOpen && '--hidden'}`}>
         {children}
       </div>
