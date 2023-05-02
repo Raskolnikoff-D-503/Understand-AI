@@ -40,7 +40,9 @@ export const Card = ({
         </div>
       )}
       <div className="card__content">
-        {isLoading ? <CardContentLoader /> : error ? <Error error={error} /> : children}
+        {isLoading && <CardContentLoader />}
+        {!isLoading && error && <Error error={error} />}
+        {!isLoading && !error && children}
       </div>
     </div>
   );
