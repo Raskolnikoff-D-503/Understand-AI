@@ -2,7 +2,7 @@ import React from 'react';
 import {useAppSelector} from '@/app/store';
 import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {Accordion, Card, List} from '@/shared/UI';
+import {Accordion, Card, Divider, List} from '@/shared/UI';
 
 import './SavedChatGPTRepliesWidget.scss';
 
@@ -20,9 +20,12 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     <Card id={id} className={className} isDraggable={isDraggable} title="Saved Chat GPT Replies">
       <List className="saved-chat-gpt-replies-widget__container">
         {items?.map((item) => (
-          <Accordion key={item.id ?? item.title} title={item.title}>
-            <p>{item.content}</p>
-          </Accordion>
+          <React.Fragment key={item.id ?? item.title}>
+            <Accordion title={item.title}>
+              <p>{item.content}</p>
+            </Accordion>
+            <Divider />
+          </React.Fragment>
         ))}
         <Accordion title={'title'}>
           <p>
@@ -31,27 +34,27 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
             }
           </p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>
-        <hr />
+        <Divider />
         <Accordion title={'title'}>
           <p>{'content content content'}</p>
         </Accordion>

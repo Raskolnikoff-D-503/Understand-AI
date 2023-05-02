@@ -14,6 +14,9 @@ type Props = {
 
 export const ChatGPTWidget = ({id, className}: Props) => {
   const [txt, setTxt] = useState<string>('');
+  const [response, setResponse] = useSaveResponseToLocalStorage();
+
+  console.log(response);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
@@ -22,13 +25,12 @@ export const ChatGPTWidget = ({id, className}: Props) => {
   console.log(data, error);
 
   const onSaveResponse = useCallback(() => {
-    // const content = data?.choices.map((item) => item.message.content);
-
-    // if (content?.[0]) {
-    useSaveResponseToLocalStorage({
-      title: 'How to become successful?',
-      // content: content[0],
-      content: `As an AI language model, I am not capable of having personal experiences and ambitions, but I can give some general tips on how to become successful:
+    setResponse(
+      // const content = data?.choices.map((item) => item.message.content);
+      {
+        title: 'How to become successful?',
+        // content: content[0],
+        content: `As an AI language model, I am not capable of having personal experiences and ambitions, but I can give some general tips on how to become successful:
 
         1. Have a clear vision and set goals
         2. Develop a strong work ethic and discipline
@@ -40,7 +42,8 @@ export const ChatGPTWidget = ({id, className}: Props) => {
         8. Stay focused and persevere through challenges and setbacks
         9. Network and build relationships within your industry or field
         10. Maintain a positive attitude and always strive for self-improvement.`,
-    });
+      },
+    );
     // }
   }, [data]);
 

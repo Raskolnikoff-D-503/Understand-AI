@@ -1,5 +1,7 @@
 import {useCallback, useEffect, useState} from 'react';
 
+type Value<T> = T | null;
+
 type ResponseItem = {
   id: string;
   title: string;
@@ -8,62 +10,83 @@ type ResponseItem = {
 
 type NewResponseItem = Omit<ResponseItem, 'id'>;
 
-export const useSaveResponseToLocalStorage = (response: NewResponseItem) => {
-  const responses = localStorage.getItem('responses');
-
-  let items: ResponseItem[] = [];
-
-  if (responses) {
-    const parsedResponses: ResponseItem[] = JSON.parse(responses);
-
-    items = [...parsedResponses, {...response, id: `${response.title}${parsedResponses.length}`}];
-  } else {
-    items = [{...response, id: `${response.title}${0}`}];
-  }
-
-  localStorage.setItem('responses', JSON.stringify(items));
-};
-
-export const useSavedResponsesFromLocalStorage = () => {
-  const responses = localStorage.getItem('responses');
-
-  let items: ResponseItem[] = [];
-
-  useEffect(() => {
-    console.log('test', responses);
-
-    if (responses) {
-      const parsedResponses: ResponseItem[] = JSON.parse(responses);
-      items = [...parsedResponses];
-    }
-  }, [responses]);
-
-  return {items};
-};
-
-type Value<T> = T | null;
-
 export const useReadLocalStorage = <T>(key: string): Value<T> => {
-  const readValue = localStorage.getItem(key);
-  const parsedValue = readValue ? JSON.parse(readValue) : null;
+  const readValue = useCallback(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? (JSON.parse(item) as T) : null;
+  }, [key]);
 
-  const [storedValue, setStoredValue] = useState<Value<T>>(parsedValue);
+  const [storedValue, setStoredValue] = useState<Value<T>>(readValue);
 
   useEffect(() => {
-    setStoredValue(parsedValue);
+    setStoredValue(readValue());
   }, []);
 
   const handleStorageChange = useCallback(
-    (event: StorageEvent | CustomEvent) => {
+    (event) => {
       if ((event as StorageEvent)?.key && (event as StorageEvent).key !== key) {
         return;
       }
-      setStoredValue(parsedValue);
+      setStoredValue(readValue());
     },
-    [key, parsedValue],
+    [key, readValue],
   );
 
-  addEventListener('storage', handleStorageChange);
+  useEffect(() => {
+    addEventListener('local-storage', handleStorageChange);
+
+    return () => {
+      removeEventListener('local-storage', handleStorageChange);
+    };
+  }, [handleStorageChange]);
 
   return storedValue;
+};
+
+export const useSaveResponseToLocalStorage = (): [
+  NewResponseItem[],
+  (value: NewResponseItem) => void,
+] => {
+  const readValue = useCallback((): ResponseItem[] => {
+    const responses = localStorage.getItem('responses');
+
+    if (!responses) {
+      return [];
+    } else {
+      return JSON.parse(responses);
+    }
+  }, []);
+
+  const [storedValue, setStoredValue] = useState<ResponseItem[]>(readValue);
+
+  const setResponse = useCallback(
+    (value: NewResponseItem) => {
+      const newValue = [...storedValue, {...value, id: `${value.title}${storedValue.length}`}];
+
+      localStorage.setItem('responses', JSON.stringify(newValue));
+
+      setStoredValue(newValue);
+
+      window.dispatchEvent(new Event('local-storage'));
+    },
+    [storedValue],
+  );
+
+  const handleStorageChange = useCallback(() => {
+    setStoredValue(readValue());
+  }, [storedValue]);
+
+  useEffect(() => {
+    setStoredValue(readValue());
+  }, []);
+
+  useEffect(() => {
+    addEventListener('local-storage', handleStorageChange);
+
+    return () => {
+      removeEventListener('local-storage', handleStorageChange);
+    };
+  }, [storedValue]);
+
+  return [storedValue, setResponse];
 };
