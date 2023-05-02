@@ -23,22 +23,35 @@ export const TitleLoader = ({
   );
 };
 
-type CardContentLoaderProps = {
+type ListContentLoaderProps = {
   repeat?: number;
   line?: number;
+  isTitle?: boolean;
 };
 
-export const CardContentLoader = ({repeat = 3, line = 3}: CardContentLoaderProps) => {
+export const ListContentLoader = ({
+  repeat = 3,
+  line = 3,
+  isTitle = false,
+}: ListContentLoaderProps) => {
   return (
     <div className="card-content-loader">
       {new Array(repeat).fill(null).map((_, index) => {
         return (
           <div key={index}>
-            <TitleLoader type={STYLE_TYPE.SECONDARY} line={1} noPadding />
+            {isTitle && <TitleLoader type={STYLE_TYPE.SECONDARY} line={1} noPadding />}
             <ShimmerText line={line} />
           </div>
         );
       })}
     </div>
   );
+};
+
+type TextContentLoaderProps = {
+  line?: number;
+};
+
+export const TextContentLoader = ({line = 4}: TextContentLoaderProps) => {
+  return <ShimmerText line={line} />;
 };

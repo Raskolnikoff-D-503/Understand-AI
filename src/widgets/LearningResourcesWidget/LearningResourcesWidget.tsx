@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
-import {Card, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
+import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
@@ -33,7 +33,10 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
       className={`learning-recources-widget ${className}`}
       title={data?.title}
       error={error}
-      isLoading={isLoading}
+      loaderConfig={{
+        isLoading: isLoading,
+        Component: <ListContentLoader isTitle={true} />,
+      }}
       isDraggable={isDraggable}
     >
       <div className="learning-recources-widget__container">

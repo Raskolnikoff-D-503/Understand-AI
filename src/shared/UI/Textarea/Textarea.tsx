@@ -6,16 +6,26 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  rows?: number;
+  maxLength?: number;
 };
 
-export const Textarea = ({value, onChange, placeholder = ''}: Props) => {
+const MAX_LENGTH = 1024;
+
+export const Textarea = ({
+  value,
+  onChange,
+  placeholder = '',
+  maxLength = MAX_LENGTH,
+  rows = 2,
+}: Props) => {
   return (
     <textarea
       className="textarea"
       placeholder={placeholder}
       value={value}
-      rows={2}
-      maxLength={1024}
+      maxLength={maxLength}
+      rows={rows}
       onChange={(e) => onChange(e.currentTarget.value)}
     />
   );
