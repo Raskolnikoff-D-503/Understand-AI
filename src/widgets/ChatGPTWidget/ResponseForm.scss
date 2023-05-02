@@ -1,0 +1,14 @@
+.response-modal-form {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media screen and (max-width: 1007px) {
+    width: 420px;
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 320px;
+  }
+}

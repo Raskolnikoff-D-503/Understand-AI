@@ -5,6 +5,7 @@
     gap: 16px;
     grid-template-columns: 1fr min-content;
     cursor: pointer;
+    user-select: none;
   }
 
   &__icon-wrapper {

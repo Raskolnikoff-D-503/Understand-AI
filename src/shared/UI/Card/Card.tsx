@@ -1,18 +1,23 @@
 import React, {ReactNode} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 import {SerializedError} from '@reduxjs/toolkit';
-import {CardContentLoader, Error, Title, TitleLoader} from '@/shared/UI';
+import {Error, Title, TitleLoader} from '@/shared/UI';
 import {DraggableIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
 import './Card.scss';
+
+type LoaderConfigType = {
+  isLoading: boolean;
+  Component: JSX.Element;
+};
 
 type Props = {
   id?: string;
   className?: string;
   title?: string;
   isDraggable?: boolean;
-  isLoading?: boolean;
+  loaderConfig?: LoaderConfigType;
   error?: FetchBaseQueryError | SerializedError;
   children: ReactNode;
 };
@@ -22,10 +27,12 @@ export const Card = ({
   className,
   title,
   isDraggable = false,
-  isLoading = false,
+  loaderConfig = {isLoading: false, Component: <></>},
   error,
   children,
 }: Props) => {
+  const {isLoading, Component} = loaderConfig;
+
   return (
     <div id={id} className={`card ${className}`}>
       {(title || isDraggable || isLoading) && (
@@ -40,7 +47,7 @@ export const Card = ({
         </div>
       )}
       <div className="card__content">
-        {isLoading && <CardContentLoader />}
+        {isLoading && Component}
         {!isLoading && error && <Error error={error} />}
         {!isLoading && !error && children}
       </div>
