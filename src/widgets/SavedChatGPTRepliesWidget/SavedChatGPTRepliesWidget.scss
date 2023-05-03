@@ -1,6 +1,26 @@
 .saved-chat-gpt-replies-widget {
-  &__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__toggle-switch-wrapper {
+    display: flex;
+    justify-content: right;
+  }
+
+  &__drag-and-drop-container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  &__container {
     gap: 0;
+  }
+
+  &__item {
+    background-color: white;
   }
 }

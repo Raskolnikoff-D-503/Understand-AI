@@ -17,7 +17,7 @@ export const ResponseForm = ({response = '', onClose}: Props) => {
   const [inputTitle, setInputTitle] = useState<string>('');
   const [txt, setTxt] = useState<string>(response);
 
-  const [_, setResponse] = useSaveResponseToLocalStorage();
+  const setResponse = useSaveResponseToLocalStorage();
 
   const onSaveResponse = useCallback(() => {
     if (txt && inputTitle) {
@@ -35,8 +35,9 @@ export const ResponseForm = ({response = '', onClose}: Props) => {
       <Title noPadding size={SIZE.SMALL}>
         Save Response
       </Title>
-      <Input value={inputTitle} onChange={setInputTitle} />
+      <Input label="Title" value={inputTitle} onChange={setInputTitle} />
       <Textarea
+        label="Edit Response"
         value={txt}
         onChange={setTxt}
         maxLength={OPEN_AI_GPT_3_MODEL_RESPONSE_MAX_LENGTH}
