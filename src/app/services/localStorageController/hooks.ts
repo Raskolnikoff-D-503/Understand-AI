@@ -1,6 +1,7 @@
-import {useCallback, useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react';
 
 type Value<T> = T | null;
+type SetValue<T> = Dispatch<SetStateAction<T>>;
 
 type ResponseItem = {
   id: string;
@@ -43,10 +44,7 @@ export const useReadLocalStorage = <T>(key: string): Value<T> => {
   return storedValue;
 };
 
-export const useSaveResponseToLocalStorage = (): [
-  NewResponseItem[],
-  (value: NewResponseItem) => void,
-] => {
+export const useSaveResponseToLocalStorage = (): ((value: NewResponseItem) => void) => {
   const readValue = useCallback((): ResponseItem[] => {
     const responses = localStorage.getItem('responses');
 
@@ -61,7 +59,7 @@ export const useSaveResponseToLocalStorage = (): [
 
   const setResponse = useCallback(
     (value: NewResponseItem) => {
-      const newValue = [...storedValue, {...value, id: `${value.title}${storedValue.length}`}];
+      const newValue = [{...value, id: `${value.title}${storedValue.length}`}, ...storedValue];
 
       localStorage.setItem('responses', JSON.stringify(newValue));
 
@@ -88,5 +86,51 @@ export const useSaveResponseToLocalStorage = (): [
     };
   }, [storedValue]);
 
-  return [storedValue, setResponse];
+  return setResponse;
+};
+
+export const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
+  const readValue = useCallback((): T => {
+    const item = window.localStorage.getItem(key);
+    return item ? (JSON.parse(item) as T) : initialValue;
+  }, [initialValue, key]);
+
+  const [storedValue, setStoredValue] = useState<T>(readValue);
+
+  const setValue: SetValue<T> = useCallback(
+    (value) => {
+      const newValue = value instanceof Function ? value(storedValue) : value;
+
+      localStorage.setItem(key, JSON.stringify(newValue));
+
+      setStoredValue(newValue);
+
+      dispatchEvent(new Event('local-storage'));
+    },
+    [storedValue],
+  );
+
+  useEffect(() => {
+    setStoredValue(readValue());
+  }, []);
+
+  const handleStorageChange = useCallback(
+    (event) => {
+      if ((event as StorageEvent)?.key && (event as StorageEvent).key !== key) {
+        return;
+      }
+      setStoredValue(readValue());
+    },
+    [key, readValue],
+  );
+
+  useEffect(() => {
+    addEventListener('local-storage', handleStorageChange);
+
+    return () => {
+      removeEventListener('local-storage', handleStorageChange);
+    };
+  }, [storedValue]);
+
+  return [storedValue, setValue];
 };
