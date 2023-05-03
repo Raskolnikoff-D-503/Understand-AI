@@ -4,8 +4,8 @@ import './ToggleSwitch.scss';
 
 type Props = {
   name: string;
-  checked?: boolean;
-  onChange?: (value: boolean) => void;
+  checked: boolean;
+  onChange: (value: boolean) => void;
 };
 
 export const ToggleSwitch = ({name, checked = false, onChange}: Props) => {

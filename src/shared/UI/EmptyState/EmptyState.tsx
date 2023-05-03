@@ -3,11 +3,15 @@ import {NoDataIcon} from '@/shared/icons';
 
 import './EmptyState.scss';
 
-export const EmptyState = () => {
+type Props = {
+  message?: string;
+};
+
+export const EmptyState = ({message = 'No Data Avialable'}: Props) => {
   return (
     <div className="empty-state">
       <NoDataIcon />
-      <p>No Data Avialable</p>
+      <p>{message}</p>
     </div>
   );
 };
