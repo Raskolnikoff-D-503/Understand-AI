@@ -14,7 +14,7 @@ export const Header = () => {
         <Title size={SIZE.LARGE}>Understand AI</Title>
       </div>
       <div className="header__nav">
-        <ToggleSwitch name="drag-and-drop" checked={isOnEdit} onChange={setIsOnEdit} />
+        <ToggleSwitch name="main-page" checked={isOnEdit} onChange={setIsOnEdit} />
       </div>
     </div>
   );

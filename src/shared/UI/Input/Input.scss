@@ -1,6 +1,17 @@
 .input {
   width: 100%;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__label {
+    color: #ccc;
+  }
+
+  &__input {
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
 }
