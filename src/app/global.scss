@@ -4,8 +4,13 @@
   margin: 0;
 
   font-family: Helvetica, Sans-Serif;
+}
+
+body {
+  overflow: overlay;
 
   &::-webkit-scrollbar {
+    overflow-y: overlay;
     width: 20px;
   }
 
