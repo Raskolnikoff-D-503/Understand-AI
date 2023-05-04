@@ -1,7 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {ChatGPTWidget, LearningResourcesWidget, SavedChatGPTRepliesWidget} from '@/widgets';
+import {
+  ChatGPTWidget,
+  LearningResourcesWidget,
+  SavedChatGPTRepliesWidget,
+  SavedLearningResourcesWidget,
+} from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
 import './MainPage.scss';
@@ -19,50 +24,30 @@ type ItemType = {
 
 const ITEMS: ItemType[] = [
   {
-    id: '2',
+    id: 'chat-gpt-widget',
     className: 'main-page__card',
     Component: ChatGPTWidget,
   },
   {
-    id: '3',
+    id: 'saved-chat-gpt-replies-widget',
     className: 'main-page__card',
     Component: SavedChatGPTRepliesWidget,
   },
   {
-    id: '4',
+    id: 'saved-learning-resources-widget',
+    className: 'main-page__card',
+    Component: SavedLearningResourcesWidget,
+  },
+  {
+    id: '2',
     className: 'main-page__card',
     Component: LearningResourcesWidget,
   },
   {
-    id: '5',
-    className: 'main-page__card',
-    Component: LearningResourcesWidget,
-  },
-  {
-    id: '1',
+    id: 'learning-resources-widget',
     className: 'main-page__card main-page__card--full-width',
     Component: LearningResourcesWidget,
   },
-  // {
-  //   id: '10',
-  //   className: 'main-page__card',
-  //   Component: CardWithListExample,
-  // },
-  // {
-  //   id: '1',
-  //   className: 'main-page__card',
-  //   Component: CardWithChartExample,
-  // },
-  // {
-  //   id: '2',
-  //   className: 'main-page__card',
-  //   Component: CardWithChartExample,
-  // },
-  // {
-  //   id: '3',
-  //   className: 'main-page__card main-page__card--full-width',
-  //   Component: CardWithListExample,
-  // },
 ];
 
 export const MainPage = () => {
