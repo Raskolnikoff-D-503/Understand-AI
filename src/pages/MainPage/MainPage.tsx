@@ -38,11 +38,11 @@ const ITEMS: ItemType[] = [
     className: 'main-page__card',
     Component: SavedLearningResourcesWidget,
   },
-  {
-    id: '2',
-    className: 'main-page__card',
-    Component: LearningResourcesWidget,
-  },
+  // {
+  //   id: '2',
+  //   className: 'main-page__card',
+  //   Component: LearningResourcesWidget,
+  // },
   {
     id: 'learning-resources-widget',
     className: 'main-page__card main-page__card--full-width',
