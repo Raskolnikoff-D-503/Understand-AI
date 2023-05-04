@@ -3,3 +3,4 @@ export {LearningResourcesWidget} from './LearningResourcesWidget/LearningResourc
 export {ChatGPTWidget} from './ChatGPTWidget/ChatGPTWidget';
 export {CardWithChartExample} from './CardWithChartExample/CardWithChartExample';
 export {SavedChatGPTRepliesWidget} from './SavedChatGPTRepliesWidget/SavedChatGPTRepliesWidget';
+export {SavedLearningResourcesWidget} from './SavedLearningResourcesWidget/SavedLearningResourcesWidget';

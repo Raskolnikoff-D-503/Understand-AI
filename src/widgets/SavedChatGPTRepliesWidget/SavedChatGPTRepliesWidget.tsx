@@ -50,11 +50,8 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
 
   const updateDataHandler = useCallback(
     (data: ItemType[]) => {
-      console.log(data);
-
       if (items) {
         const ids = data.map((item) => item.id);
-
         const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
 
         setItems(sortedItems);
@@ -66,28 +63,33 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   return (
     <Card id={id} className={className} isDraggable={isDraggable} title="Saved Chat GPT Replies">
       <div className="saved-chat-gpt-replies-widget">
-        <div className="saved-chat-gpt-replies-widget__toggle-switch-wrapper">
-          <ToggleSwitch
-            name="saved-chat-gpt-replies-widget"
-            checked={isOnEdit}
-            onChange={setIsOnEdit}
-          />
-        </div>
-        {Boolean(configuratedItems.length) && isOnEdit && (
-          <DragAndDropContainer
-            className="saved-chat-gpt-replies-widget__drag-and-drop-container"
-            data={configuratedItems}
-            updateDataHandler={updateDataHandler}
-          />
-        )}
-        {Boolean(configuratedItems) && !isOnEdit && (
-          <List className="saved-chat-gpt-replies-widget__container">
-            {configuratedItems.map((item) => {
-              const {id, className, Component} = item;
+        {Boolean(configuratedItems.length) && (
+          <>
+            <div className="saved-chat-gpt-replies-widget__toggle-switch-wrapper">
+              <ToggleSwitch
+                name="saved-chat-gpt-replies-widget"
+                checked={isOnEdit}
+                onChange={setIsOnEdit}
+              />
+            </div>
 
-              return <Component key={id} id={id} className={className} />;
-            })}
-          </List>
+            {isOnEdit && (
+              <DragAndDropContainer
+                className="saved-chat-gpt-replies-widget__drag-and-drop-container"
+                data={configuratedItems}
+                updateDataHandler={updateDataHandler}
+              />
+            )}
+            {!isOnEdit && (
+              <List className="saved-chat-gpt-replies-widget__container">
+                {configuratedItems.map((item) => {
+                  const {id, className, Component} = item;
+
+                  return <Component key={id} id={id} className={className} />;
+                })}
+              </List>
+            )}
+          </>
         )}
         {!configuratedItems.length && <EmptyState message="The List Is Empty" />}
       </div>
