@@ -26,7 +26,11 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const [items, setItems] = useLocalStorage<
-    {id: string; directory: string; content: {title: string; excerpt: string; url: string}[]}[]
+    {
+      id: string;
+      directory: string;
+      content: {id: string; title: string; excerpt: string; url: string}[];
+    }[]
   >('learning-resources', []);
 
   const configuratedItems = useMemo<ItemType[]>(
@@ -39,7 +43,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
               <div id={id} className={className}>
                 <Accordion title={item.directory} isDraggable={isOnEdit}>
                   {item.content.map((resource) => (
-                    <CustomAnchor key={resource.excerpt} href={resource.url}>
+                    <CustomAnchor key={resource.id} href={resource.url}>
                       <li className="saved-learning-resources-widget__list-item">
                         <Title size={SIZE.SMALL} noPadding>
                           {resource.title}

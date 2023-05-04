@@ -8,6 +8,16 @@
 
   &__list-item {
     display: grid;
+    grid-template-columns: 1fr min-content;
     gap: 16px;
+  }
+
+  &__content {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__icon-wrapper {
+    cursor: pointer;
   }
 }
