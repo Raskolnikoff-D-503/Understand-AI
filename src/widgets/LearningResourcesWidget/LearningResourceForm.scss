@@ -1,0 +1,21 @@
+.learning-resources-modal-form {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__content {
+    display: grid;
+    gap: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+
+  @media screen and (max-width: 1007px) {
+    width: 420px;
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 320px;
+  }
+}

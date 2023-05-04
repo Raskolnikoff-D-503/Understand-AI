@@ -2,8 +2,10 @@ import React, {useCallback, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
-import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title} from '@/shared/UI';
+import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
+import {LearningResourceForm} from './LearningResourceForm';
+import {SaveIcon} from '@/shared/icons';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
@@ -14,10 +16,19 @@ type Props = {
   className: string;
 };
 
+export type LearningResourceType = {
+  id: string;
+  title: string;
+  excerpt: string;
+  url: string;
+};
+
 const DEFAULT_PAGE_NUMBER = 1;
 
 export const LearningResourcesWidget = ({id, className}: Props) => {
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [currentItem, setCurrentItem] = useState<LearningResourceType | null>(null);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
@@ -27,12 +38,23 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
     setCurrentPage(page);
   }, []);
 
+  const onSaveClick = useCallback((item: LearningResourceType) => {
+    if (item) {
+      setCurrentItem(item);
+      setIsOpen(true);
+    }
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   return (
     <Card
       id={id}
       className={`learning-recources-widget ${className}`}
       title={data?.title}
-      error={error}
+      // error={error}
       loaderConfig={{
         isLoading: isLoading,
         Component: <ListContentLoader isTitle={true} />,
@@ -42,16 +64,35 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
       <div className="learning-recources-widget__container">
         <List>
           {Boolean(data?.value.length) ? (
-            data?.value.map((item) => (
-              <CustomAnchor key={item.excerpt} href={item.originalUrl || item.webUrl}>
-                <li className="learning-recources-widget__list-item">
-                  <Title size={SIZE.SMALL} noPadding>
-                    {item.title}
-                  </Title>
-                  <p>{removeEmojis(item.excerpt)}</p>
+            data?.value.map((item, index) => {
+              const id = `${item.title}${index}`;
+
+              return (
+                <li key={id} className="learning-recources-widget__list-item">
+                  <CustomAnchor href={item.originalUrl || item.webUrl}>
+                    <div className="learning-recources-widget__content">
+                      <Title size={SIZE.SMALL} noPadding>
+                        {item.title}
+                      </Title>
+                      <p>{removeEmojis(item.excerpt)}</p>
+                    </div>
+                  </CustomAnchor>
+                  <div
+                    className="learning-recources-widget__icon-wrapper"
+                    onClick={() =>
+                      onSaveClick({
+                        id,
+                        title: item.title,
+                        excerpt: removeEmojis(item.excerpt),
+                        url: item.originalUrl || item.webUrl,
+                      })
+                    }
+                  >
+                    <SaveIcon />
+                  </div>
                 </li>
-              </CustomAnchor>
-            ))
+              );
+            })
           ) : (
             <EmptyState />
           )}
@@ -63,6 +104,12 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
           onPageChange={onPageChange}
         />
       </div>
+      {isOpen && (
+        // currentItem !== null &&
+        <Modal id="learning-resources-modal-form" handleModalClose={onCloseModal}>
+          <LearningResourceForm data={currentItem} />
+        </Modal>
+      )}
     </Card>
   );
 };
