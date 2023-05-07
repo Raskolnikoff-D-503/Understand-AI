@@ -12,7 +12,24 @@ type Props = {
   createLabel?: string;
 };
 
-const styles = {
+const customStyles = {
+  control: (provided: CSSObjectWithLabel): CSSObjectWithLabel => ({
+    ...provided,
+
+    borderRadius: '0',
+
+    '::focus': {
+      borderColor: 'black',
+    },
+  }),
+
+  menu: (provided: CSSObjectWithLabel): CSSObjectWithLabel => ({
+    ...provided,
+
+    marginTop: '2px',
+    borderRadius: '0',
+  }),
+
   menuList: (provided: CSSObjectWithLabel): CSSObjectWithLabel => ({
     ...provided,
 
@@ -40,27 +57,15 @@ const styles = {
     },
   }),
 
-  control: (provided: CSSObjectWithLabel): CSSObjectWithLabel => ({
-    ...provided,
-
-    borderRadius: '0',
-
-    '::focus': {
-      borderColor: 'black',
-    },
-  }),
-
   option: (provided: CSSObjectWithLabel): CSSObjectWithLabel => ({
     ...provided,
-
-    background: '1px solid black',
   }),
 };
 
 export const CustomSelect = ({value, onChange, options = []}: Props) => {
   return (
     <Creatable
-      styles={styles}
+      styles={customStyles}
       className="custom-select"
       value={value}
       isClearable
