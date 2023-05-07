@@ -34,6 +34,8 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
 
   const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
+  console.log(error);
+
   const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
