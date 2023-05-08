@@ -51,6 +51,7 @@ export const LearningResourceForm = ({data, onCloseModal}: Props) => {
         const updatedData = savedResources.map((item) =>
           item.id === currentDirectory.value ? {...item, items: [...item.items, data]} : item,
         );
+
         setSavedResources(updatedData);
       } else {
         setSavedResources([...savedResources, {id: currentDirectory.value, items: [data]}]);
