@@ -36,28 +36,30 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
   const configuratedItems = useMemo<ItemType[]>(
     () =>
       items
-        ? items.map<ItemType>((item) => {
-            return {
-              id: item.id,
-              className: 'saved-learning-resources-widget__item',
-              Component: ({id, className}) => (
-                <div id={id} className={className}>
-                  <Accordion title={item.id} isDraggable={isOnEdit}>
-                    {item.items.map((resource) => (
-                      <CustomAnchor key={resource.id} href={resource.url}>
-                        <li className="saved-learning-resources-widget__list-item">
-                          <Title size={SIZE.SMALL} noPadding>
-                            {resource.title}
-                          </Title>
-                          <p>{removeEmojis(resource.excerpt)}</p>
-                        </li>
-                      </CustomAnchor>
-                    ))}
-                  </Accordion>
-                </div>
-              ),
-            };
-          })
+        ? items
+            .filter((item) => item.items.length)
+            .map<ItemType>((item) => {
+              return {
+                id: item.id,
+                className: 'saved-learning-resources-widget__item',
+                Component: ({id, className}) => (
+                  <div id={id} className={className}>
+                    <Accordion title={item.id} isDraggable={isOnEdit}>
+                      {item.items.map((resource) => (
+                        <CustomAnchor key={resource.id} href={resource.url}>
+                          <li className="saved-learning-resources-widget__list-item">
+                            <Title size={SIZE.SMALL} noPadding>
+                              {resource.title}
+                            </Title>
+                            <p>{removeEmojis(resource.excerpt)}</p>
+                          </li>
+                        </CustomAnchor>
+                      ))}
+                    </Accordion>
+                  </div>
+                ),
+              };
+            })
         : [],
     [items, isOnEdit],
   );

@@ -1,11 +1,12 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
+import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {LearningResourceForm} from './LearningResourceForm';
-import {SaveIcon} from '@/shared/icons';
+import {SaveIcon, SavedIcon} from '@/shared/icons';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
@@ -32,9 +33,24 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
+  const [savedResources, setSavedResources] = useLocalStorage<
+    {
+      id: string;
+      items: LearningResourceType[];
+    }[]
+  >('learning-resources', []);
+
   const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
-  console.log(error);
+  const ids = useMemo(
+    () =>
+      savedResources.reduce<string[]>((acc, curr) => {
+        const itemIds = curr.items.map((item) => item.id);
+
+        return [...acc, ...itemIds];
+      }, []),
+    [savedResources],
+  );
 
   const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
@@ -47,6 +63,24 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
     }
   }, []);
 
+  const onDeleteClick = useCallback(
+    (id: string) => {
+      const directory = savedResources.find((el) => el.items.some((item) => item.id === id));
+      console.log(directory);
+
+      if (directory) {
+        setSavedResources(
+          savedResources.map((item) =>
+            item.id === directory.id
+              ? {...item, items: item.items.filter((el) => el.id !== id)}
+              : item,
+          ),
+        );
+      }
+    },
+    [savedResources],
+  );
+
   const onCloseModal = useCallback(() => {
     setIsOpen(false);
   }, []);
@@ -56,7 +90,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
       id={id}
       className={`learning-recources-widget ${className}`}
       title={data?.title}
-      // error={error}
+      error={error}
       loaderConfig={{
         isLoading: isLoading,
         Component: <ListContentLoader isTitle={true} />,
@@ -67,10 +101,10 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
         <List>
           {Boolean(data?.value.length) ? (
             data?.value.map((item, index) => {
-              const id = `${item.title}${index}`;
+              const itemId = `${item.title}${index}`;
 
               return (
-                <li key={id} className="learning-recources-widget__list-item">
+                <li key={itemId} className="learning-recources-widget__list-item">
                   <CustomAnchor href={item.originalUrl || item.webUrl}>
                     <div className="learning-recources-widget__content">
                       <Title size={SIZE.SMALL} noPadding>
@@ -79,19 +113,28 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
                       <p>{removeEmojis(item.excerpt)}</p>
                     </div>
                   </CustomAnchor>
-                  <div
-                    className="learning-recources-widget__icon-wrapper"
-                    onClick={() =>
-                      onSaveClick({
-                        id,
-                        title: item.title,
-                        excerpt: removeEmojis(item.excerpt),
-                        url: item.originalUrl || item.webUrl,
-                      })
-                    }
-                  >
-                    <SaveIcon />
-                  </div>
+                  {ids.find((id) => id === itemId) ? (
+                    <div
+                      className="learning-recources-widget__icon-wrapper"
+                      onClick={() => onDeleteClick(itemId)}
+                    >
+                      <SavedIcon />
+                    </div>
+                  ) : (
+                    <div
+                      className="learning-recources-widget__icon-wrapper"
+                      onClick={() =>
+                        onSaveClick({
+                          id: itemId,
+                          title: item.title,
+                          excerpt: removeEmojis(item.excerpt),
+                          url: item.originalUrl || item.webUrl,
+                        })
+                      }
+                    >
+                      <SaveIcon />
+                    </div>
+                  )}
                 </li>
               );
             })
