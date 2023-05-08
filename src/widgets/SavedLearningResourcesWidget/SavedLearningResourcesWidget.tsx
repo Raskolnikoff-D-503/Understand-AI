@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
+import {LearningResourceType} from '../LearningResourcesWidget/LearningResourcesWidget';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
@@ -28,35 +29,35 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
   const [items, setItems] = useLocalStorage<
     {
       id: string;
-      directory: string;
-      content: {id: string; title: string; excerpt: string; url: string}[];
+      items: LearningResourceType[];
     }[]
   >('learning-resources', []);
 
   const configuratedItems = useMemo<ItemType[]>(
     () =>
       items
-        ? items.map<ItemType>((item) => ({
-            id: item.id,
-            className: 'saved-learning-resources-widget__item',
-            Component: ({id, className}) => (
-              <div id={id} className={className}>
-                <Accordion title={item.directory} isDraggable={isOnEdit}>
-                  {item.content.map((resource) => (
-                    <CustomAnchor key={resource.id} href={resource.url}>
-                      <li className="saved-learning-resources-widget__list-item">
-                        <Title size={SIZE.SMALL} noPadding>
-                          {resource.title}
-                        </Title>
-                        <p>{removeEmojis(resource.excerpt)}</p>
-                      </li>
-                    </CustomAnchor>
-                  ))}
-                  <p>{item.content}</p>
-                </Accordion>
-              </div>
-            ),
-          }))
+        ? items.map<ItemType>((item) => {
+            return {
+              id: item.id,
+              className: 'saved-learning-resources-widget__item',
+              Component: ({id, className}) => (
+                <div id={id} className={className}>
+                  <Accordion title={item.id} isDraggable={isOnEdit}>
+                    {item.items.map((resource) => (
+                      <CustomAnchor key={resource.id} href={resource.url}>
+                        <li className="saved-learning-resources-widget__list-item">
+                          <Title size={SIZE.SMALL} noPadding>
+                            {resource.title}
+                          </Title>
+                          <p>{removeEmojis(resource.excerpt)}</p>
+                        </li>
+                      </CustomAnchor>
+                    ))}
+                  </Accordion>
+                </div>
+              ),
+            };
+          })
         : [],
     [items, isOnEdit],
   );

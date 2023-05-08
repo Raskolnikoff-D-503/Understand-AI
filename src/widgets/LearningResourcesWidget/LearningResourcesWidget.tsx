@@ -106,10 +106,9 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
           onPageChange={onPageChange}
         />
       </div>
-      {isOpen && (
-        // currentItem !== null &&
+      {isOpen && currentItem !== null && (
         <Modal id="learning-resources-modal-form" handleModalClose={onCloseModal}>
-          <LearningResourceForm data={currentItem} />
+          <LearningResourceForm data={currentItem} onCloseModal={onCloseModal} />
         </Modal>
       )}
     </Card>

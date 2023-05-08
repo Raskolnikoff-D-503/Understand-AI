@@ -10,6 +10,7 @@
     display: grid;
     grid-template-columns: 1fr min-content;
     gap: 16px;
+    padding-right: 24px;
   }
 
   &__content {
