@@ -9,7 +9,6 @@ type Props = {
   onChange?: (newValue: SingleValue<{label: string; value: string}>) => void;
   options?: {label: string; value: string}[];
   placeholder?: string;
-  createLabel?: string;
 };
 
 const customStyles = {
@@ -62,9 +61,10 @@ const customStyles = {
   }),
 };
 
-export const CustomSelect = ({value, onChange, options = []}: Props) => {
+export const CustomSelect = ({value, onChange, options = [], placeholder = 'Select...'}: Props) => {
   return (
     <Creatable
+      placeholder={placeholder}
       styles={customStyles}
       className="custom-select"
       value={value}
