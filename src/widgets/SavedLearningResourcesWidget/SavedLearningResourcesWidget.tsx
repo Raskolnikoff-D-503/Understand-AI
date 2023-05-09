@@ -4,7 +4,7 @@ import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {DragAndDropContainer} from '@/features';
-import {Accordion, Card, CustomAnchor, EmptyState, List, Title, ToggleSwitch} from '@/shared/UI';
+import {Accordion, Card, CustomAnchor, EmptyState, List, Switch, Title} from '@/shared/UI';
 import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
@@ -81,12 +81,8 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
       <div className="saved-learning-resources-widget">
         {Boolean(configuratedItems.length) && (
           <>
-            <div className="saved-learning-resources-widget__toggle-switch-wrapper">
-              <ToggleSwitch
-                name="saved-learning-resources-widget"
-                checked={isOnEdit}
-                onChange={setIsOnEdit}
-              />
+            <div className="saved-learning-resources-widget__switch-wrapper">
+              <Switch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
             </div>
 
             {isOnEdit && (
