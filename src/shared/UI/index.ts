@@ -6,7 +6,7 @@ export {Textarea} from './Textarea/Textarea';
 export {Input} from './Input/Input';
 export {CustomSelect} from './CustomSelect/CustomSelect';
 export {Button} from './Button/Button';
-export {ToggleSwitch} from './ToggleSwitch/ToggleSwitch';
+export {Switch} from './Switch/Switch';
 export {CustomLink} from './CustomLink/CustomLink';
 export {CustomAnchor} from './CustomAnchor/CustomAnchor';
 export {Card} from './Card/Card';
