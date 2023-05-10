@@ -75,9 +75,12 @@ export const LearningResourceForm = ({data, onCloseModal}: Props) => {
         </Title>
         <p>{data.excerpt}</p>
       </div>
-      <Button onClick={onSave} disabled={!data && !currentDirectory}>
-        Save
-      </Button>
+      <div className="learning-resources-modal-form__button-container">
+        <Button onClick={onCloseModal}>Cancel</Button>
+        <Button onClick={onSave} disabled={!data && !currentDirectory}>
+          Save
+        </Button>
+      </div>
     </div>
   );
 };
