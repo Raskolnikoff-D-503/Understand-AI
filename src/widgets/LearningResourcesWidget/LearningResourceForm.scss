@@ -11,6 +11,12 @@
     border: 1px solid #ccc;
   }
 
+  &__button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
   @media screen and (max-width: 1007px) {
     width: 420px;
   }
