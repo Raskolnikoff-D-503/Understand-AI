@@ -3,9 +3,10 @@ import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {
   ChatGPTWidget,
-  LearningResourcesWidget,
   SavedChatGPTRepliesWidget,
   SavedLearningResourcesWidget,
+  StudiesGraphAndArchiveWidget,
+  LearningResourcesWidget,
 } from '@/widgets';
 import {DragAndDropContainer} from '@/features';
 
@@ -38,11 +39,11 @@ const ITEMS: ItemType[] = [
     className: 'main-page__card',
     Component: SavedLearningResourcesWidget,
   },
-  // {
-  //   id: '2',
-  //   className: 'main-page__card',
-  //   Component: LearningResourcesWidget,
-  // },
+  {
+    id: '2',
+    className: 'main-page__card',
+    Component: StudiesGraphAndArchiveWidget,
+  },
   {
     id: 'learning-resources-widget',
     className: 'main-page__card main-page__card--full-width',
