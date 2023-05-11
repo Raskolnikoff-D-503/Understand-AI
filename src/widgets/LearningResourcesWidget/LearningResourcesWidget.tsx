@@ -27,8 +27,8 @@ export type LearningResourceType = {
 const DEFAULT_PAGE_NUMBER = 1;
 
 export const LearningResourcesWidget = ({id, className}: Props) => {
-  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
   const [currentItem, setCurrentItem] = useState<LearningResourceType | null>(null);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
