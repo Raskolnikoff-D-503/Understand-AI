@@ -23,6 +23,19 @@ const options: ChartOptions = {
   aspectRatio: 1,
 };
 
+const COLORS = [
+  '#a0db8e',
+  '#afeeee',
+  '#c39797',
+  '#ff7373',
+  '#008080',
+  '#ffc0cb',
+  '#b4eeb4',
+  '#f6546a',
+  '#ffc3a0',
+  '#b0e0e6',
+];
+
 export const StudiesGraphAndArchiveWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
@@ -31,12 +44,12 @@ export const StudiesGraphAndArchiveWidget = ({id, className}: Props) => {
 
   const configuratedItems = useMemo(
     () =>
-      learningResources?.map((item) => ({
+      learningResources?.map((item, index) => ({
         label: item.id,
         data: item.items.length,
-        backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${
-          Math.random() * 255
-        })`,
+        backgroundColor:
+          COLORS[index] ??
+          `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
       })) ?? [],
     [learningResources],
   );
