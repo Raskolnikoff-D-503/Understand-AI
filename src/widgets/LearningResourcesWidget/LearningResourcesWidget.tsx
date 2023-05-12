@@ -66,7 +66,6 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
   const onDeleteClick = useCallback(
     (id: string) => {
       const directory = savedResources.find((el) => el.items.some((item) => item.id === id));
-      console.log(directory);
 
       if (directory) {
         setSavedResources(

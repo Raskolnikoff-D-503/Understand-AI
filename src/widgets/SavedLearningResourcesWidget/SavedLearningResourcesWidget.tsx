@@ -9,6 +9,7 @@ import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
 import './SavedLearningResourcesWidget.scss';
+import {DeleteIcon} from '@/shared/icons';
 
 type Props = {
   id: string;
@@ -33,6 +34,17 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
     }[]
   >('learning-resources', []);
 
+  const onDeleteClick = useCallback(
+    (id: string, directory: string) => {
+      setItems(
+        items.map((item) =>
+          item.id === directory ? {...item, items: item.items.filter((el) => el.id !== id)} : item,
+        ),
+      );
+    },
+    [items],
+  );
+
   const configuratedItems = useMemo<ItemType[]>(
     () =>
       items
@@ -46,14 +58,22 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                   <div id={id} className={className}>
                     <Accordion title={item.id} isDraggable={isOnEdit}>
                       {item.items.map((resource) => (
-                        <CustomAnchor key={resource.id} href={resource.url}>
-                          <li className="saved-learning-resources-widget__list-item">
-                            <Title size={SIZE.SMALL} noPadding>
-                              {resource.title}
-                            </Title>
-                            <p>{removeEmojis(resource.excerpt)}</p>
-                          </li>
-                        </CustomAnchor>
+                        <li className="saved-learning-resources-widget__list-item">
+                          <CustomAnchor key={resource.id} href={resource.url}>
+                            <div className="saved-learning-resources-widget__content">
+                              <Title size={SIZE.SMALL} noPadding>
+                                {resource.title}
+                              </Title>
+                              <p>{removeEmojis(resource.excerpt)}</p>
+                            </div>
+                          </CustomAnchor>
+                          <div
+                            className="saved-learning-resources-widget__icon-wrapper"
+                            onClick={() => onDeleteClick(resource.id, item.id)}
+                          >
+                            <DeleteIcon />
+                          </div>
+                        </li>
                       ))}
                     </Accordion>
                   </div>
