@@ -7,7 +7,7 @@ import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {LearningResourceType} from '../LearningResourcesWidget/LearningResourcesWidget';
 import {Card} from '@/shared/UI';
 
-import './StudiesGraphAndArchiveWidget.scss';
+import './StudiesGraphsWidget.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -36,7 +36,7 @@ const COLORS = [
   '#b0e0e6',
 ];
 
-export const StudiesGraphAndArchiveWidget = ({id, className}: Props) => {
+export const StudiesGraphsWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const learningResources =
@@ -71,12 +71,12 @@ export const StudiesGraphAndArchiveWidget = ({id, className}: Props) => {
   return (
     <Card
       id={id}
-      className={`studies-graph-and-archive-widget ${className}`}
+      className={`studies-graphs-widget ${className}`}
       title="Some Chart With Important Data"
       isDraggable={isDraggable}
     >
-      <div className="studies-graph-and-archive-widget__container">
-        <div className="studies-graph-and-archive-widget__chart-wrapper">
+      <div className="studies-graphs-widget__container">
+        <div className="studies-graphs-widget__chart-wrapper">
           <Doughnut data={data} options={options} />
         </div>
       </div>
