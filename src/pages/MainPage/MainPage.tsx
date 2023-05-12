@@ -5,7 +5,7 @@ import {
   ChatGPTWidget,
   SavedChatGPTRepliesWidget,
   SavedLearningResourcesWidget,
-  StudiesGraphAndArchiveWidget,
+  StudiesGraphsWidget,
   LearningResourcesWidget,
 } from '@/widgets';
 import {DragAndDropContainer} from '@/features';
@@ -42,7 +42,7 @@ const ITEMS: ItemType[] = [
   {
     id: '2',
     className: 'main-page__card',
-    Component: StudiesGraphAndArchiveWidget,
+    Component: StudiesGraphsWidget,
   },
   {
     id: 'learning-resources-widget',
