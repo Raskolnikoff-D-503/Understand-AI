@@ -44,13 +44,15 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
 
   const configuratedItems = useMemo(
     () =>
-      learningResources?.map((item, index) => ({
-        label: item.id,
-        data: item.items.length,
-        backgroundColor:
-          COLORS[index] ??
-          `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
-      })) ?? [],
+      learningResources
+        ?.filter((item) => item.items.length)
+        .map((item, index) => ({
+          label: item.id,
+          data: item.items.length,
+          backgroundColor:
+            COLORS[index] ??
+            `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+        })) ?? [],
     [learningResources],
   );
 
