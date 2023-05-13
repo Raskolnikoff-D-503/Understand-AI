@@ -5,7 +5,6 @@ import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {DragAndDropContainer} from '@/features';
 import {Accordion, Card, CustomAnchor, EmptyState, List, Switch, Title} from '@/shared/UI';
-import {removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
 import './SavedLearningResourcesWidget.scss';
@@ -64,7 +63,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                               <Title size={SIZE.SMALL} noPadding>
                                 {resource.title}
                               </Title>
-                              <p>{removeEmojis(resource.excerpt)}</p>
+                              <p>{resource.excerpt}</p>
                             </div>
                           </CustomAnchor>
                           <div
