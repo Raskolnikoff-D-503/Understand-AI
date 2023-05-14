@@ -85,7 +85,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
             )}
           </>
         )}
-        {!configuratedItems.length && <EmptyState message="The List Is Empty" />}
+        {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
       </div>
     </Card>
   );
