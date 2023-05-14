@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
+import {LearningResourceDirectoryType, LearningResourceType, Nullable} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
@@ -17,28 +18,19 @@ type Props = {
   className: string;
 };
 
-export type LearningResourceType = {
-  id: string;
-  title: string;
-  excerpt: string;
-  url: string;
-};
-
 const DEFAULT_PAGE_NUMBER = 1;
 
 export const LearningResourcesWidget = ({id, className}: Props) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE_NUMBER);
-  const [currentItem, setCurrentItem] = useState<LearningResourceType | null>(null);
+  const [currentItem, setCurrentItem] = useState<Nullable<LearningResourceType>>(null);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
-  const [savedResources, setSavedResources] = useLocalStorage<
-    {
-      id: string;
-      items: LearningResourceType[];
-    }[]
-  >('learning-resources', []);
+  const [savedResources, setSavedResources] = useLocalStorage<LearningResourceDirectoryType[]>(
+    'learning-resources',
+    [],
+  );
 
   const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
