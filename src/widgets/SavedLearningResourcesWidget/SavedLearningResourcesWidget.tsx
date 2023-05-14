@@ -1,14 +1,14 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {LearningResourceType} from '../LearningResourcesWidget/LearningResourcesWidget';
+import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {DragAndDropContainer} from '@/features';
 import {Accordion, Card, CustomAnchor, EmptyState, List, Switch, Title} from '@/shared/UI';
+import {DeleteIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
 import './SavedLearningResourcesWidget.scss';
-import {DeleteIcon} from '@/shared/icons';
 
 type Props = {
   id: string;

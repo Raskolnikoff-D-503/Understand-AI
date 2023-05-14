@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions, ChartData} from 'chart.js';
 import {Doughnut} from 'react-chartjs-2';
+import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
-import {LearningResourceType} from '../LearningResourcesWidget/LearningResourcesWidget';
 import {Card, EmptyState} from '@/shared/UI';
 
 import './StudiesGraphsWidget.scss';
@@ -23,7 +23,7 @@ const options: ChartOptions = {
   aspectRatio: 1,
 };
 
-const COLORS = [
+const CHART_COLORS = [
   '#a0db8e',
   '#afeeee',
   '#c39797',
@@ -50,7 +50,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
           label: item.id,
           data: item.items.length,
           backgroundColor:
-            COLORS[index] ??
+            CHART_COLORS[index] ??
             `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
         })) ?? [],
     [learningResources],

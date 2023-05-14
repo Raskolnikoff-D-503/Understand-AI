@@ -18,7 +18,6 @@ type ChatGPTDataDto = {
   created: number;
   model: string;
   choices: ChoiceChatGPT[];
-  //   usage
 };
 
 export const chatGPTApi = createApi({
