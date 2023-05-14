@@ -1,5 +1,6 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {useAppSelector} from '@/app/store';
+import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {
   ChatGPTWidget,
@@ -23,54 +24,66 @@ type ItemType = {
   Component: ({id, className}: Props) => JSX.Element;
 };
 
-const ITEMS: ItemType[] = [
+const WIDGETS_STORE: {[key: string]: ({id, className}: Props) => JSX.Element} = {
+  'saved-learning-resources-widget': SavedLearningResourcesWidget,
+  'studies-graphs-widget': StudiesGraphsWidget,
+  'chat-gpt-widget': ChatGPTWidget,
+  'saved-chat-gpt-replies-widget': SavedChatGPTRepliesWidget,
+  'learning-resources-widget': LearningResourcesWidget,
+};
+
+const DEFAULT_ORDER = [
+  {
+    id: 'saved-learning-resources-widget',
+    className: 'main-page__card',
+  },
+  {
+    id: 'studies-graphs-widget',
+    className: 'main-page__card',
+  },
   {
     id: 'chat-gpt-widget',
     className: 'main-page__card',
-    Component: ChatGPTWidget,
   },
   {
     id: 'saved-chat-gpt-replies-widget',
     className: 'main-page__card',
-    Component: SavedChatGPTRepliesWidget,
-  },
-  {
-    id: 'saved-learning-resources-widget',
-    className: 'main-page__card',
-    Component: SavedLearningResourcesWidget,
-  },
-  {
-    id: '2',
-    className: 'main-page__card',
-    Component: StudiesGraphsWidget,
   },
   {
     id: 'learning-resources-widget',
     className: 'main-page__card main-page__card--full-width',
-    Component: LearningResourcesWidget,
   },
 ];
 
 export const MainPage = () => {
-  const [cards, setCards] = useState(ITEMS);
+  const [widgets, setWidgets] = useLocalStorage<{id: string; className: string}[]>(
+    'widgets',
+    DEFAULT_ORDER,
+  );
+
+  const configuratedItems = useMemo<ItemType[]>(
+    () => widgets.map((item) => ({...item, Component: WIDGETS_STORE[item.id]})),
+    [widgets],
+  );
 
   const isOnEdit = useAppSelector(selectIsOnEdit);
 
   const updateDataHandler = useCallback((data: ItemType[]) => {
-    setCards(data);
+    const configurated = data.map((item) => ({id: item.id, className: item.className}));
+    setWidgets(configurated);
   }, []);
 
   return (
     <div className="main-page">
       {isOnEdit ? (
         <DragAndDropContainer
-          data={cards}
+          data={configuratedItems}
           updateDataHandler={updateDataHandler}
           className="main-page__container"
         />
       ) : (
         <div className="main-page__container">
-          {cards.map((item) => {
+          {configuratedItems.map((item) => {
             const {id, className, Component} = item;
 
             return <Component id={id} key={id} className={className} />;
