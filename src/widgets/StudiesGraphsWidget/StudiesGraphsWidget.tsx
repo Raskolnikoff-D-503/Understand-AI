@@ -5,7 +5,7 @@ import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {LearningResourceType} from '../LearningResourcesWidget/LearningResourcesWidget';
-import {Card} from '@/shared/UI';
+import {Card, EmptyState} from '@/shared/UI';
 
 import './StudiesGraphsWidget.scss';
 
@@ -74,13 +74,16 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
     <Card
       id={id}
       className={`studies-graphs-widget ${className}`}
-      title="Some Chart With Important Data"
+      title="Saved Learnind Resources Chart"
       isDraggable={isDraggable}
     >
       <div className="studies-graphs-widget__container">
-        <div className="studies-graphs-widget__chart-wrapper">
-          <Doughnut data={data} options={options} />
-        </div>
+        {Boolean(configuratedItems.length) && (
+          <div className="studies-graphs-widget__chart-wrapper">
+            <Doughnut data={data} options={options} />
+          </div>
+        )}
+        {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
       </div>
     </Card>
   );
