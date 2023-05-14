@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react';
+import {Optional} from '@/shared/types';
 import {useSaveResponseToLocalStorage} from '@/app/services/localStorageController/hooks';
 import {Button, Input, Textarea, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
@@ -6,7 +7,7 @@ import {SIZE} from '@/shared/constants';
 import './ResponseForm.scss';
 
 type Props = {
-  response: string | undefined;
+  response: Optional<string>;
   onClose: () => void;
 };
 

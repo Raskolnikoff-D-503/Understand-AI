@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo} from 'react';
+import {DefaultComponentProps, WidgetProps, WidgetStoreType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
@@ -10,65 +11,52 @@ import {
   LearningResourcesWidget,
 } from '@/widgets';
 import {DragAndDropContainer} from '@/features';
+import {WIDGET_IDS} from '@/shared/constants';
 
 import './MainPage.scss';
 
-type Props = {
-  id: string;
-  className: string;
+const WIDGETS_STORE: WidgetStoreType = {
+  [WIDGET_IDS.STORED_LEARNING_RESOURCES_WIDGET]: SavedLearningResourcesWidget,
+  [WIDGET_IDS.STUDIES_GRAPHS_WIDGET]: StudiesGraphsWidget,
+  [WIDGET_IDS.CHAT_GPT_WIDGET]: ChatGPTWidget,
+  [WIDGET_IDS.STORED_CHAT_GPT_REPLIES_WIDGET]: SavedChatGPTRepliesWidget,
+  [WIDGET_IDS.LEARNING_RESOURCES_WIDGET]: LearningResourcesWidget,
 };
 
-type ItemType = {
-  id: string;
-  className: string;
-  Component: ({id, className}: Props) => JSX.Element;
-};
-
-const WIDGETS_STORE: {[key: string]: ({id, className}: Props) => JSX.Element} = {
-  'saved-learning-resources-widget': SavedLearningResourcesWidget,
-  'studies-graphs-widget': StudiesGraphsWidget,
-  'chat-gpt-widget': ChatGPTWidget,
-  'saved-chat-gpt-replies-widget': SavedChatGPTRepliesWidget,
-  'learning-resources-widget': LearningResourcesWidget,
-};
-
-const DEFAULT_ORDER = [
+const DEFAULT_ORDER: DefaultComponentProps[] = [
   {
-    id: 'saved-learning-resources-widget',
+    id: WIDGET_IDS.STORED_LEARNING_RESOURCES_WIDGET,
     className: 'main-page__card',
   },
   {
-    id: 'studies-graphs-widget',
+    id: WIDGET_IDS.STUDIES_GRAPHS_WIDGET,
     className: 'main-page__card',
   },
   {
-    id: 'chat-gpt-widget',
+    id: WIDGET_IDS.CHAT_GPT_WIDGET,
     className: 'main-page__card',
   },
   {
-    id: 'saved-chat-gpt-replies-widget',
+    id: WIDGET_IDS.STORED_CHAT_GPT_REPLIES_WIDGET,
     className: 'main-page__card',
   },
   {
-    id: 'learning-resources-widget',
+    id: WIDGET_IDS.LEARNING_RESOURCES_WIDGET,
     className: 'main-page__card main-page__card--full-width',
   },
 ];
 
 export const MainPage = () => {
-  const [widgets, setWidgets] = useLocalStorage<{id: string; className: string}[]>(
-    'widgets',
-    DEFAULT_ORDER,
-  );
+  const [widgets, setWidgets] = useLocalStorage<DefaultComponentProps[]>('widgets', DEFAULT_ORDER);
 
-  const configuratedItems = useMemo<ItemType[]>(
+  const configuratedItems = useMemo<WidgetProps[]>(
     () => widgets.map((item) => ({...item, Component: WIDGETS_STORE[item.id]})),
     [widgets],
   );
 
   const isOnEdit = useAppSelector(selectIsOnEdit);
 
-  const updateDataHandler = useCallback((data: ItemType[]) => {
+  const updateDataHandler = useCallback((data: WidgetProps[]) => {
     const configurated = data.map((item) => ({id: item.id, className: item.className}));
     setWidgets(configurated);
   }, []);

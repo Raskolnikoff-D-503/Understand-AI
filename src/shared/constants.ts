@@ -9,21 +9,10 @@ export const STYLE_TYPE = {
   SECONDARY: 'secondary',
 } as const;
 
-export const TOPIC_IDS = {
-  MACHINE_LEARNING: 'MACHINE_LEARNING',
-  COMPUTER_VISION: 'COMPUTER_VISION',
-  NATURAL_LEARNING_PROCESSING: 'NATURAL_LEARNING_PROCESSING',
-  AI_ETHICS: 'AI_ETHICS',
-  AI_HARDWARE: 'AI_HARDWARE',
-} as const;
-
-export const TOPICS = {
-  [TOPIC_IDS.MACHINE_LEARNING]: {name: 'Machine Learning', id: 'machine-learning'},
-  [TOPIC_IDS.COMPUTER_VISION]: {name: 'Computer Vision', id: 'computer-vision'},
-  [TOPIC_IDS.NATURAL_LEARNING_PROCESSING]: {
-    name: 'Natural Language Processing',
-    id: 'natural-language-processing',
-  },
-  [TOPIC_IDS.AI_ETHICS]: {name: 'AI Ethics', id: 'ai-ethics'},
-  [TOPIC_IDS.AI_HARDWARE]: {name: 'AI Hardware', id: 'ai-hardware'},
+export const WIDGET_IDS = {
+  STORED_LEARNING_RESOURCES_WIDGET: 'stored-learning-resources-widget',
+  STUDIES_GRAPHS_WIDGET: 'studies-graphs-widget',
+  CHAT_GPT_WIDGET: 'chat-gpt-widget',
+  STORED_CHAT_GPT_REPLIES_WIDGET: 'stored-chat-gpt-replies-widget',
+  LEARNING_RESOURCES_WIDGET: 'learning-resources-widget',
 } as const;

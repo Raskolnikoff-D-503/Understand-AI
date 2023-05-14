@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
+import {WidgetProps} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
@@ -12,12 +13,6 @@ type Props = {
   className: string;
 };
 
-type ItemType = {
-  id: string;
-  className: string;
-  Component: ({id, className}: Props) => JSX.Element;
-};
-
 export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   const [isOnEdit, setIsOnEdit] = useState<boolean>(false);
 
@@ -28,10 +23,10 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     [],
   );
 
-  const configuratedItems = useMemo<ItemType[]>(
+  const configuratedItems = useMemo<WidgetProps[]>(
     () =>
       items
-        ? items.map<ItemType>((item) => ({
+        ? items.map<WidgetProps>((item) => ({
             id: item.id,
             className: 'saved-chat-gpt-replies-widget__item',
             Component: ({id, className}) => (
@@ -47,7 +42,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   );
 
   const updateDataHandler = useCallback(
-    (data: ItemType[]) => {
+    (data: WidgetProps[]) => {
       if (items) {
         const ids = data.map((item) => item.id);
         const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
