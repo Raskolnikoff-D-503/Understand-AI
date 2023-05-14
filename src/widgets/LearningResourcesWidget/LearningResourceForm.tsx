@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {SingleValue} from 'react-select';
+import {LearningResourceType} from '@/shared/types';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {LearningResourceType} from './LearningResourcesWidget';
 import {Button, CustomSelect, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
