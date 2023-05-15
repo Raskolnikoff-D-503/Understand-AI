@@ -3,8 +3,8 @@ import {WidgetProps} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {DragAndDropContainer} from '@/features';
-import {Accordion, Card, EmptyState, List, Switch} from '@/shared/UI';
+import {DnDRegimeSwitcher} from '@/features';
+import {Accordion, Card, EmptyState, List, ToggleSwitch} from '@/shared/UI';
 
 import './SavedChatGPTRepliesWidget.scss';
 
@@ -59,17 +59,15 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
         {Boolean(configuratedItems.length) && (
           <>
             <div className="saved-chat-gpt-replies-widget__switch-wrapper">
-              <Switch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
+              <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
             </div>
 
-            {isOnEdit && (
-              <DragAndDropContainer
-                className="saved-chat-gpt-replies-widget__drag-and-drop-container"
-                data={configuratedItems}
-                updateDataHandler={updateDataHandler}
-              />
-            )}
-            {!isOnEdit && (
+            <DnDRegimeSwitcher
+              className="saved-chat-gpt-replies-widget__drag-and-drop-container"
+              isOnEdit={isOnEdit}
+              data={configuratedItems}
+              updateDataHandler={updateDataHandler}
+            >
               <List className="saved-chat-gpt-replies-widget__container">
                 {configuratedItems.map((item) => {
                   const {id, className, Component} = item;
@@ -77,7 +75,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
                   return <Component key={id} id={id} className={className} />;
                 })}
               </List>
-            )}
+            </DnDRegimeSwitcher>
           </>
         )}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
