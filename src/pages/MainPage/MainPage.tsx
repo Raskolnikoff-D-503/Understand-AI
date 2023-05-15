@@ -10,7 +10,7 @@ import {
   StudiesGraphsWidget,
   LearningResourcesWidget,
 } from '@/widgets';
-import {DragAndDropContainer} from '@/features';
+import {DnDRegimeSwitcher} from '@/features';
 import {WIDGET_IDS} from '@/shared/constants';
 
 import './MainPage.scss';
@@ -48,13 +48,12 @@ const DEFAULT_ORDER: DefaultComponentProps[] = [
 
 export const MainPage = () => {
   const [widgets, setWidgets] = useLocalStorage<DefaultComponentProps[]>('widgets', DEFAULT_ORDER);
+  const isOnEdit = useAppSelector(selectIsOnEdit);
 
   const configuratedItems = useMemo<WidgetProps[]>(
     () => widgets.map((item) => ({...item, Component: WIDGETS_STORE[item.id]})),
     [widgets],
   );
-
-  const isOnEdit = useAppSelector(selectIsOnEdit);
 
   const updateDataHandler = useCallback((data: WidgetProps[]) => {
     const configurated = data.map((item) => ({id: item.id, className: item.className}));
@@ -63,13 +62,12 @@ export const MainPage = () => {
 
   return (
     <div className="main-page">
-      {isOnEdit ? (
-        <DragAndDropContainer
-          data={configuratedItems}
-          updateDataHandler={updateDataHandler}
-          className="main-page__container"
-        />
-      ) : (
+      <DnDRegimeSwitcher
+        className="main-page__container"
+        isOnEdit={isOnEdit}
+        data={configuratedItems}
+        updateDataHandler={updateDataHandler}
+      >
         <div className="main-page__container">
           {configuratedItems.map((item) => {
             const {id, className, Component} = item;
@@ -77,7 +75,7 @@ export const MainPage = () => {
             return <Component id={id} key={id} className={className} />;
           })}
         </div>
-      )}
+      </DnDRegimeSwitcher>
     </div>
   );
 };

@@ -3,8 +3,8 @@ import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {DragAndDropContainer} from '@/features';
-import {Accordion, Card, CustomAnchor, EmptyState, List, Switch, Title} from '@/shared/UI';
+import {DnDRegimeSwitcher} from '@/features';
+import {Accordion, Card, CustomAnchor, EmptyState, List, ToggleSwitch, Title} from '@/shared/UI';
 import {DeleteIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
@@ -101,17 +101,15 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
         {Boolean(configuratedItems.length) && (
           <>
             <div className="saved-learning-resources-widget__switch-wrapper">
-              <Switch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
+              <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
             </div>
 
-            {isOnEdit && (
-              <DragAndDropContainer
-                className="saved-learning-resources-widget__drag-and-drop-container"
-                data={configuratedItems}
-                updateDataHandler={updateDataHandler}
-              />
-            )}
-            {!isOnEdit && (
+            <DnDRegimeSwitcher
+              className="saved-learning-resources-widget__drag-and-drop-container"
+              isOnEdit={isOnEdit}
+              data={configuratedItems}
+              updateDataHandler={updateDataHandler}
+            >
               <List className="saved-learning-resources-widget__container">
                 {configuratedItems.map((item) => {
                   const {id, className, Component} = item;
@@ -119,7 +117,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                   return <Component key={id} id={id} className={className} />;
                 })}
               </List>
-            )}
+            </DnDRegimeSwitcher>
           </>
         )}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
