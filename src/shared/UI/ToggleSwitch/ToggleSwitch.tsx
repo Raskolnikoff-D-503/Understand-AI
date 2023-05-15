@@ -1,15 +1,15 @@
 import React from 'react';
 
-import './Switch.scss';
+import './ToggleSwitch.scss';
 
 type Props = {
   isToggled: boolean;
   onToggle: () => void;
 };
 
-export const Switch = ({isToggled = false, onToggle}: Props) => {
+export const ToggleSwitch = ({isToggled = false, onToggle}: Props) => {
   return (
-    <label className="switch">
+    <label className="toggle-switch">
       <input type="checkbox" checked={isToggled} onChange={onToggle} />
       <span className="slider" />
     </label>
