@@ -57,8 +57,11 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                   <div id={id} className={className}>
                     <Accordion title={item.id} isDraggable={isOnEdit}>
                       {item.items.map((resource) => (
-                        <li className="saved-learning-resources-widget__list-item">
-                          <CustomAnchor key={resource.id} href={resource.url}>
+                        <li
+                          key={resource.id}
+                          className="saved-learning-resources-widget__list-item"
+                        >
+                          <CustomAnchor href={resource.url}>
                             <div className="saved-learning-resources-widget__content">
                               <Title size={SIZE.SMALL} noPadding>
                                 {resource.title}

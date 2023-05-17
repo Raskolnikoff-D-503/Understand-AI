@@ -12,7 +12,7 @@ type ChoiceChatGPT = {
   finish_reason: string;
 };
 
-type ChatGPTDataDto = {
+export type ChatGPTDataDto = {
   id: string;
   object: string;
   created: number;

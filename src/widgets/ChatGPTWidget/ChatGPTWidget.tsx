@@ -1,9 +1,19 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {useGetChatGPTMessageMutation} from '@/app/services/chatGPT/hooks';
-import {ResponseForm} from './ResponseForm';
-import {Button, Card, List, Modal, TextContentLoader, Textarea, Error} from '@/shared/UI';
+import {useGetChatGPTMessageMutation} from './api/hooks';
+import {ResponseForm} from '@/features';
+import {
+  Button,
+  Card,
+  List,
+  Modal,
+  TextContentLoader,
+  Textarea,
+  Error,
+  EmptyState,
+} from '@/shared/UI';
+import {getMessage} from './utils';
 
 import './ChatGPTWidget.scss';
 
@@ -19,12 +29,15 @@ export const ChatGPTWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const [getChatGPTMessage, {data, isSuccess, isLoading, error}] = useGetChatGPTMessageMutation();
+  const message = useMemo(() => getMessage(data), [data]);
+
+  const onOpenModal = useCallback(() => {
+    setIsOpen(true);
+  }, []);
 
   const onCloseModal = useCallback(() => {
     setIsOpen(false);
   }, []);
-
-  const message = useMemo(() => data?.choices.map((item) => item.message.content)?.[0], [data]);
 
   return (
     <Card id={id} className={className} title="Chat GPT" isDraggable={isDraggable}>
@@ -35,24 +48,20 @@ export const ChatGPTWidget = ({id, className}: Props) => {
             Send
           </Button>
         </div>
-        {isLoading && <TextContentLoader line={12} />}
-        {error && <Error error={error} />}
-        {isSuccess && (
-          <>
-            <div className="chat-gpt-widget__list-wrapper">
-              <List>
-                <p>{message}</p>
-              </List>
-            </div>
-            <Button
-              onClick={() => {
-                setIsOpen(true);
-              }}
-            >
-              Save Response
-            </Button>
-          </>
-        )}
+        <div className="chat-gpt-widget__list-wrapper">
+          {isLoading && <TextContentLoader line={12} />}
+          {error && <Error error={error} />}
+          {!isLoading && !error && message ? (
+            <List>
+              <p>{message}</p>
+            </List>
+          ) : (
+            <EmptyState message="No Data Yet..." />
+          )}
+        </div>
+        <Button onClick={onOpenModal} disabled={!isSuccess}>
+          Save Response
+        </Button>
       </div>
       {isOpen && (
         <Modal id="response-modal-form" handleModalClose={onCloseModal}>
