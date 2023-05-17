@@ -1,16 +1,16 @@
 import React, {ReactNode} from 'react';
-import {WidgetProps} from '@/shared/types';
+import {WidgetDataType} from '@/shared/types';
 import {DragAndDropContainer} from '@/features';
 
 type Props = {
   className: string;
   isOnEdit: boolean;
-  data: WidgetProps[];
-  updateDataHandler: (data: WidgetProps[]) => void;
+  data: WidgetDataType[];
+  updateDataHandler: (data: WidgetDataType[]) => void;
   children: ReactNode;
 };
 
-export const DnDRegimeSwitcher = ({
+export const EditRegimeSwitcher = ({
   className,
   isOnEdit,
   data,
