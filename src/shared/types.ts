@@ -8,19 +8,19 @@ export type StyleType = (typeof STYLE_TYPE)[keyof typeof STYLE_TYPE];
 
 export type WidgetIdType = (typeof WIDGET_IDS)[keyof typeof WIDGET_IDS];
 
-export type DefaultComponentProps = {
+export type StoreDataType = {
   id: string;
   className: string;
 };
 
-export type WidgetProps = {
+export type WidgetDataType = {
   id: string;
   className: string;
-  Component: ({id, className}: DefaultComponentProps) => JSX.Element;
+  Component: ({id, className}: StoreDataType) => JSX.Element;
 };
 
-export type WidgetStoreType = {
-  [key: string]: ({id, className}: DefaultComponentProps) => JSX.Element;
+export type WidgetComponentType = {
+  [key: string]: ({id, className}: StoreDataType) => JSX.Element;
 };
 
 export type LearningResourceType = {

@@ -1,9 +1,9 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {WidgetProps} from '@/shared/types';
+import {WidgetDataType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {DnDRegimeSwitcher} from '@/features';
+import {EditRegimeSwitcher} from '@/features';
 import {Accordion, Card, EmptyState, List, ToggleSwitch} from '@/shared/UI';
 
 import './SavedChatGPTRepliesWidget.scss';
@@ -23,10 +23,10 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     [],
   );
 
-  const configuratedItems = useMemo<WidgetProps[]>(
+  const configuratedItems = useMemo<WidgetDataType[]>(
     () =>
       items
-        ? items.map<WidgetProps>((item) => ({
+        ? items.map<WidgetDataType>((item) => ({
             id: item.id,
             className: 'saved-chat-gpt-replies-widget__item',
             Component: ({id, className}) => (
@@ -42,7 +42,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   );
 
   const updateDataHandler = useCallback(
-    (data: WidgetProps[]) => {
+    (data: WidgetDataType[]) => {
       if (items) {
         const ids = data.map((item) => item.id);
         const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
@@ -62,7 +62,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
               <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
             </div>
 
-            <DnDRegimeSwitcher
+            <EditRegimeSwitcher
               className="saved-chat-gpt-replies-widget__drag-and-drop-container"
               isOnEdit={isOnEdit}
               data={configuratedItems}
@@ -75,7 +75,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
                   return <Component key={id} id={id} className={className} />;
                 })}
               </List>
-            </DnDRegimeSwitcher>
+            </EditRegimeSwitcher>
           </>
         )}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}

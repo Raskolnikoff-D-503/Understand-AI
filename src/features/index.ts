@@ -1,2 +1,2 @@
 export {DragAndDropContainer} from './DragAndDropContainer/DragAndDropContainer';
-export {DnDRegimeSwitcher} from './DnDRegimeSwitcher/DnDRegimeSwitcher';
+export {EditRegimeSwitcher} from './EditRegimeSwitcher/EditRegimeSwitcher';
