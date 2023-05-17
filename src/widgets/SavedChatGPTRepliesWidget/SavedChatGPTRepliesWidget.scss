@@ -44,4 +44,18 @@
   &__item {
     background-color: white;
   }
+
+  &__item-container {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    gap: 16px;
+  }
+
+  &__icon-wrapper {
+    height: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 }
