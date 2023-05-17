@@ -3,7 +3,7 @@ import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {DnDRegimeSwitcher} from '@/features';
+import {EditRegimeSwitcher} from '@/features';
 import {Accordion, Card, CustomAnchor, EmptyState, List, ToggleSwitch, Title} from '@/shared/UI';
 import {DeleteIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
@@ -104,7 +104,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
               <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
             </div>
 
-            <DnDRegimeSwitcher
+            <EditRegimeSwitcher
               className="saved-learning-resources-widget__drag-and-drop-container"
               isOnEdit={isOnEdit}
               data={configuratedItems}
@@ -117,7 +117,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                   return <Component key={id} id={id} className={className} />;
                 })}
               </List>
-            </DnDRegimeSwitcher>
+            </EditRegimeSwitcher>
           </>
         )}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
