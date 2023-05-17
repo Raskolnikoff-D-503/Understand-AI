@@ -7,6 +7,7 @@ import {EditRegimeSwitcher} from '@/features';
 import {Accordion, Card, EmptyState, List, ToggleSwitch} from '@/shared/UI';
 
 import './SavedChatGPTRepliesWidget.scss';
+import {DeleteIcon} from '@/shared/icons';
 
 type Props = {
   id: string;
@@ -23,6 +24,14 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     [],
   );
 
+  const onDeleteClick = useCallback(
+    (id: string) => {
+      const filteredItems = items.filter((item) => item.id !== id);
+      setItems(filteredItems);
+    },
+    [items],
+  );
+
   const configuratedItems = useMemo<WidgetDataType[]>(
     () =>
       items
@@ -32,7 +41,15 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
             Component: ({id, className}) => (
               <div id={id} className={className}>
                 <Accordion title={item.title} isDraggable={isOnEdit}>
-                  <p>{item.content}</p>
+                  <div className="saved-chat-gpt-replies-widget__item-container">
+                    <p>{item.content}</p>
+                    <div
+                      className="saved-chat-gpt-replies-widget__icon-wrapper"
+                      onClick={() => onDeleteClick(id)}
+                    >
+                      <DeleteIcon />
+                    </div>
+                  </div>
                 </Accordion>
               </div>
             ),
