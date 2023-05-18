@@ -19,4 +19,32 @@
   &--small {
     font-size: 24px;
   }
+
+  @media screen and (max-width: 1007px) {
+    &--large {
+      font-size: 40px;
+    }
+
+    &--medium {
+      font-size: 32px;
+    }
+
+    &--small {
+      font-size: 24px;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    &--large {
+      font-size: 40px;
+    }
+
+    &--medium {
+      font-size: 28px;
+    }
+
+    &--small {
+      font-size: 16px;
+    }
+  }
 }
