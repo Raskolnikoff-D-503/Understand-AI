@@ -5,6 +5,7 @@ import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
+import {useWindowWidth} from './hooks/useWindowWidth';
 import {Card, EmptyState} from '@/shared/UI';
 
 import './StudiesGraphsWidget.scss';
@@ -14,13 +15,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 type Props = {
   id: string;
   className: string;
-};
-
-const options: ChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {legend: {position: 'right'}},
-  aspectRatio: 1,
 };
 
 const CHART_COLORS = [
@@ -39,8 +33,18 @@ const CHART_COLORS = [
 export const StudiesGraphsWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
+  const windowWidth = useWindowWidth();
   const learningResources =
     useReadLocalStorage<{id: string; items: LearningResourceType[]}[]>('learning-resources');
+
+  const options = useMemo<ChartOptions>(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {legend: {position: windowWidth <= 720 ? 'bottom' : 'right'}},
+    }),
+    [windowWidth],
+  );
 
   const configuratedItems = useMemo(
     () =>
@@ -74,7 +78,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
     <Card
       id={id}
       className={`studies-graphs-widget ${className}`}
-      title="Saved Learnind Resources Chart"
+      title="Studies Chart"
       isDraggable={isDraggable}
     >
       <div className="studies-graphs-widget__container">
