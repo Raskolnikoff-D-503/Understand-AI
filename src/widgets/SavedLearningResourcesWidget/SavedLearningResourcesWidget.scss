@@ -20,6 +20,12 @@
     gap: 16px;
   }
 
+  &__icon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   &__icon-wrapper {
     height: min-content;
     display: flex;
