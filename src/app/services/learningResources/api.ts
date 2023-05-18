@@ -20,7 +20,7 @@ type AINewsDto = {
 export const learningResourcesApi = createApi({
   reducerPath: 'learningResourcesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://ai10.p.rapidapi.com/learning/page',
+    // baseUrl: 'https://ai10.p.rapidapi.com/learning/page',
     headers: {
       'content-type': 'application/octet-stream',
       'X-RapidAPI-Key': `${REACT_APP_RAPID_API_KEY}`,
