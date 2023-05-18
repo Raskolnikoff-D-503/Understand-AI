@@ -5,7 +5,7 @@ import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {EditRegimeSwitcher} from '@/features';
 import {Accordion, Card, CustomAnchor, EmptyState, List, ToggleSwitch, Title} from '@/shared/UI';
-import {DeleteIcon} from '@/shared/icons';
+import {DeleteIcon, EditIcon} from '@/shared/icons';
 import {SIZE} from '@/shared/constants';
 
 import './SavedLearningResourcesWidget.scss';
@@ -69,11 +69,16 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                               <p>{resource.excerpt}</p>
                             </div>
                           </CustomAnchor>
-                          <div
-                            className="saved-learning-resources-widget__icon-wrapper"
-                            onClick={() => onDeleteClick(resource.id, item.id)}
-                          >
-                            <DeleteIcon />
+                          <div className="saved-learning-resources-widget__icon-container">
+                            <div className="saved-learning-resources-widget__icon-wrapper">
+                              <EditIcon />
+                            </div>
+                            <div
+                              className="saved-learning-resources-widget__icon-wrapper"
+                              onClick={() => onDeleteClick(resource.id, item.id)}
+                            >
+                              <DeleteIcon />
+                            </div>
                           </div>
                         </li>
                       ))}
