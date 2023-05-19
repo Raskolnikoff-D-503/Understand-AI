@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetChatGPTMessageMutation} from './api/hooks';
-import {ResponseForm} from '@/features';
+import {CreateResponse} from '@/features';
 import {
   Button,
   Card,
@@ -16,6 +16,7 @@ import {
 import {getMessage} from './utils';
 
 import './ChatGPTWidget.scss';
+import {isUndefined} from '@/shared/utils';
 
 type Props = {
   id: string;
@@ -31,6 +32,10 @@ export const ChatGPTWidget = ({id, className}: Props) => {
   const [getChatGPTMessage, {data, isSuccess, isLoading, error}] = useGetChatGPTMessageMutation();
   const message = useMemo(() => getMessage(data), [data]);
 
+  const onSend = useCallback(() => {
+    getChatGPTMessage(txt);
+  }, [txt]);
+
   const onOpenModal = useCallback(() => {
     setIsOpen(true);
   }, []);
@@ -44,7 +49,7 @@ export const ChatGPTWidget = ({id, className}: Props) => {
       <div className="chat-gpt-widget__container">
         <div className="chat-gpt-widget__controls">
           <Textarea value={txt} onChange={setTxt} placeholder="Send a message..." />
-          <Button onClick={() => getChatGPTMessage(txt)} disabled={!txt || isLoading}>
+          <Button onClick={onSend} disabled={!txt || isLoading}>
             Send
           </Button>
         </div>
@@ -63,9 +68,9 @@ export const ChatGPTWidget = ({id, className}: Props) => {
           Save Response
         </Button>
       </div>
-      {isOpen && (
-        <Modal id="response-modal-form" handleModalClose={onCloseModal}>
-          <ResponseForm response={message} onClose={onCloseModal} />
+      {!isUndefined(message) && (
+        <Modal id="create-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
+          <CreateResponse response={{title: txt, content: message}} onClose={onCloseModal} />
         </Modal>
       )}
     </Card>
