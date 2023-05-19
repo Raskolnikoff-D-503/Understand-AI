@@ -1,13 +1,14 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {WidgetDataType} from '@/shared/types';
+import {Nullable, WidgetDataType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {EditRegimeSwitcher} from '@/features';
-import {Accordion, Card, EmptyState, List, ToggleSwitch} from '@/shared/UI';
+import {EditRegimeSwitcher, EditResponse} from '@/features';
+import {Accordion, Card, EmptyState, List, Modal, ToggleSwitch} from '@/shared/UI';
+import {isNull} from '@/shared/utils';
+import {DeleteIcon, EditIcon} from '@/shared/icons';
 
 import './SavedChatGPTRepliesWidget.scss';
-import {DeleteIcon} from '@/shared/icons';
 
 type Props = {
   id: string;
@@ -15,14 +16,23 @@ type Props = {
 };
 
 export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOnEdit, setIsOnEdit] = useState<boolean>(false);
+  const [currentItem, setCurrentItem] = useState<Nullable<ResponseItem>>(null);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
-  const [items, setItems] = useLocalStorage<{id: string; title: string; content: string}[]>(
-    'responses',
-    [],
-  );
+  const [items, setItems] = useLocalStorage<ResponseItem[]>('responses', []);
+
+  const onOpenModal = useCallback((data: ResponseItem) => {
+    setCurrentItem(data);
+    setIsOpen(true);
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setCurrentItem(null);
+    setIsOpen(false);
+  }, []);
 
   const onDeleteClick = useCallback(
     (id: string) => {
@@ -43,11 +53,19 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
                 <Accordion title={item.title} isDraggable={isOnEdit}>
                   <div className="saved-chat-gpt-replies-widget__item-container">
                     <p>{item.content}</p>
-                    <div
-                      className="saved-chat-gpt-replies-widget__icon-wrapper"
-                      onClick={() => onDeleteClick(id)}
-                    >
-                      <DeleteIcon />
+                    <div className="saved-chat-gpt-replies-widget__icon-container">
+                      <div
+                        className="saved-chat-gpt-replies-widget__icon-wrapper"
+                        onClick={() => onOpenModal(item)}
+                      >
+                        <EditIcon />
+                      </div>
+                      <div
+                        className="saved-chat-gpt-replies-widget__icon-wrapper"
+                        onClick={() => onDeleteClick(id)}
+                      >
+                        <DeleteIcon />
+                      </div>
                     </div>
                   </div>
                 </Accordion>
@@ -97,6 +115,11 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
         )}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
       </div>
+      {!isNull(currentItem) && (
+        <Modal id="edit-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
+          <EditResponse response={currentItem} onClose={onCloseModal} />
+        </Modal>
+      )}
     </Card>
   );
 };

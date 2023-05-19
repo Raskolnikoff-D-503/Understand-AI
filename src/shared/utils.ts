@@ -4,3 +4,6 @@ const EMOJIS_REGEX =
 export const removeEmojis = (str: string): string => str.replace(EMOJIS_REGEX, '');
 
 export const isObject = (value: unknown): value is object => typeof value === 'object';
+
+export const isUndefined = (value: unknown): value is undefined => value === undefined;
+export const isNull = (value: unknown): value is null => value === null;

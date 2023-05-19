@@ -3,13 +3,13 @@ import {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react'
 type Value<T> = T | null;
 type SetValue<T> = Dispatch<SetStateAction<T>>;
 
-type ResponseItem = {
+export type ResponseItem = {
   id: string;
   title: string;
   content: string;
 };
 
-type NewResponseItem = Omit<ResponseItem, 'id'>;
+export type NewResponseItem = Omit<ResponseItem, 'id'>;
 
 export const useReadLocalStorage = <T>(key: string): Value<T> => {
   const readValue = useCallback(() => {
