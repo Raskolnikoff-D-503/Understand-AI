@@ -8,7 +8,7 @@ import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} f
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {LearningResourceForm} from './LearningResourceForm';
 import {SaveIcon, SavedIcon} from '@/shared/icons';
-import {removeEmojis} from '@/shared/utils';
+import {isNull, removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
 
 import './LearningResourcesWidget.scss';
@@ -140,8 +140,8 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
           onPageChange={onPageChange}
         />
       </div>
-      {isOpen && currentItem !== null && (
-        <Modal id="learning-resources-modal-form" handleModalClose={onCloseModal}>
+      {!isNull(currentItem) && (
+        <Modal id="learning-resources-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
           <LearningResourceForm data={currentItem} onCloseModal={onCloseModal} />
         </Modal>
       )}

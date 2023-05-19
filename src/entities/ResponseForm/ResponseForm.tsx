@@ -1,40 +1,35 @@
 import React, {useCallback, useState} from 'react';
-import {Optional} from '@/shared/types';
-import {useSaveResponseToLocalStorage} from '@/app/services/localStorageController/hooks';
 import {Button, Input, Textarea, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
 import './ResponseForm.scss';
 
+export type ResponseFormType = {
+  title?: string;
+  content?: string;
+};
+
 type Props = {
-  response: Optional<string>;
-  onClose: () => void;
+  title: string;
+  data: ResponseFormType;
+  onSave: (data: ResponseFormType) => void;
 };
 
 const OPEN_AI_GPT_3_MODEL_RESPONSE_MAX_LENGTH = 10000;
 const ROWS = 10;
 
-export const ResponseForm = ({response = '', onClose}: Props) => {
-  const [inputTitle, setInputTitle] = useState<string>('');
-  const [txt, setTxt] = useState<string>(response);
-
-  const setResponse = useSaveResponseToLocalStorage();
+export const ResponseForm = ({title, data, onSave}: Props) => {
+  const [inputTitle, setInputTitle] = useState<string>(data.title ?? '');
+  const [txt, setTxt] = useState<string>(data.content ?? '');
 
   const onSaveResponse = useCallback(() => {
-    if (txt && inputTitle) {
-      setResponse({
-        title: inputTitle,
-        content: txt,
-      });
-
-      onClose();
-    }
+    onSave({title: inputTitle, content: txt});
   }, [inputTitle, txt]);
 
   return (
     <div className="response-modal-form">
       <Title noPadding size={SIZE.SMALL}>
-        Save Response
+        {title}
       </Title>
       <Input label="Title" value={inputTitle} onChange={setInputTitle} />
       <Textarea
