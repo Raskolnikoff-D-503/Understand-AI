@@ -17,6 +17,11 @@
       background-color: #2196f3;
     }
   }
+
+  &--disabled {
+    cursor: unset;
+    pointer-events: none;
+  }
 }
 
 .slider {

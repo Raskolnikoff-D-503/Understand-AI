@@ -104,7 +104,11 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
         {Boolean(configuratedItems.length) && (
           <>
             <div className="saved-learning-resources-widget__switch-wrapper">
-              <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
+              <ToggleSwitch
+                isToggled={isOnEdit}
+                onToggle={() => setIsOnEdit(!isOnEdit)}
+                disabled={isDraggable}
+              />
             </div>
 
             <EditRegimeSwitcher
