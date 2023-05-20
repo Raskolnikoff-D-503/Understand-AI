@@ -24,6 +24,10 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
 
   const [items, setItems] = useLocalStorage<ResponseItem[]>('responses', []);
 
+  const onToggle = useCallback(() => {
+    setIsOnEdit(!isOnEdit);
+  }, [isOnEdit]);
+
   const onOpenModal = useCallback((data: ResponseItem) => {
     setCurrentItem(data);
     setIsOpen(true);
@@ -94,7 +98,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
         {Boolean(configuratedItems.length) && (
           <>
             <div className="saved-chat-gpt-replies-widget__switch-wrapper">
-              <ToggleSwitch isToggled={isOnEdit} onToggle={() => setIsOnEdit(!isOnEdit)} />
+              <ToggleSwitch isToggled={isOnEdit} onToggle={onToggle} disabled={isDraggable} />
             </div>
 
             <EditRegimeSwitcher
