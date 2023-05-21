@@ -21,22 +21,27 @@ export const Accordion = ({title, children, open = false, isDraggable = false}: 
 
   return (
     <div className="accordion">
-      <div className="accordion__title-container" onClick={() => handleClick()}>
+      <div
+        className={`accordion__title-container ${
+          isDraggable ? 'accordion__title-container--draggable' : ''
+        }`}
+        onClick={() => handleClick()}
+      >
         <Title size={SIZE.SMALL} noPadding>
           {title}
         </Title>
         {isDraggable ? (
           <DraggableIcon />
         ) : (
-          <div className={`accordion__icon-wrapper accordion__icon-wrapper${isOpen ? '--up' : ''}`}>
+          <div className={`accordion__icon-wrapper ${isOpen ? 'accordion__icon-wrapper--up' : ''}`}>
             <ArrowIcon />
           </div>
         )}
       </div>
-      <Divider className={`accordion__divider accordion__divider${!isOpen ? '--hidden' : ''}`} />
+      <Divider className={`accordion__divider ${!isOpen ? 'accordion__divider--hidden' : ''}`} />
       <div
-        className={`accordion__content accordion__content${
-          !isOpen || isDraggable ? '--hidden' : ''
+        className={`accordion__content ${
+          !isOpen || isDraggable ? 'accordion__content--hidden' : ''
         }`}
       >
         {children}

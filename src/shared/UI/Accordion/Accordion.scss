@@ -1,11 +1,15 @@
 .accordion {
   &__title-container {
+    cursor: pointer;
     padding: 24px;
     display: grid;
     gap: 16px;
     grid-template-columns: 1fr min-content;
-    cursor: pointer;
     user-select: none;
+
+    &--draggable {
+      cursor: grab;
+    }
   }
 
   &__icon-wrapper {
