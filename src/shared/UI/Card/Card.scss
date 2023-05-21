@@ -17,5 +17,9 @@
     padding: 24px;
     flex: 1;
     min-height: 0;
+
+    &--disabled {
+      pointer-events: none;
+    }
   }
 }
