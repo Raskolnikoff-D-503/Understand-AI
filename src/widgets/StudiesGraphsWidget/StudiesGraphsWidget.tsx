@@ -25,9 +25,9 @@ const CHART_COLORS = [
   '#008080',
   '#ffc0cb',
   '#b4eeb4',
+  '#b0e0e6',
   '#f6546a',
   '#ffc3a0',
-  '#b0e0e6',
 ];
 
 export const StudiesGraphsWidget = ({id, className}: Props) => {
@@ -53,9 +53,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
         .map((item, index) => ({
           label: item.id,
           data: item.items.length,
-          backgroundColor:
-            CHART_COLORS[index] ??
-            `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+          backgroundColor: CHART_COLORS[index % 10],
         })) ?? [],
     [learningResources],
   );
