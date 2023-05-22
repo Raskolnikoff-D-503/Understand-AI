@@ -9,19 +9,13 @@ import './LearningResourceForm.scss';
 
 type Props = {
   data: LearningResourceType;
-  onCloseModal: () => void;
+  onSave: (data: LearningResourceType, directory: string) => void;
+  onClose: () => void;
 };
 
-export const LearningResourceForm = ({data, onCloseModal}: Props) => {
+export const LearningResourceForm = ({data, onSave, onClose}: Props) => {
   const [currentDirectory, setCurrentDirectory] =
     useState<SingleValue<{label: string; value: string}>>(null);
-
-  const [savedResources, setSavedResources] = useLocalStorage<
-    {
-      id: string;
-      items: LearningResourceType[];
-    }[]
-  >('learning-resources', []);
 
   const [options, setOptions] = useLocalStorage<{label: string; value: string}[]>(
     'directory-options',
@@ -43,23 +37,12 @@ export const LearningResourceForm = ({data, onCloseModal}: Props) => {
     [options, currentDirectory],
   );
 
-  const onSave = useCallback(() => {
-    if (data && currentDirectory?.value) {
-      const directoryExists = savedResources.find((item) => item.id === currentDirectory.value);
-
-      if (directoryExists) {
-        const updatedData = savedResources.map((item) =>
-          item.id === currentDirectory.value ? {...item, items: [...item.items, data]} : item,
-        );
-
-        setSavedResources(updatedData);
-      } else {
-        setSavedResources([...savedResources, {id: currentDirectory.value, items: [data]}]);
-      }
-
-      onCloseModal();
+  const onSaveResource = useCallback(() => {
+    if (currentDirectory?.value) {
+      onSave(data, currentDirectory.value);
+      onClose();
     }
-  }, [data, currentDirectory]);
+  }, [currentDirectory]);
 
   return (
     <div className="learning-resources-modal-form">
@@ -76,8 +59,8 @@ export const LearningResourceForm = ({data, onCloseModal}: Props) => {
         <p>{data.excerpt}</p>
       </div>
       <div className="learning-resources-modal-form__button-container">
-        <Button onClick={onCloseModal}>Cancel</Button>
-        <Button onClick={onSave} disabled={!data && !currentDirectory}>
+        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onSaveResource} disabled={!data && !currentDirectory}>
           Save
         </Button>
       </div>
