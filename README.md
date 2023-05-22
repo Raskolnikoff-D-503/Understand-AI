@@ -11,10 +11,10 @@
 
 <br />
 <div align="center">
-  <h3 align="center">kanban-board-drag-&-drop</h3>
+  <h3 align="center">Understand-AI</h3>
 
   <p align="center">
-    Kanban Board
+    Understand AI
     <br />
     <a href="https://github.com/Raskolnikoff-D-503/Understand-AI"><strong>Explore the docs »</strong></a>
     <br />
@@ -40,42 +40,47 @@ The Understand AI project was made with the purpose to create convenient and use
 <img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/6876a9b3-b9ed-4694-80a7-8a81ea88eb8f">
 
 
-1. In order to organize the code, I used Feature-Sliced Design architectural methodology:
+I. In order to organize the code, I used Feature-Sliced Design architectural methodology:
 
-<img width="211" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/b8d29cbd-987e-4c0d-9c19-835382aa5334">
+<img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/b8d29cbd-987e-4c0d-9c19-835382aa5334">
  
  
-2. There is also a few APIs that were integrated in the project: chat GPT and learning resources. For data storage I used RTK Query Redux Toolkit and local storage. For loading I used library that renders shimmer effects:
+II. There is also a few APIs that were integrated in the project: chat GPT and learning resources. For data storage I used RTK Query Redux Toolkit and local storage. For loading I used library that renders shimmer effects:
 
-<img width="664" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/87c222bf-ece9-4477-94f5-6372f4212523">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/87c222bf-ece9-4477-94f5-6372f4212523">
 
-<img width="660" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/f08062c5-cef3-4612-8b36-e2b3c7df3551">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/f08062c5-cef3-4612-8b36-e2b3c7df3551">
 
-<img width="1222" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/61369157-817a-4163-bfef-5c3d3ee7d23c">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/61369157-817a-4163-bfef-5c3d3ee7d23c">
 
-<img width="681" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/17d98a6b-39e3-48ef-bad8-e6f0bed4cf94">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/17d98a6b-39e3-48ef-bad8-e6f0bed4cf94">
 
-<img width="648" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/cae12415-b5cf-4f62-a75e-709c6375d5e0">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/cae12415-b5cf-4f62-a75e-709c6375d5e0">
 
-<img width="620" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/9bdcd4c6-9f60-40d0-ad36-11c730eca9db">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/9bdcd4c6-9f60-40d0-ad36-11c730eca9db">
 
 
-3. One of the features of the project is reusable drag and drop container that allows you to create draggable environment in order to switch child elements between each other:
+III. One of the features of the project is reusable drag and drop container that allows you to create draggable environment in order to switch child elements between each other:
 
 <img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/302fc2d1-bbcb-4cfd-b36d-e3412830e3c7">
 
-<img width="669" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/3d7a4ef1-d21b-47d2-aa71-27f55b4450d4">
+<img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/3d7a4ef1-d21b-47d2-aa71-27f55b4450d4">
 
-<img width="203" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/d5076b38-1509-4b1e-8761-26f16ecaa406">
+<img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/d5076b38-1509-4b1e-8761-26f16ecaa406">
 
 This feature is based on React DnD Library. in order to use it, you need to:
 
   1) Install React Dnd Library: `npm install react-dnd react-dnd-html5-backend`,
+  
   2) Import `DragAndDropContainer` in your Container component:
-  <img width="306" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/51f9b809-ea58-4d02-a3b4-6f289aee9470">
+  
+  <img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/51f9b809-ea58-4d02-a3b4-6f289aee9470">
+  
   3) Pass to `DragAndDropContainer` next props: data for dragging mechanism; updateDataHandler function & className for drop container:
-  <img width="327" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/73eae4c7-7b9b-42a8-9eb6-1fd4cdacc7da">
-  <img width="593" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/5523fb41-7bac-4f59-9852-793e67df35a2">
+  
+  <img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/73eae4c7-7b9b-42a8-9eb6-1fd4cdacc7da">
+  
+  <img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/5523fb41-7bac-4f59-9852-793e67df35a2">
 
 
 
