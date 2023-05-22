@@ -62,13 +62,13 @@ II. There is also a few APIs that were integrated in the project: chat GPT and l
 
 III. One of the features of the project is reusable drag and drop container that allows you to create draggable environment in order to switch child elements between each other:
 
-<img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/302fc2d1-bbcb-4cfd-b36d-e3412830e3c7">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/302fc2d1-bbcb-4cfd-b36d-e3412830e3c7">
 
-<img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/3d7a4ef1-d21b-47d2-aa71-27f55b4450d4">
+<img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/3d7a4ef1-d21b-47d2-aa71-27f55b4450d4">
 
-<img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/d5076b38-1509-4b1e-8761-26f16ecaa406">
+<!-- <img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/d5076b38-1509-4b1e-8761-26f16ecaa406"> -->
 
-This feature is based on React DnD Library. in order to use it, you need to:
+This feature is based on React DnD Library. In order to use it, you need to:
 
   1) Install React Dnd Library: `npm install react-dnd react-dnd-html5-backend`,
   
@@ -134,7 +134,7 @@ Evgeny Gaag - gaagevgenii@gmail.com
 [contributors-url]: https://github.com/Raskolnikoff-D-503/Understand-AI/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Raskolnikoff-D-503/Understand-AI.svg?style=for-the-badge
 [forks-url]: https://github.com/Raskolnikoff-D-503/Understand-AI/network/members
-[stars-shield]: https://img.shields.io/github/stars/Raskolnikoff-D-503/Understand-AIp.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Raskolnikoff-D-503/Understand-AI.svg?style=for-the-badge
 [stars-url]: https://github.com/Raskolnikoff-D-503/Understand-AI/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Raskolnikoff-D-503/Understand-AI.svg?style=for-the-badge
 [issues-url]: https://github.com/Raskolnikoff-D-503/Understand-AI/issues
