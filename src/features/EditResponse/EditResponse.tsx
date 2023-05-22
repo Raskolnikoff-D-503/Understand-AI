@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
-import {ResponseForm, ResponseFormType} from '@/entities/ResponseForm/ResponseForm';
 import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {ResponseForm, ResponseFormType} from '@/entities';
 
 type Props = {
   response: ResponseItem;
