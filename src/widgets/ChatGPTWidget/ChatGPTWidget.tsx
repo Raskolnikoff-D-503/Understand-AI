@@ -70,7 +70,7 @@ export const ChatGPTWidget = ({id, className}: Props) => {
       </div>
       {!isUndefined(message) && (
         <Modal id="create-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
-          <CreateResponse response={{title: txt, content: message}} onClose={onCloseModal} />
+          <CreateResponse data={{title: txt, content: message}} onClose={onCloseModal} />
         </Modal>
       )}
     </Card>

@@ -4,9 +4,9 @@ import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {CreateLearningResource} from '@/features';
 import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
-import {LearningResourceForm} from './LearningResourceForm';
 import {SaveIcon, SavedIcon} from '@/shared/icons';
 import {isNull, removeEmojis} from '@/shared/utils';
 import {SIZE} from '@/shared/constants';
@@ -142,7 +142,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
       </div>
       {!isNull(currentItem) && (
         <Modal id="learning-resources-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
-          <LearningResourceForm data={currentItem} onCloseModal={onCloseModal} />
+          <CreateLearningResource data={currentItem} onClose={onCloseModal} />
         </Modal>
       )}
     </Card>

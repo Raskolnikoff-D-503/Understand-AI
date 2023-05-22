@@ -3,14 +3,14 @@ import {
   NewResponseItem,
   useSaveResponseToLocalStorage,
 } from '@/app/services/localStorageController/hooks';
-import {ResponseForm, ResponseFormType} from '@/entities/ResponseForm/ResponseForm';
+import {ResponseForm, ResponseFormType} from '@/entities';
 
 type Props = {
-  response: NewResponseItem;
+  data: NewResponseItem;
   onClose: () => void;
 };
 
-export const CreateResponse = ({response, onClose}: Props) => {
+export const CreateResponse = ({data, onClose}: Props) => {
   const setResponse = useSaveResponseToLocalStorage();
 
   const onSaveResponse = useCallback((data: ResponseFormType) => {
@@ -26,5 +26,5 @@ export const CreateResponse = ({response, onClose}: Props) => {
     }
   }, []);
 
-  return <ResponseForm title="Save New Response" data={response} onSave={onSaveResponse} />;
+  return <ResponseForm title="Save New Response" data={data} onSave={onSaveResponse} />;
 };
