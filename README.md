@@ -31,7 +31,7 @@
 
 ## About The Project
 
-The Understand AI project was made with the purpose to create convenient and useful application in exploring AI, Machine Learning, Deep Learning and others. Additionaly, I wanted to deeply explore Feature-Sliced Design Methodology APIs integration, drag & drop technology, shimmer effects on loading, and various other libraries.
+The Understand AI project was made with the purpose to create convenient and useful application in exploring AI, Machine Learning, Deep Learning and other topics. Additionaly, I wanted to deeply explore Feature-Sliced Design Methodology, APIs integration, drag & drop technology, shimmer effects on loading, and various other libraries.
 
 <img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/59ea6083-97ec-4dce-9620-1dd46f70102d">
 
