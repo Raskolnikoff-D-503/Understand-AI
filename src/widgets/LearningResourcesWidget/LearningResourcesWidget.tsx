@@ -2,13 +2,14 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {LearningResourceDirectoryType, LearningResourceType, Nullable} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {useGetLearningResourcesQuery} from '@/app/services/learningResources/hooks';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {useGetLearningResourcesQuery} from './api/hooks';
 import {CreateLearningResource} from '@/features';
 import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {SaveIcon, SavedIcon} from '@/shared/icons';
 import {isNull, removeEmojis} from '@/shared/utils';
+import {filterListById, getDirectoryById, getIdList} from './utils';
 import {SIZE} from '@/shared/constants';
 
 import './LearningResourcesWidget.scss';
@@ -34,15 +35,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
 
   const {data, error, isLoading} = useGetLearningResourcesQuery(currentPage);
 
-  const ids = useMemo(
-    () =>
-      savedResources.reduce<string[]>((acc, curr) => {
-        const itemIds = curr.items.map((item) => item.id);
-
-        return [...acc, ...itemIds];
-      }, []),
-    [savedResources],
-  );
+  const ids = useMemo(() => getIdList(savedResources), [savedResources]);
 
   const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
@@ -57,16 +50,11 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
 
   const onDeleteClick = useCallback(
     (id: string) => {
-      const directory = savedResources.find((el) => el.items.some((item) => item.id === id));
+      const directory = getDirectoryById(savedResources, id);
 
       if (directory) {
-        setSavedResources(
-          savedResources.map((item) =>
-            item.id === directory.id
-              ? {...item, items: item.items.filter((el) => el.id !== id)}
-              : item,
-          ),
-        );
+        const updatedData = filterListById(savedResources, directory, id);
+        setSavedResources(updatedData);
       }
     },
     [savedResources],
