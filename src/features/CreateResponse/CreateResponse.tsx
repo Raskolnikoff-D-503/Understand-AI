@@ -3,7 +3,7 @@ import {
   NewResponseItem,
   useSaveResponseToLocalStorage,
 } from '@/app/services/localStorageController/hooks';
-import {ResponseForm, ResponseFormType} from '@/entities';
+import {ResponseForm, ResponseFormType} from '@/entities/ChatGPT';
 
 type Props = {
   data: NewResponseItem;

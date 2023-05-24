@@ -4,9 +4,9 @@ import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {EditRegimeSwitcher} from '@/features';
-import {Accordion, Card, CustomAnchor, EmptyState, List, ToggleSwitch, Title} from '@/shared/UI';
+import {Accordion, Card, EmptyState, IconButton, List, ToggleSwitch} from '@/shared/UI';
+import {LearningResourceLinkItem} from '@/entities/LearningResources';
 import {DeleteIcon} from '@/shared/icons';
-import {SIZE} from '@/shared/constants';
 
 import './SavedLearningResourcesWidget.scss';
 
@@ -61,20 +61,15 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                           key={resource.id}
                           className="saved-learning-resources-widget__list-item"
                         >
-                          <CustomAnchor href={resource.url}>
-                            <div className="saved-learning-resources-widget__content">
-                              <Title size={SIZE.SMALL} noPadding>
-                                {resource.title}
-                              </Title>
-                              <p>{resource.excerpt}</p>
-                            </div>
-                          </CustomAnchor>
-                          <div
-                            className="saved-learning-resources-widget__icon-wrapper"
+                          <LearningResourceLinkItem
+                            url={resource.url}
+                            title={resource.title}
+                            excerpt={resource.excerpt}
+                          />
+                          <IconButton
                             onClick={() => onDeleteClick(resource.id, item.id)}
-                          >
-                            <DeleteIcon />
-                          </div>
+                            icon={<DeleteIcon />}
+                          />
                         </li>
                       ))}
                     </Accordion>

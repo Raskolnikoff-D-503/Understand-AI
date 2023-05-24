@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {LearningResourceType} from '@/shared/types';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {LearningResourceForm} from '@/entities';
+import {LearningResourceForm} from '@/entities/LearningResources';
 
 type Props = {
   data: LearningResourceType;

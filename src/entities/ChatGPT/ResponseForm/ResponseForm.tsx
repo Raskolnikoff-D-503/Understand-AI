@@ -1,13 +1,9 @@
 import React, {useCallback, useState} from 'react';
+import {ResponseFormType} from '@/entities/ChatGPT';
 import {Button, Input, Textarea, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
 import './ResponseForm.scss';
-
-export type ResponseFormType = {
-  title?: string;
-  content?: string;
-};
 
 type Props = {
   title: string;

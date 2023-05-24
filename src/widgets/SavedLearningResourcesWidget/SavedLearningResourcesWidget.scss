@@ -15,19 +15,6 @@
     gap: 16px;
   }
 
-  &__content {
-    display: grid;
-    gap: 16px;
-  }
-
-  &__icon-wrapper {
-    height: min-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-
   &__drag-and-drop-container {
     height: 100%;
     display: flex;
