@@ -2,7 +2,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
 import {rootReducer} from './rootReducer';
-import {learningResourcesApi} from './services/learningResources/api';
+import {learningResourcesApi} from '@/widgets/LearningResourcesWidget/api/api';
 import {chatGPTApi} from '@/widgets/ChatGPTWidget/api/api';
 
 export const store = configureStore({

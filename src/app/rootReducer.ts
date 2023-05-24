@@ -1,5 +1,5 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {learningResourcesApi} from './services/learningResources/api';
+import {learningResourcesApi} from '@/widgets/LearningResourcesWidget/api/api';
 import {chatGPTApi} from '@/widgets/ChatGPTWidget/api/api';
 import {mainPageSlice} from './services/mainPageController/mainPageSlice';
 
