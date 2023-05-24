@@ -51,17 +51,9 @@
     gap: 16px;
   }
 
-  &__icon-container {
+  &__buttons-container {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  &__icon-wrapper {
-    height: min-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
   }
 }

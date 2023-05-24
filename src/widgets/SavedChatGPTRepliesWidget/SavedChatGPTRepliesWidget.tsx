@@ -4,7 +4,7 @@ import {useAppSelector} from '@/app/store';
 import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {EditRegimeSwitcher, EditResponse} from '@/features';
-import {Accordion, Card, EmptyState, List, Modal, ToggleSwitch} from '@/shared/UI';
+import {Accordion, Card, EmptyState, IconButton, List, Modal, ToggleSwitch} from '@/shared/UI';
 import {isNull} from '@/shared/utils';
 import {DeleteIcon, EditIcon} from '@/shared/icons';
 
@@ -57,19 +57,9 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
                 <Accordion title={item.title} isDraggable={isOnEdit}>
                   <div className="saved-chat-gpt-replies-widget__item-container">
                     <p>{item.content}</p>
-                    <div className="saved-chat-gpt-replies-widget__icon-container">
-                      <div
-                        className="saved-chat-gpt-replies-widget__icon-wrapper"
-                        onClick={() => onOpenModal(item)}
-                      >
-                        <EditIcon />
-                      </div>
-                      <div
-                        className="saved-chat-gpt-replies-widget__icon-wrapper"
-                        onClick={() => onDeleteClick(id)}
-                      >
-                        <DeleteIcon />
-                      </div>
+                    <div className="saved-chat-gpt-replies-widget__buttons-container">
+                      <IconButton onClick={() => onOpenModal(item)} icon={<EditIcon />} />
+                      <IconButton onClick={() => onDeleteClick(id)} icon={<DeleteIcon />} />
                     </div>
                   </div>
                 </Accordion>

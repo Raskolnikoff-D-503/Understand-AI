@@ -5,12 +5,12 @@ import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {useGetLearningResourcesQuery} from './api/hooks';
 import {CreateLearningResource} from '@/features';
-import {Card, ListContentLoader, CustomAnchor, EmptyState, List, Title, Modal} from '@/shared/UI';
+import {Card, ListContentLoader, EmptyState, List, Modal, IconButton} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
 import {SaveIcon, SavedIcon} from '@/shared/icons';
+import {LearningResourceLinkItem} from '@/entities/LearningResources';
 import {isNull, removeEmojis} from '@/shared/utils';
 import {filterListById, getDirectoryById, getIdList} from './utils';
-import {SIZE} from '@/shared/constants';
 
 import './LearningResourcesWidget.scss';
 
@@ -41,14 +41,14 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
     setCurrentPage(page);
   }, []);
 
-  const onSaveClick = useCallback((item: LearningResourceType) => {
+  const onSave = useCallback((item: LearningResourceType) => {
     if (item) {
       setCurrentItem(item);
       setIsOpen(true);
     }
   }, []);
 
-  const onDeleteClick = useCallback(
+  const onDelete = useCallback(
     (id: string) => {
       const directory = getDirectoryById(savedResources, id);
 
@@ -84,35 +84,25 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
 
               return (
                 <li key={itemId} className="learning-recources-widget__list-item">
-                  <CustomAnchor href={item.originalUrl || item.webUrl}>
-                    <div className="learning-recources-widget__content">
-                      <Title size={SIZE.SMALL} noPadding>
-                        {item.title}
-                      </Title>
-                      <p>{removeEmojis(item.excerpt)}</p>
-                    </div>
-                  </CustomAnchor>
+                  <LearningResourceLinkItem
+                    url={item.originalUrl || item.webUrl}
+                    title={item.title}
+                    excerpt={item.excerpt}
+                  />
                   {ids.find((id) => id === itemId) ? (
-                    <div
-                      className="learning-recources-widget__icon-wrapper"
-                      onClick={() => onDeleteClick(itemId)}
-                    >
-                      <SavedIcon />
-                    </div>
+                    <IconButton onClick={() => onDelete(itemId)} icon={<SavedIcon />} />
                   ) : (
-                    <div
-                      className="learning-recources-widget__icon-wrapper"
+                    <IconButton
                       onClick={() =>
-                        onSaveClick({
+                        onSave({
                           id: itemId,
                           title: item.title,
                           excerpt: removeEmojis(item.excerpt),
                           url: item.originalUrl || item.webUrl,
                         })
                       }
-                    >
-                      <SaveIcon />
-                    </div>
+                      icon={<SaveIcon />}
+                    />
                   )}
                 </li>
               );

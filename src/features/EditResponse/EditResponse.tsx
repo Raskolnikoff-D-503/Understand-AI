@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {ResponseForm, ResponseFormType} from '@/entities';
+import {ResponseForm, ResponseFormType} from '@/entities/ChatGPT';
 
 type Props = {
   response: ResponseItem;
