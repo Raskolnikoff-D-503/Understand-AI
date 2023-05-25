@@ -15,3 +15,8 @@ export {List} from './List/List';
 export {Accordion} from './Accordion/Accordion';
 export {Divider} from './Divider/Divider';
 export {Modal} from './Modal/Modal';
+export {
+  DoughnutChart,
+  DoughnutChartType,
+  DoughnutChartOptions,
+} from './DoughnutChart/DoughnutChart';

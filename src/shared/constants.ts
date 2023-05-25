@@ -9,6 +9,13 @@ export const STYLE_TYPE = {
   SECONDARY: 'secondary',
 } as const;
 
+export const POSITION = {
+  TOP: 'top',
+  RIGHT: 'right',
+  BOTTOM: 'bottom',
+  LEFT: 'left',
+} as const;
+
 export const WIDGET_IDS = {
   STORED_LEARNING_RESOURCES_WIDGET: 'stored-learning-resources-widget',
   STUDIES_GRAPHS_WIDGET: 'studies-graphs-widget',

@@ -44,6 +44,18 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
     [items],
   );
 
+  const updateDataHandler = useCallback(
+    (data: ItemType[]) => {
+      if (items) {
+        const ids = data.map((item) => item.id);
+        const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+
+        setItems(sortedItems);
+      }
+    },
+    [items],
+  );
+
   const configuratedItems = useMemo<ItemType[]>(
     () =>
       items
@@ -79,18 +91,6 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
             })
         : [],
     [items, isOnEdit],
-  );
-
-  const updateDataHandler = useCallback(
-    (data: ItemType[]) => {
-      if (items) {
-        const ids = data.map((item) => item.id);
-        const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
-
-        setItems(sortedItems);
-      }
-    },
-    [items],
   );
 
   return (
