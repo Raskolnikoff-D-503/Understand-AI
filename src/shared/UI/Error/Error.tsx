@@ -15,7 +15,7 @@ type FetchErrorData = {
   code: string;
 };
 
-const DEFAULT_ERROR_MESSAGE: string = 'An error has occured';
+const DEFAULT_ERROR_MESSAGE = 'An error has occured';
 
 const isErrorDataWithMessage = (value: unknown): value is FetchErrorData =>
   isObject(value) && 'message' in value && 'code' in value;

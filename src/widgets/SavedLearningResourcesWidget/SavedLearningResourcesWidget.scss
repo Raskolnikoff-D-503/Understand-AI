@@ -6,4 +6,8 @@
     grid-template-columns: 1fr min-content;
     gap: 16px;
   }
+
+  &__item {
+    background-color: white;
+  }
 }

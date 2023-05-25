@@ -27,6 +27,13 @@ const getItemStyles = (initialOffset: XYCoord | null, currentOffset: XYCoord | n
   };
 };
 
+const getElementWidthById = (id: string): string => {
+  const element = document.getElementById(id);
+  const styles = element && getComputedStyle(element);
+
+  return styles?.width ?? '0px';
+};
+
 export const CustomDragLayer = () => {
   const {isDragging, item, initialOffset, currentOffset} = useDragLayer((monitor) => ({
     item: monitor.getItem(),
@@ -39,10 +46,8 @@ export const CustomDragLayer = () => {
     return null;
   }
 
-  const styles = getComputedStyle(document.getElementById(item.props.id)!);
-
   return (
-    <div style={{...layerStyles, width: styles.width}}>
+    <div style={{...layerStyles, width: getElementWidthById(item.props.id)}}>
       <div style={getItemStyles(initialOffset, currentOffset)}>
         <BoxDragPreview>{item}</BoxDragPreview>
       </div>
