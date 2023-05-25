@@ -1,12 +1,13 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {LearningResourceType} from '@/shared/types';
+import {LearningResourceDirectoryType, WidgetDataType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
-import {EditRegimeSwitcher} from '@/features';
-import {Accordion, Card, EmptyState, IconButton, List, ToggleSwitch} from '@/shared/UI';
+import {SavedInfo} from '@/features';
+import {Accordion, Card, IconButton} from '@/shared/UI';
 import {LearningResourceLinkItem} from '@/entities/LearningResources';
 import {DeleteIcon} from '@/shared/icons';
+import {getSortedResponseItems} from './utils';
 
 import './SavedLearningResourcesWidget.scss';
 
@@ -15,25 +16,21 @@ type Props = {
   className: string;
 };
 
-type ItemType = {
-  id: string;
-  className: string;
-  Component: ({id, className}: Props) => JSX.Element;
-};
-
 export const SavedLearningResourcesWidget = ({id, className}: Props) => {
   const [isOnEdit, setIsOnEdit] = useState<boolean>(false);
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
-  const [items, setItems] = useLocalStorage<
-    {
-      id: string;
-      items: LearningResourceType[];
-    }[]
-  >(LOCAL_STORAGE.LEARNING_RESOURCES, []);
+  const [items, setItems] = useLocalStorage<LearningResourceDirectoryType[]>(
+    LOCAL_STORAGE.LEARNING_RESOURCES,
+    [],
+  );
 
-  const onDeleteClick = useCallback(
+  const onToggle = useCallback(() => {
+    setIsOnEdit(!isOnEdit);
+  }, [isOnEdit]);
+
+  const onDelete = useCallback(
     (id: string, directory: string) => {
       setItems(
         items.map((item) =>
@@ -45,10 +42,9 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
   );
 
   const updateDataHandler = useCallback(
-    (data: ItemType[]) => {
+    (data: WidgetDataType[]) => {
       if (items) {
-        const ids = data.map((item) => item.id);
-        const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+        const sortedItems = getSortedResponseItems(items, data);
 
         setItems(sortedItems);
       }
@@ -56,12 +52,12 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
     [items],
   );
 
-  const configuratedItems = useMemo<ItemType[]>(
+  const configuratedItems = useMemo<WidgetDataType[]>(
     () =>
       items
         ? items
             .filter((item) => item.items.length)
-            .map<ItemType>((item) => {
+            .map<WidgetDataType>((item) => {
               return {
                 id: item.id,
                 className: 'saved-learning-resources-widget__item',
@@ -79,7 +75,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
                             excerpt={resource.excerpt}
                           />
                           <IconButton
-                            onClick={() => onDeleteClick(resource.id, item.id)}
+                            onClick={() => onDelete(resource.id, item.id)}
                             icon={<DeleteIcon />}
                           />
                         </li>
@@ -95,35 +91,13 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
 
   return (
     <Card id={id} className={className} isDraggable={isDraggable} title="Saved Learning Resources">
-      <div className="saved-learning-resources-widget">
-        {Boolean(configuratedItems.length) && (
-          <>
-            <div className="saved-learning-resources-widget__switch-wrapper">
-              <ToggleSwitch
-                isToggled={isOnEdit}
-                onToggle={() => setIsOnEdit(!isOnEdit)}
-                disabled={isDraggable}
-              />
-            </div>
-
-            <EditRegimeSwitcher
-              className="saved-learning-resources-widget__drag-and-drop-container"
-              isOnEdit={isOnEdit}
-              data={configuratedItems}
-              updateDataHandler={updateDataHandler}
-            >
-              <List className="saved-learning-resources-widget__container">
-                {configuratedItems.map((item) => {
-                  const {id, className, Component} = item;
-
-                  return <Component key={id} id={id} className={className} />;
-                })}
-              </List>
-            </EditRegimeSwitcher>
-          </>
-        )}
-        {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
-      </div>
+      <SavedInfo
+        data={configuratedItems}
+        isOnEdit={isOnEdit}
+        isDraggable={isDraggable}
+        onToggle={onToggle}
+        onUpdate={updateDataHandler}
+      />
     </Card>
   );
 };
