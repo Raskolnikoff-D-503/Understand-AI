@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {LearningResourceType} from '@/shared/types';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {LearningResourceForm} from '@/entities/LearningResources';
 
 type Props = {
@@ -14,7 +14,7 @@ export const CreateLearningResource = ({data, onClose}: Props) => {
       id: string;
       items: LearningResourceType[];
     }[]
-  >('learning-resources', []);
+  >(LOCAL_STORAGE.LEARNING_RESOURCES, []);
 
   const onSaveResource = useCallback((data: LearningResourceType, directory: string) => {
     const directoryExists = savedResources.find((item) => item.id === directory);

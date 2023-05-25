@@ -2,12 +2,11 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {LearningResourceDirectoryType, LearningResourceType, Nullable} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {useGetLearningResourcesQuery} from './api/hooks';
-import {CreateLearningResource} from '@/features';
-import {Card, ListContentLoader, EmptyState, List, Modal, IconButton} from '@/shared/UI';
+import {CreateLearningResource, Favorites} from '@/features';
+import {Card, ListContentLoader, EmptyState, List, Modal} from '@/shared/UI';
 import {Pagination} from '@/shared/UI/Pagination/Pagination';
-import {SaveIcon, SavedIcon} from '@/shared/icons';
 import {LearningResourceLinkItem} from '@/entities/LearningResources';
 import {isNull, removeEmojis} from '@/shared/utils';
 import {filterListById, getDirectoryById, getIdList} from './utils';
@@ -29,7 +28,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const [savedResources, setSavedResources] = useLocalStorage<LearningResourceDirectoryType[]>(
-    'learning-resources',
+    LOCAL_STORAGE.LEARNING_RESOURCES,
     [],
   );
 
@@ -89,21 +88,18 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
                     title={item.title}
                     excerpt={item.excerpt}
                   />
-                  {ids.find((id) => id === itemId) ? (
-                    <IconButton onClick={() => onDelete(itemId)} icon={<SavedIcon />} />
-                  ) : (
-                    <IconButton
-                      onClick={() =>
-                        onSave({
-                          id: itemId,
-                          title: item.title,
-                          excerpt: removeEmojis(item.excerpt),
-                          url: item.originalUrl || item.webUrl,
-                        })
-                      }
-                      icon={<SaveIcon />}
-                    />
-                  )}
+                  <Favorites
+                    inFavorites={ids.some((id) => id === itemId)}
+                    onSave={() =>
+                      onSave({
+                        id: itemId,
+                        title: item.title,
+                        excerpt: removeEmojis(item.excerpt),
+                        url: item.originalUrl || item.webUrl,
+                      })
+                    }
+                    onDelete={() => onDelete(itemId)}
+                  />
                 </li>
               );
             })
@@ -111,18 +107,18 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
             <EmptyState />
           )}
         </List>
-
         <Pagination
           currentPage={data?.page ?? 0}
           nextPage={data?.nextPage}
           onPageChange={onPageChange}
         />
+
+        {!isNull(currentItem) && (
+          <Modal id="learning-resources-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
+            <CreateLearningResource data={currentItem} onClose={onCloseModal} />
+          </Modal>
+        )}
       </div>
-      {!isNull(currentItem) && (
-        <Modal id="learning-resources-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
-          <CreateLearningResource data={currentItem} onClose={onCloseModal} />
-        </Modal>
-      )}
     </Card>
   );
 };

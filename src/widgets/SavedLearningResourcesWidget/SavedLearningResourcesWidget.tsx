@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {EditRegimeSwitcher} from '@/features';
 import {Accordion, Card, EmptyState, IconButton, List, ToggleSwitch} from '@/shared/UI';
 import {LearningResourceLinkItem} from '@/entities/LearningResources';
@@ -31,7 +31,7 @@ export const SavedLearningResourcesWidget = ({id, className}: Props) => {
       id: string;
       items: LearningResourceType[];
     }[]
-  >('learning-resources', []);
+  >(LOCAL_STORAGE.LEARNING_RESOURCES, []);
 
   const onDeleteClick = useCallback(
     (id: string, directory: string) => {

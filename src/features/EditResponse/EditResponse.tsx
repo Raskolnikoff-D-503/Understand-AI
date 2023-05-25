@@ -1,5 +1,9 @@
 import React, {useCallback} from 'react';
-import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {
+  LOCAL_STORAGE,
+  ResponseItem,
+  useLocalStorage,
+} from '@/app/services/localStorageController/hooks';
 import {ResponseForm, ResponseFormType} from '@/entities/ChatGPT';
 
 type Props = {
@@ -9,7 +13,7 @@ type Props = {
 
 export const EditResponse = ({response, onClose}: Props) => {
   const [responses, setResponses] = useLocalStorage<{id: string; title: string; content: string}[]>(
-    'responses',
+    LOCAL_STORAGE.RESPONSES,
     [],
   );
 
