@@ -77,7 +77,7 @@ export const LearningResourcesWidget = ({id, className}: Props) => {
     >
       <div className="learning-recources-widget__container">
         <List>
-          {Boolean(data?.value.length) ? (
+          {data?.value.length ? (
             data?.value.map((item, index) => {
               const itemId = `${item.title}${index}`;
 

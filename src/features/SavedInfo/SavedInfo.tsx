@@ -7,10 +7,8 @@ import './SavedInfo.scss';
 
 type Props = {
   data: WidgetDataType[];
-
   isOnEdit: boolean;
   isDraggable: boolean;
-
   onToggle: () => void;
   onUpdate: (data: WidgetDataType[]) => void;
 };
