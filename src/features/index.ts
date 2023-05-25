@@ -4,3 +4,4 @@ export {CreateLearningResource} from './CreateLearningResource/CreateLearningRes
 export {CreateResponse} from './CreateResponse/CreateResponse';
 export {EditResponse} from './EditResponse/EditResponse';
 export {Favorites} from './Favorites/Favorites';
+export {SavedInfo} from './SavedInfo/SavedInfo';

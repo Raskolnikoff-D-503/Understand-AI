@@ -7,10 +7,11 @@ import {
   useLocalStorage,
 } from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {EditRegimeSwitcher, EditResponse} from '@/features';
-import {Accordion, Card, EmptyState, IconButton, List, Modal, ToggleSwitch} from '@/shared/UI';
-import {isNull} from '@/shared/utils';
+import {EditResponse, SavedInfo} from '@/features';
+import {Accordion, Card, IconButton, Modal} from '@/shared/UI';
 import {DeleteIcon, EditIcon} from '@/shared/icons';
+import {isNull} from '@/shared/utils';
+import {getSortedResponseItems} from './utils';
 
 import './SavedChatGPTRepliesWidget.scss';
 
@@ -32,6 +33,14 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     setIsOnEdit(!isOnEdit);
   }, [isOnEdit]);
 
+  const onDelete = useCallback(
+    (id: string) => {
+      const filteredItems = items.filter((item) => item.id !== id);
+      setItems(filteredItems);
+    },
+    [items],
+  );
+
   const onOpenModal = useCallback((data: ResponseItem) => {
     setCurrentItem(data);
     setIsOpen(true);
@@ -41,14 +50,6 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
     setCurrentItem(null);
     setIsOpen(false);
   }, []);
-
-  const onDeleteClick = useCallback(
-    (id: string) => {
-      const filteredItems = items.filter((item) => item.id !== id);
-      setItems(filteredItems);
-    },
-    [items],
-  );
 
   const configuratedItems = useMemo<WidgetDataType[]>(
     () =>
@@ -63,7 +64,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
                     <p>{item.content}</p>
                     <div className="saved-chat-gpt-replies-widget__buttons-container">
                       <IconButton onClick={() => onOpenModal(item)} icon={<EditIcon />} />
-                      <IconButton onClick={() => onDeleteClick(id)} icon={<DeleteIcon />} />
+                      <IconButton onClick={() => onDelete(id)} icon={<DeleteIcon />} />
                     </div>
                   </div>
                 </Accordion>
@@ -77,8 +78,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
   const updateDataHandler = useCallback(
     (data: WidgetDataType[]) => {
       if (items) {
-        const ids = data.map((item) => item.id);
-        const sortedItems = items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+        const sortedItems = getSortedResponseItems(items, data);
 
         setItems(sortedItems);
       }
@@ -88,31 +88,13 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
 
   return (
     <Card id={id} className={className} isDraggable={isDraggable} title="Saved Chat GPT Replies">
-      <div className="saved-chat-gpt-replies-widget">
-        {Boolean(configuratedItems.length) && (
-          <>
-            <div className="saved-chat-gpt-replies-widget__switch-wrapper">
-              <ToggleSwitch isToggled={isOnEdit} onToggle={onToggle} disabled={isDraggable} />
-            </div>
-
-            <EditRegimeSwitcher
-              className="saved-chat-gpt-replies-widget__drag-and-drop-container"
-              isOnEdit={isOnEdit}
-              data={configuratedItems}
-              updateDataHandler={updateDataHandler}
-            >
-              <List className="saved-chat-gpt-replies-widget__container">
-                {configuratedItems.map((item) => {
-                  const {id, className, Component} = item;
-
-                  return <Component key={id} id={id} className={className} />;
-                })}
-              </List>
-            </EditRegimeSwitcher>
-          </>
-        )}
-        {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
-      </div>
+      <SavedInfo
+        data={configuratedItems}
+        isOnEdit={isOnEdit}
+        isDraggable={isDraggable}
+        onToggle={onToggle}
+        onUpdate={updateDataHandler}
+      />
       {!isNull(currentItem) && (
         <Modal id="edit-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
           <EditResponse response={currentItem} onClose={onCloseModal} />

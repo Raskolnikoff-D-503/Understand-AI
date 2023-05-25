@@ -1,13 +1,5 @@
-.custom-anchor {
-  font-size: 20px;
-  color: #0000;
-  text-decoration: none;
-  background: linear-gradient(90deg, #1095c1 50%, #000 0) var(--_p, 100%) / 200% no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: 0.4s;
+@import '@/app/styles/mixins.scss';
 
-  &:hover {
-    --_p: 0%;
-  }
+.custom-anchor {
+  @include link;
 }

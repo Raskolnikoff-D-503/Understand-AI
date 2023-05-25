@@ -1,33 +1,6 @@
 @import '@/app/styles/mixins.scss';
 
 .saved-chat-gpt-replies-widget {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  &__switch-wrapper {
-    display: flex;
-    justify-content: right;
-  }
-
-  &__drag-and-drop-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-
-    @include scrollbar;
-  }
-
-  &__container {
-    gap: 0;
-  }
-
-  &__item {
-    background-color: white;
-  }
-
   &__item-container {
     display: grid;
     grid-template-columns: 1fr min-content;

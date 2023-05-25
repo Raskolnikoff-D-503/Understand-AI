@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins.scss';
+
 .custom-link {
   overflow: hidden;
   display: -webkit-box;
@@ -5,15 +7,5 @@
   -webkit-line-clamp: 2;
   white-space: pre-wrap;
 
-  font-size: 20px;
-  color: #0000;
-  text-decoration: none;
-  background: linear-gradient(90deg, #1095c1 50%, #000 0) var(--_p, 100%) / 200% no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: 0.4s;
-
-  &:hover {
-    --_p: 0%;
-  }
+  @include link;
 }
