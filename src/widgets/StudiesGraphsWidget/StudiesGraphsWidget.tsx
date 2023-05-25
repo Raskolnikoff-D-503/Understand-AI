@@ -1,34 +1,25 @@
 import React, {useMemo} from 'react';
-import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions, ChartData} from 'chart.js';
-import {Doughnut} from 'react-chartjs-2';
 import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {LOCAL_STORAGE, useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {useWindowWidth} from './hooks/useWindowWidth';
-import {Card, EmptyState} from '@/shared/UI';
+import {
+  Card,
+  DoughnutChart,
+  DoughnutChartOptions,
+  DoughnutChartType,
+  EmptyState,
+} from '@/shared/UI';
+import {POSITION} from '@/shared/constants';
+import {CHART_COLORS, WINDOW_SIZE_WIDTH} from './constants';
 
 import './StudiesGraphsWidget.scss';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 type Props = {
   id: string;
   className: string;
 };
-
-const CHART_COLORS = [
-  '#a0db8e',
-  '#afeeee',
-  '#c39797',
-  '#ff7373',
-  '#008080',
-  '#ffc0cb',
-  '#b4eeb4',
-  '#b0e0e6',
-  '#f6546a',
-  '#ffc3a0',
-];
 
 export const StudiesGraphsWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
@@ -38,11 +29,13 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
     LOCAL_STORAGE.LEARNING_RESOURCES,
   );
 
-  const options = useMemo<ChartOptions>(
+  const options = useMemo<DoughnutChartOptions>(
     () => ({
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {legend: {position: windowWidth <= 720 ? 'bottom' : 'right'}},
+      plugins: {
+        legend: {position: windowWidth <= WINDOW_SIZE_WIDTH ? POSITION.BOTTOM : POSITION.RIGHT},
+      },
     }),
     [windowWidth],
   );
@@ -59,7 +52,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
     [learningResources],
   );
 
-  const data = useMemo<ChartData<'doughnut'>>(
+  const data = useMemo<DoughnutChartType>(
     () => ({
       labels: configuratedItems.map((item) => item.label),
       datasets: [
@@ -81,11 +74,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
       isDraggable={isDraggable}
     >
       <div className="studies-graphs-widget__container">
-        {Boolean(configuratedItems.length) && (
-          <div className="studies-graphs-widget__chart-wrapper">
-            <Doughnut data={data} options={options} />
-          </div>
-        )}
+        {Boolean(configuratedItems.length) && <DoughnutChart data={data} options={options} />}
         {!configuratedItems.length && <EmptyState message="No Saved Data Yet" />}
       </div>
     </Card>
