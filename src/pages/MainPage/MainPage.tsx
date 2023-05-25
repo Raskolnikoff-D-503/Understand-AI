@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {StoreDataType, WidgetDataType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {useDebounce} from '@/shared/hooks';
 import {EditRegimeSwitcher} from '@/features';
@@ -15,7 +15,10 @@ export const MainPage = () => {
 
   const debouncedValue = useDebounce<boolean>(isOnEdit, 100);
 
-  const [widgets, setWidgets] = useLocalStorage<StoreDataType[]>('widgets', DEFAULT_ORDER);
+  const [widgets, setWidgets] = useLocalStorage<StoreDataType[]>(
+    LOCAL_STORAGE.WIDGETS,
+    DEFAULT_ORDER,
+  );
   const widgetData = useMemo<WidgetDataType[]>(() => getWidgetsDataById(widgets), [widgets]);
 
   const updateDataHandler = useCallback(

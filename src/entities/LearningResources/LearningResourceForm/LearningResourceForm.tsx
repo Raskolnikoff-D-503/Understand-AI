@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {SingleValue} from 'react-select';
 import {LearningResourceType} from '@/shared/types';
-import {useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useLocalStorage} from '@/app/services/localStorageController/hooks';
 import {Button, CustomSelect, Title} from '@/shared/UI';
 import {SIZE} from '@/shared/constants';
 
@@ -18,7 +18,7 @@ export const LearningResourceForm = ({data, onSave, onClose}: Props) => {
     useState<SingleValue<{label: string; value: string}>>(null);
 
   const [options, setOptions] = useLocalStorage<{label: string; value: string}[]>(
-    'directory-options',
+    LOCAL_STORAGE.DIRECTORY_OPTIONS,
     [],
   );
 

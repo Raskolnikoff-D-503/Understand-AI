@@ -1,7 +1,11 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {Nullable, WidgetDataType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
-import {ResponseItem, useLocalStorage} from '@/app/services/localStorageController/hooks';
+import {
+  LOCAL_STORAGE,
+  ResponseItem,
+  useLocalStorage,
+} from '@/app/services/localStorageController/hooks';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {EditRegimeSwitcher, EditResponse} from '@/features';
 import {Accordion, Card, EmptyState, IconButton, List, Modal, ToggleSwitch} from '@/shared/UI';
@@ -22,7 +26,7 @@ export const SavedChatGPTRepliesWidget = ({id, className}: Props) => {
 
   const isDraggable = useAppSelector(selectIsOnEdit);
 
-  const [items, setItems] = useLocalStorage<ResponseItem[]>('responses', []);
+  const [items, setItems] = useLocalStorage<ResponseItem[]>(LOCAL_STORAGE.RESPONSES, []);
 
   const onToggle = useCallback(() => {
     setIsOnEdit(!isOnEdit);

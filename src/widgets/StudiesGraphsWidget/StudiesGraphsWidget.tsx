@@ -4,7 +4,7 @@ import {Doughnut} from 'react-chartjs-2';
 import {LearningResourceType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
-import {useReadLocalStorage} from '@/app/services/localStorageController/hooks';
+import {LOCAL_STORAGE, useReadLocalStorage} from '@/app/services/localStorageController/hooks';
 import {useWindowWidth} from './hooks/useWindowWidth';
 import {Card, EmptyState} from '@/shared/UI';
 
@@ -34,8 +34,9 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const windowWidth = useWindowWidth();
-  const learningResources =
-    useReadLocalStorage<{id: string; items: LearningResourceType[]}[]>('learning-resources');
+  const learningResources = useReadLocalStorage<{id: string; items: LearningResourceType[]}[]>(
+    LOCAL_STORAGE.LEARNING_RESOURCES,
+  );
 
   const options = useMemo<ChartOptions>(
     () => ({
