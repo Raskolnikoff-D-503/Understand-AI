@@ -1,6 +1,8 @@
+@import '@/app/styles/variables.scss';
+
 .card {
   border-radius: 16px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: $box-shadow;
   display: flex;
   flex-direction: column;
 

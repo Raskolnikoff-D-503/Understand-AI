@@ -1,3 +1,5 @@
+@import '@/app/styles/variables.scss';
+
 .modal {
   &__backdrop {
     position: fixed;
@@ -15,7 +17,7 @@
   &__content {
     border-radius: 16px;
     padding: 24px;
-    background-color: white;
+    background-color: $background;
   }
 }
 

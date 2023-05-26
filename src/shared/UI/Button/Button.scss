@@ -1,13 +1,14 @@
 @import '@/app/styles/mixins.scss';
+@import '@/app/styles/variables.scss';
 
 .button {
-  background: #fff;
+  background: $background;
   backface-visibility: hidden;
   border-radius: 0.375rem;
   border-style: solid;
   border-width: 0.125rem;
   box-sizing: border-box;
-  color: #212121;
+  color: $primary;
   cursor: pointer;
   display: inline-block;
   font-family: Circular, Helvetica, sans-serif;

@@ -1,3 +1,5 @@
+@import '@/app/styles/variables.scss';
+
 .main-page {
   width: 100%;
   height: 100%;
@@ -19,7 +21,7 @@
 
   &__card {
     height: 600px;
-    background-color: white;
+    background-color: $background;
     width: 100%;
     max-width: 100%;
 

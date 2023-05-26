@@ -1,4 +1,5 @@
 @import '@/app/styles/mixins.scss';
+@import '@/app/styles/variables.scss';
 
 .saved-chat-gpt-replies-widget {
   &__item-container {
@@ -14,6 +15,6 @@
   }
 
   &__item {
-    background-color: white;
+    background-color: $background;
   }
 }

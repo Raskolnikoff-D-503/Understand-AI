@@ -1,3 +1,5 @@
+@import '@/app/styles/variables.scss';
+
 .learning-resources-modal-form {
   width: 600px;
   display: flex;
@@ -8,7 +10,7 @@
     display: grid;
     gap: 16px;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid $secondary;
   }
 
   &__button-container {

@@ -1,4 +1,5 @@
 @import '@/app/styles/mixins.scss';
+@import '@/app/styles/variables.scss';
 
 .textarea {
   width: 100%;
@@ -7,14 +8,14 @@
   gap: 8px;
 
   &__label {
-    color: #ccc;
+    color: $secondary;
   }
 
   &__input {
     width: 100%;
     font-size: 16px;
     resize: none;
-    border: 1px solid #ccc;
+    border: 1px solid $secondary;
     padding: 8px;
 
     @include scrollbar;
