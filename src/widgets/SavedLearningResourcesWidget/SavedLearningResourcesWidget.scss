@@ -1,4 +1,5 @@
 @import '@/app/styles/mixins.scss';
+@import '@/app/styles/variables.scss';
 
 .saved-learning-resources-widget {
   &__list-item {
@@ -8,6 +9,6 @@
   }
 
   &__item {
-    background-color: white;
+    background-color: $background;
   }
 }

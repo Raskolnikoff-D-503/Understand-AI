@@ -1,3 +1,5 @@
+@import '@/app/styles/variables.scss';
+
 .input {
   width: 100%;
   display: flex;
@@ -5,13 +7,13 @@
   gap: 8px;
 
   &__label {
-    color: #ccc;
+    color: $secondary;
   }
 
   &__input {
     width: 100%;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid $secondary;
     padding: 8px;
   }
 }
