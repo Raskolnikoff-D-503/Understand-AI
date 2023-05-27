@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {LearningResourceType} from '@/shared/types';
+import {LearningResourceDirectoryType} from '@/shared/types';
 import {useAppSelector} from '@/app/store';
 import {selectIsOnEdit} from '@/app/services/mainPageController/mainPageSlice';
 import {LOCAL_STORAGE, useReadLocalStorage} from '@/app/services/localStorageController/hooks';
@@ -12,7 +12,8 @@ import {
   EmptyState,
 } from '@/shared/UI';
 import {POSITION} from '@/shared/constants';
-import {CHART_COLORS, WINDOW_SIZE_WIDTH} from './constants';
+import {StudiesGraphType, getDoughnutChartData, getFilteredItems} from './utils';
+import {WINDOW_SIZE_WIDTH} from './constants';
 
 import './StudiesGraphsWidget.scss';
 
@@ -25,7 +26,7 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
   const isDraggable = useAppSelector(selectIsOnEdit);
 
   const windowWidth = useWindowWidth();
-  const learningResources = useReadLocalStorage<{id: string; items: LearningResourceType[]}[]>(
+  const learningResources = useReadLocalStorage<LearningResourceDirectoryType[]>(
     LOCAL_STORAGE.LEARNING_RESOURCES,
   );
 
@@ -40,29 +41,13 @@ export const StudiesGraphsWidget = ({id, className}: Props) => {
     [windowWidth],
   );
 
-  const configuratedItems = useMemo(
-    () =>
-      learningResources
-        ?.filter((item) => item.items.length)
-        .map((item, index) => ({
-          label: item.id,
-          data: item.items.length,
-          backgroundColor: CHART_COLORS[index % 10],
-        })) ?? [],
+  const configuratedItems = useMemo<StudiesGraphType[]>(
+    () => getFilteredItems(learningResources),
     [learningResources],
   );
 
   const data = useMemo<DoughnutChartType>(
-    () => ({
-      labels: configuratedItems.map((item) => item.label),
-      datasets: [
-        {
-          data: configuratedItems.map((item) => item.data),
-          backgroundColor: configuratedItems.map((item) => item.backgroundColor),
-          hoverOffset: 4,
-        },
-      ],
-    }),
+    () => getDoughnutChartData(configuratedItems),
     [configuratedItems],
   );
 
