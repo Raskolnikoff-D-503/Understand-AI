@@ -20,7 +20,6 @@ const getFileLoaderOptions = () => ({
 });
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -33,16 +32,6 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-  },
-
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    open: false,
-    port: 3000,
-    historyApiFallback: true,
   },
 
   module: {
