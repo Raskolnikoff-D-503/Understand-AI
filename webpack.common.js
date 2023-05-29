@@ -7,11 +7,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const plugins = [
+  new Dotenv(),
   new HtmlWebpackPlugin({template: './src/index.html'}),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin(),
   new HotModuleReplacementPlugin(),
-  new Dotenv(),
 ];
 
 const getFileLoaderOptions = () => ({
