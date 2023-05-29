@@ -31,7 +31,7 @@
 
 ## About The Project
 
-The Understand AI project was made with the purpose to create convenient and useful application in exploring AI, Machine Learning, Deep Learning and other topics. Additionaly, I wanted to deeply explore Feature-Sliced Design Methodology, APIs integration, drag & drop technology, shimmer effects on loading, and various other libraries.
+The Understand AI project was made with the purpose to create convenient and useful application for exploring AI, Machine Learning, Deep Learning and other topics. Additionaly, I wanted to deeply explore Feature-Sliced Design Methodology, APIs integration, drag & drop technology, shimmer effects on loading, and various other libraries.
 
 <img width="1280" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/59ea6083-97ec-4dce-9620-1dd46f70102d">
 
@@ -45,7 +45,7 @@ I. In order to organize the code, I used Feature-Sliced Design architectural met
 <img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/b8d29cbd-987e-4c0d-9c19-835382aa5334">
  
  
-II. There is also a few APIs that were integrated in the project: chat GPT and learning resources. For data storage I used RTK Query Redux Toolkit and local storage. For loading I used library that renders shimmer effects:
+II. There are several APIs that were integrated in the project: chat GPT and learning resources. For data storage I used RTK Query Redux Toolkit and local storage. For loading I utilized library that renders shimmer effects:
 
 <img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/87c222bf-ece9-4477-94f5-6372f4212523">
 
@@ -76,7 +76,7 @@ This feature is based on React DnD Library. In order to use it, you need to:
   
   <img width="320" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/51f9b809-ea58-4d02-a3b4-6f289aee9470">
   
-  3) Pass to `DragAndDropContainer` next props: data for dragging mechanism; updateDataHandler function & className for drop container:
+  3) Pass next props to `DragAndDropContainer`: data for dragging mechanism; updateDataHandler function & className for drop container:
   
   <img width="640" alt="image" src="https://github.com/Raskolnikoff-D-503/Understand-AI/assets/82656000/73eae4c7-7b9b-42a8-9eb6-1fd4cdacc7da">
   
