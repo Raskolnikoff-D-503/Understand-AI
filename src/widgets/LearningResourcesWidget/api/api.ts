@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-const {REACT_APP_RAPID_API_KEY} = process.env;
+// const {REACT_APP_RAPID_API_KEY} = process.env;
 
 type AINewsItem = {
   title: string;
@@ -23,7 +23,7 @@ export const learningResourcesApi = createApi({
     baseUrl: 'https://ai10.p.rapidapi.com/learning/page',
     headers: {
       'content-type': 'application/octet-stream',
-      'X-RapidAPI-Key': `${REACT_APP_RAPID_API_KEY}`,
+      'X-RapidAPI-Key': `${process.env.REACT_APP_RAPID_API_KEY}`,
       'X-RapidAPI-Host': 'ai10.p.rapidapi.com',
     },
   }),
