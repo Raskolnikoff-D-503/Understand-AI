@@ -1,7 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-// const {REACT_APP_RAPID_API_KEY} = process.env;
-
 type AINewsItem = {
   title: string;
   excerpt: string;

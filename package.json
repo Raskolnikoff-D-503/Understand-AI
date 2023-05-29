@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "chart.js": "^4.2.1",
-    "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^5.2.0",
