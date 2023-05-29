@@ -55,7 +55,7 @@ export const ChatGPTWidget = ({id, className}: Props) => {
         </div>
         <div className="chat-gpt-widget__list-wrapper">
           {isLoading && <TextContentLoader line={12} />}
-          {error && <Error error={error} />}
+          {(error || isUndefined(message)) && <Error error={error} />}
           {!isLoading && !error && message ? (
             <List>
               <p>{message}</p>
@@ -67,12 +67,12 @@ export const ChatGPTWidget = ({id, className}: Props) => {
         <Button onClick={onOpenModal} disabled={!isSuccess}>
           Save Response
         </Button>
+        {!isUndefined(message) && (
+          <Modal id="create-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
+            <CreateResponse data={{title: txt, content: message}} onClose={onCloseModal} />
+          </Modal>
+        )}
       </div>
-      {!isUndefined(message) && (
-        <Modal id="create-response-modal-form" isOpen={isOpen} handleModalClose={onCloseModal}>
-          <CreateResponse data={{title: txt, content: message}} onClose={onCloseModal} />
-        </Modal>
-      )}
     </Card>
   );
 };

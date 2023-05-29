@@ -2,12 +2,13 @@ import React from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 import {SerializedError} from '@reduxjs/toolkit';
 import {ErrorIcon} from '@/shared/icons';
+import {Optional} from '@/shared/types';
 import {isObject} from '@/shared/utils';
 
 import './Error.scss';
 
 type Props = {
-  error: FetchBaseQueryError | SerializedError;
+  error: Optional<FetchBaseQueryError | SerializedError>;
 };
 
 type FetchErrorData = {
@@ -21,10 +22,10 @@ const isErrorDataWithMessage = (value: unknown): value is FetchErrorData =>
   isObject(value) && 'message' in value && 'code' in value;
 
 const isFetchBaseQueryError = (
-  value: FetchBaseQueryError | SerializedError,
-): value is FetchBaseQueryError => 'status' in value;
+  value: Optional<FetchBaseQueryError | SerializedError>,
+): value is FetchBaseQueryError => isObject(value) && 'status' in value;
 
-const getErrorMessage = (error: FetchBaseQueryError | SerializedError): string => {
+const getErrorMessage = (error: Optional<FetchBaseQueryError | SerializedError>): string => {
   if (isFetchBaseQueryError(error) && isErrorDataWithMessage(error.data)) {
     return error.data.message;
   } else {
