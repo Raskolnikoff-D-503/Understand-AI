@@ -55,7 +55,7 @@ export const ChatGPTWidget = ({id, className}: Props) => {
         </div>
         <div className="chat-gpt-widget__list-wrapper">
           {isLoading && <TextContentLoader line={12} />}
-          {(error || isUndefined(message)) && <Error error={error} />}
+          {error && <Error error={error} />}
           {!isLoading && !error && message ? (
             <List>
               <p>{message}</p>
