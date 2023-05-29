@@ -1,17 +1,25 @@
 const path = require('path');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const {HotModuleReplacementPlugin} = require('webpack');
+const {HotModuleReplacementPlugin, DefinePlugin} = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 
 const plugins = [
   new HtmlWebpackPlugin({template: './src/index.html'}),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin(),
   new HotModuleReplacementPlugin(),
-  new Dotenv(),
+  // new Dotenv(),
+  new DefinePlugin(envKeys),
 ];
 
 const getFileLoaderOptions = () => ({
