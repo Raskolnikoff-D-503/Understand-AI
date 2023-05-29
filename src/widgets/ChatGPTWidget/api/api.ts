@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-const {REACT_APP_RAPID_API_KEY} = process.env;
+// const {REACT_APP_RAPID_API_KEY} = process.env;
 
 type MessageChatGPT = {
   role: string;
@@ -26,7 +26,7 @@ export const chatGPTApi = createApi({
     baseUrl: 'https://chatgpt53.p.rapidapi.com/',
     headers: {
       'content-type': 'application/json',
-      'X-RapidAPI-Key': `${REACT_APP_RAPID_API_KEY}`,
+      'X-RapidAPI-Key': `${process.env.REACT_APP_RAPID_API_KEY}`,
       'X-RapidAPI-Host': 'chatgpt53.p.rapidapi.com',
     },
   }),
