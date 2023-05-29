@@ -30,8 +30,6 @@ export const MainPage = () => {
     [debouncedValue],
   );
 
-  console.log('TEST', process.env, process.env.REACT_APP_RAPID_API_KEY);
-
   return (
     <div className="main-page">
       <EditRegimeSwitcher
