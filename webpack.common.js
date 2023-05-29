@@ -11,14 +11,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const {HotModuleReplacementPlugin, DefinePlugin} = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const Dotenv = require('dotenv-webpack');
 
 const plugins = [
   new HtmlWebpackPlugin({template: './src/index.html'}),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin(),
   new HotModuleReplacementPlugin(),
-  // new Dotenv(),
   new DefinePlugin(envKeys),
 ];
 
