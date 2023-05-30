@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const plugins = [
-  new Dotenv({ignoreStub: true}),
+  new Dotenv(),
   new HtmlWebpackPlugin({template: './src/index.html'}),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin(),
