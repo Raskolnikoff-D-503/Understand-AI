@@ -19,9 +19,7 @@ export type WidgetDataType = {
   Component: ({id, className}: StoreDataType) => JSX.Element;
 };
 
-export type WidgetComponentType = {
-  [key: string]: ({id, className}: StoreDataType) => JSX.Element;
-};
+export type WidgetComponentType = Record<string, ({id, className}: StoreDataType) => JSX.Element>;
 
 export type LearningResourceType = {
   id: string;
